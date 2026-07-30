@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shortest Path in DAG | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="../css/graph.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+</head>
+<body data-algorithm="shortestpathdag">
+    <nav class="navbar">
+        <div class="logo"><h1><i class="fas fa-route"></i> Shortest Path in DAG</h1></div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="../algorithms/graph.html"><i class="fas fa-arrow-left"></i> Back to Graph</a></li>
+        </ul>
+    </nav>
+    <div class="page-header">
+        <div class="header-content">
+            <h2><i class="fas fa-route"></i> Shortest Path in Directed Acyclic Graph (DAG)</h2>
+            <p>Calculate single-source shortest paths in linear O(V + E) time using Topological Sorting and Edge Relaxation.</p>
+            <div class="header-stats">
+                <div class="stat"><h3>O(V + E)</h3><p>Time</p></div>
+                <div class="stat"><h3>O(V)</h3><p>Space</p></div>
+                <div class="stat"><h3>Topo Relaxation</h3><p>Strategy</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="graph-detail-page">
+        <div class="graph-shell">
+            <aside class="graph-sidebar">
+                <div class="graph-card">
+                    <h3><i class="fas fa-info-circle"></i> Info</h3>
+                    <div class="graph-info-grid">
+                        <div class="graph-info-item"><span class="graph-info-label">Category</span><span class="graph-info-value">DAG Shortest Path</span></div>
+                        <div class="graph-info-item"><span class="graph-info-label">Difficulty</span><span class="graph-info-value">Medium</span></div>
+                    </div>
+                </div>
+                <div class="graph-card">
+                    <h3><i class="fas fa-bookmark"></i> Actions</h3>
+                    <button class="btn-mark-learned" style="width:100%; padding:0.8rem; margin-bottom:0.5rem; background:#4CAF50; color:#fff; border:none; border-radius:8px; font-weight:bold; cursor:pointer;"><i class="fas fa-check-circle"></i> Mark as Learned</button>
+                    <button class="btn-favorite" style="width:100%; padding:0.8rem; background:#1a237e; color:#fff; border:none; border-radius:8px; font-weight:bold; cursor:pointer;"><i class="fas fa-star"></i> Add to Favorites</button>
+                </div>
+            </aside>
+            <main class="graph-main">
+                <section class="graph-panel">
+                    <h2><i class="fas fa-eye"></i> Interactive Visualization</h2>
+                    <div class="graph-visualizer">
+                        <div class="graph-canvas-card">
+                            <svg id="graphSvg" class="graph-svg"></svg>
+                            <div class="graph-controls">
+                                <button class="graph-btn secondary" id="startBtn"><i class="fas fa-play"></i> Find Shortest Path</button>
+                                <button class="graph-btn ghost" id="stepBtn"><i class="fas fa-step-forward"></i> Step</button>
+                                <button class="graph-btn" id="resetBtn"><i class="fas fa-undo"></i> Reset</button>
+                            </div>
+                        </div>
+                        <div class="graph-canvas-card">
+                            <h3><i class="fas fa-chart-bar"></i> Live Stats</h3>
+                            <div class="graph-stats-grid">
+                                <div class="graph-stat"><span class="label">Visited</span><strong id="visitedCount">0</strong></div>
+                                <div class="graph-stat"><span class="label">Status</span><strong id="statusValue">Ready</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="graph-panel">
+                    <h2><i class="fas fa-code"></i> Code Implementations</h2>
+                    <div class="language-tabs" style="display:flex; gap:0.5rem; margin-bottom:1rem;">
+                        <button class="lang-pill active" onclick="showLang('c')">C</button>
+                        <button class="lang-pill" onclick="showLang('cpp')">C++</button>
+                        <button class="lang-pill" onclick="showLang('java')">Java</button>
+                    </div>
+                    <div id="lang-c" class="code-box active"><pre><code class="language-c">void shortestPathDAG(int src, int V, int adj[][10][2], int deg[], int dist[]) {
+    int vis[10] = {0}, stack[10], top = 10;
+    // Step 1: Topo Sort (call dfs for unvisited)
+    for(int i = 0; i < V; i++) dist[i] = 1e9;
+    dist[src] = 0;
+    // Step 2: Relax edges in Topo Order
+}</code></pre></div>
+                    <div id="lang-cpp" class="code-box" style="display:none;"><pre><code class="language-cpp">void topoSort(int node, vector<pair<int, int>> adj[], vector<int>& vis, stack<int>& st) {
+    vis[node] = 1;
+    for (auto it : adj[node]) {
+        if (!vis[it.first]) topoSort(it.first, adj, vis, st);
+    }
+    st.push(node);
+}
+vector<int> shortestPath(int N, int M, vector<vector<int>>& edges) {
+    vector<pair<int, int>> adj[N];
+    for (int i = 0; i < M; i++) adj[edges[i][0]].push_back({edges[i][1], edges[i][2]});
+    vector<int> vis(N, 0); stack<int> st;
+    for (int i = 0; i < N; i++) if (!vis[i]) topoSort(i, adj, vis, st);
+    vector<int> dist(N, 1e9); dist[0] = 0;
+    while (!st.empty()) {
+        int node = st.top(); st.pop();
+        if (dist[node] != 1e9) {
+            for (auto it : adj[node]) {
+                if (dist[node] + it.second < dist[it.first]) dist[it.first] = dist[node] + it.second;
+            }
+        }
+    }
+    return dist;
+}</code></pre></div>
+                    <div id="lang-java" class="code-box" style="display:none;"><pre><code class="language-java">public class Solution {
+    public int[] shortestPath(int N, int M, int[][] edges) {
+        ArrayList<ArrayList<Pair>> adj = new ArrayList<>();
+        for (int i = 0; i < N; i++) adj.add(new ArrayList<>());
+        for (int i = 0; i < M; i++) adj.get(edges[i][0]).add(new Pair(edges[i][1], edges[i][2]));
+        int vis[] = new int[N]; Stack<Integer> st = new Stack<>();
+        for (int i = 0; i < N; i++) if (vis[i] == 0) topoSort(i, adj, vis, st);
+        int dist[] = new int[N]; Arrays.fill(dist, (int)1e9); dist[0] = 0;
+        while (!st.isEmpty()) {
+            int node = st.pop();
+            if (dist[node] != 1e9) {
+                for (Pair it : adj.get(node)) {
+                    if (dist[node] + it.weight < dist[it.node]) dist[it.node] = dist[node] + it.weight;
+                }
+            }
+        }
+        return dist;
+    }
+}</code></pre></div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        function showLang(lang) {
+            document.querySelectorAll('.code-box').forEach(b => b.style.display = 'none');
+            document.querySelectorAll('.lang-pill').forEach(p => p.classList.remove('active'));
+            document.getElementById('lang-' + lang).style.display = 'block';
+            event.target.classList.add('active');
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tracker.js"></script>
+    <script src="../js/graph-visualizer.js"></script>
+</body>
+</html>

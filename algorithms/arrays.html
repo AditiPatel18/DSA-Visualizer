@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Algorithms | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><h1><i class="fas fa-th-large"></i> Array Algorithms</h1></div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="arrays.html" class="active"><i class="fas fa-th-large"></i> Arrays</a></li>
+            <li><a href="sorting.html"><i class="fas fa-sort-amount-down"></i> Sorting</a></li>
+            <li><a href="searching.html"><i class="fas fa-search"></i> Searching</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-header">
+        <div class="header-content">
+            <h2><i class="fas fa-th-large"></i> Array Data Structures & Algorithms (Striver A2Z)</h2>
+            <p>Master array manipulation, prefix sums, Kadane's algorithm, Pascal's triangle, and matrix rotations.</p>
+            <div class="header-stats">
+                <div class="stat"><h3>5</h3><p>Algorithms</p></div>
+                <div class="stat"><h3>15</h3><p>Code Implementations</p></div>
+                <div class="stat"><h3>100%</h3><p>A2Z Coverage</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="algorithm-page">
+        <aside class="algo-sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-filter"></i> Search & Focus</h3>
+                <input type="text" id="searchInput" placeholder="Search array algorithms..." style="width:100%; padding:0.6rem; border-radius:6px; border:1px solid #ccc; margin-bottom:1rem;">
+                <div class="filter-options">
+                    <label class="checkbox"><input type="checkbox" checked> Subarray</label>
+                    <label class="checkbox"><input type="checkbox" checked> Matrix</label>
+                </div>
+            </div>
+        </aside>
+
+        <main class="algo-main">
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/kadane.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Kadane's Algorithm (Max Subarray Sum)</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-easy">Medium</span></div></div></div>
+                <p class="algo-description">Find contiguous subarray with largest sum in linear time using dynamic running sum.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/pascal.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Pascal's Triangle</h3><div class="algo-tags"><span class="tag-time">O(N²)</span><span class="tag-easy">Easy</span></div></div></div>
+                <p class="algo-description">Generate N rows of Pascal's Triangle using combinatorial combinations or row DP.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/nextpermutation.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Next Permutation</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-medium">Medium</span></div></div></div>
+                <p class="algo-description">Rearrange numbers into lexicographically next greater permutation in-place.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/majorityelement.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Boyer-Moore Majority Element</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-easy">Easy</span></div></div></div>
+                <p class="algo-description">Find element appearing more than N/2 times using O(1) space voting algorithm.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/mergeintervals.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Merge Overlapping Intervals</h3><div class="algo-tags"><span class="tag-time">O(N log N)</span><span class="tag-medium">Medium</span></div></div></div>
+                <p class="algo-description">Sort intervals by start time and merge overlapping time spans efficiently.</p>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tracker.js"></script>
+</body>
+</html>

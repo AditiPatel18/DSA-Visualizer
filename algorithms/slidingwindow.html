@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sliding Window | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><h1><i class="fas fa-window-maximize"></i> Sliding Window</h1></div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="slidingwindow.html" class="active"><i class="fas fa-window-maximize"></i> Sliding Window</a></li>
+        </ul>
+    </nav>
+    <div class="page-header">
+        <div class="header-content">
+            <h2><i class="fas fa-window-maximize"></i> Sliding Window Technique (Striver A2Z)</h2>
+            <p>Fixed-size and dynamic variable-size sliding window patterns for optimal O(N) array/string processing.</p>
+            <div class="header-stats">
+                <div class="stat"><h3>5</h3><p>Algorithms</p></div>
+                <div class="stat"><h3>15</h3><p>Code Implementations</p></div>
+                <div class="stat"><h3>100%</h3><p>A2Z Coverage</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="algorithm-page">
+        <aside class="algo-sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-filter"></i> Search & Focus</h3>
+                <input type="text" id="searchInput" placeholder="Search sliding window..." style="width:100%; padding:0.6rem; border-radius:6px; border:1px solid #ccc; margin-bottom:1rem;">
+            </div>
+        </aside>
+        <main class="algo-main">
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/maxsumsubarray.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Maximum Sum Subarray of Size K</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-easy">Easy</span></div></div></div>
+                <p class="algo-description">Fixed window size K: add next element and subtract front element efficiently.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/firstnegative.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>First Negative in Every Window</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-medium">Medium</span></div></div></div>
+                <p class="algo-description">Find first negative integer in every window of size K using queue window tracking.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/longestsubstring.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Longest Substring Without Repeating Chars</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-medium">Medium</span></div></div></div>
+                <p class="algo-description">Dynamic window with last seen character index map to maintain unique character substrings.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/maxconsecutiveones.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Max Consecutive Ones III</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-medium">Medium</span></div></div></div>
+                <p class="algo-description">Find longest contiguous 1s subarray after flipping at most K zeros.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/minwindowsubstring.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Minimum Window Substring</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-hard">Hard</span></div></div></div>
+                <p class="algo-description">Find smallest substring containing all characters of pattern T using frequency map.</p>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tracker.js"></script>
+</body>
+</html>

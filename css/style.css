@@ -1,4 +1,8 @@
-/* style.css */
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -13,6 +17,35 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+}
+
+/* Global Container & Card System */
+.page-shell, .algorithm-detail-container, .algorithm-page, .dashboard-container, .auth-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.card, .algo-detail-card, .lang-card, .complexity-card, .app-card, .sidebar-section, .algo-info-card, .visualization-card, .language-selector-card, .progress-card {
+    border-radius: 12px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06) !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.card:hover, .algo-detail-card:hover, .lang-card:hover, .complexity-card:hover, .app-card:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12) !important;
+}
+
+pre, code {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: pre;
+}
+
+svg, canvas, img, iframe {
+    max-width: 100%;
+    height: auto;
 }
 
 /* Navigation */
@@ -69,6 +102,90 @@ body {
     color: #4CAF50;
 }
 
+/* Navbar Categories Dropdown */
+.nav-dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+.nav-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #101652;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    min-width: 460px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+    border-radius: 12px;
+    padding: 0.8rem;
+    z-index: 10000;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown.active .nav-dropdown-menu {
+    display: grid;
+}
+
+.nav-dropdown-menu a {
+    color: #e0e0e0 !important;
+    padding: 0.5rem 0.8rem !important;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.88rem;
+    border-radius: 6px;
+    border-bottom: none !important;
+    transition: all 0.2s ease;
+}
+
+.nav-dropdown-menu a:hover {
+    background-color: rgba(76, 175, 80, 0.25) !important;
+    color: #4CAF50 !important;
+    transform: translateX(3px);
+}
+
+.hamburger-menu {
+    display: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+@media (max-width: 850px) {
+    .hamburger-menu {
+        display: block;
+    }
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #1a237e;
+        padding: 1rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+    .nav-links.mobile-active {
+        display: flex;
+    }
+    .nav-dropdown-menu {
+        position: static;
+        transform: none;
+        min-width: 100%;
+        grid-template-columns: 1fr;
+        background: rgba(0,0,0,0.2);
+    }
+}
+
 .btn-login, .btn-register {
     padding: 0.5rem 1.5rem !important;
     font-weight: 600;
@@ -91,18 +208,21 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, rgba(26, 35, 126, 0.9), rgba(40, 53, 147, 0.9)),
+    background: linear-gradient(135deg, rgba(26, 35, 126, 0.75), rgba(40, 53, 147, 0.75)),
                 url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
     background-size: cover;
     background-position: center;
     color: white;
-    padding: 5rem 5%;
+    min-height: 65vh;
+    padding: 3.5rem 5%;
     text-align: center;
-    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero h2 {
-    font-size: 3.5rem;
+    font-size: 3rem;
     margin-bottom: 1rem;
     font-weight: 700;
     background: linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%);
@@ -112,10 +232,10 @@ body {
 }
 
 .subtitle {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     margin-bottom: 2rem;
-    opacity: 0.9;
-    max-width: 800px;
+    opacity: 0.92;
+    max-width: 750px;
     margin-left: auto;
     margin-right: auto;
 }

@@ -118,6 +118,8 @@ class GraphVisualizer {
             await this.runPrim();
         } else if (this.algorithm === 'kruskal') {
             await this.runKruskal();
+        } else {
+            await this.runGenericGraphAlgo();
         }
 
         this.isRunning = false;
@@ -291,6 +293,26 @@ class GraphVisualizer {
         }
 
         this.updateStatus('Kruskal finished');
+    }
+
+    async runGenericGraphAlgo() {
+        this.updateStatus(`Running ${this.algorithm.toUpperCase()} algorithm...`);
+        for (const node of this.nodes) {
+            this.currentNode = node;
+            this.visited.add(node);
+            this.stats.visited = this.visited.size;
+            this.highlightNode(node, 'current');
+            await this.delay();
+            for (const [from, to] of this.edges) {
+                if (from === node) {
+                    this.highlightEdge(from, to, 'selected');
+                    await this.delay(200);
+                }
+            }
+            this.highlightNode(node, 'visited');
+            this.updateStats();
+        }
+        this.updateStatus(`${this.algorithm.toUpperCase()} completed.`);
     }
 
     step() {

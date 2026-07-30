@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Algorithms | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <h1><a href="../index.html" style="color:white; text-decoration:none; display:flex; align-items:center; gap:10px;"><i class="fas fa-code"></i> DSA Master</a></h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li class="nav-dropdown">
+                <a href="#" class="dropdown-toggle active"><i class="fas fa-layer-group"></i> Categories <i class="fas fa-chevron-down" style="font-size:0.75rem;"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="arrays.html"><i class="fas fa-th-large"></i> Arrays</a>
+                    <a href="sorting.html"><i class="fas fa-sort-amount-down"></i> Sorting</a>
+                    <a href="searching.html"><i class="fas fa-search"></i> Searching</a>
+                    <a href="linkedlist.html"><i class="fas fa-link"></i> Linked List</a>
+                    <a href="stack.html"><i class="fas fa-layer-group"></i> Stack</a>
+                    <a href="queue.html"><i class="fas fa-stream"></i> Queue</a>
+                    <a href="backtracking.html"><i class="fas fa-undo-alt"></i> Recursion & Backtracking</a>
+                    <a href="bitmanipulation.html"><i class="fas fa-microchip"></i> Bit Manipulation</a>
+                    <a href="slidingwindow.html"><i class="fas fa-window-maximize"></i> Sliding Window</a>
+                    <a href="twopointers.html"><i class="fas fa-arrows-alt-h"></i> Two Pointers</a>
+                    <a href="binarytrees.html"><i class="fas fa-tree"></i> Binary Trees</a>
+                    <a href="bst.html"><i class="fas fa-network-wired"></i> Binary Search Trees</a>
+                    <a href="heap.html"><i class="fas fa-cubes"></i> Heap</a>
+                    <a href="greedy.html"><i class="fas fa-coins"></i> Greedy</a>
+                    <a href="graph.html"><i class="fas fa-project-diagram"></i> Graph</a>
+                    <a href="dp.html"><i class="fas fa-calculator"></i> Dynamic Programming</a>
+                    <a href="trie.html"><i class="fas fa-sitemap"></i> Trie</a>
+                </div>
+            </li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="../profile.html"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="#" id="logoutBtn" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+        <div class="hamburger-menu" id="hamburgerMenu"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <div class="page-header">
+        <div class="header-content">
+            <h2><i class="fas fa-layer-group"></i> Stack & Monotonic Stack (Striver A2Z)</h2>
+            <p>Master LIFO queue operations, parentheses matching, min stack, and monotonic stack patterns.</p>
+            <div class="header-stats">
+                <div class="stat"><h3>5</h3><p>Algorithms</p></div>
+                <div class="stat"><h3>15</h3><p>Code Implementations</p></div>
+                <div class="stat"><h3>100%</h3><p>A2Z Coverage</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="algorithm-page">
+        <aside class="algo-sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-filter"></i> Search & Focus</h3>
+                <input type="text" id="searchInput" placeholder="Search stack algorithms..." style="width:100%; padding:0.6rem; border-radius:6px; border:1px solid #ccc; margin-bottom:1rem;">
+                <div class="filter-options">
+                    <label class="checkbox"><input type="checkbox" checked> Basics</label>
+                    <label class="checkbox"><input type="checkbox" checked> Monotonic Stack</label>
+                </div>
+            </div>
+        </aside>
+
+        <main class="algo-main">
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/validparentheses.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Valid Parentheses</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-easy">Easy</span></div></div></div>
+                <p class="algo-description">Check if input bracket string has matching open and closing pairs using a character stack.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/minstack.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Min Stack</h3><div class="algo-tags"><span class="tag-time">O(1)</span><span class="tag-medium">Medium</span></div></div></div>
+                <p class="algo-description">Design a stack that retrieves the minimum element in O(1) constant time.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/nextgreaterelement.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Next Greater Element</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-medium">Medium</span></div></div></div>
+                <p class="algo-description">Find the next greater element for each array element using monotonic stack traversal.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/monotonicstack.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Monotonic Stack Pattern</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-medium">Medium</span></div></div></div>
+                <p class="algo-description">Maintain strictly increasing or decreasing elements in a stack for range queries.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/histogram.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Largest Rectangle in Histogram</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-hard">Hard</span></div></div></div>
+                <p class="algo-description">Calculate maximum rectangular area in a histogram using Previous & Next Smaller Element stacks.</p>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tracker.js"></script>
+</body>
+</html>

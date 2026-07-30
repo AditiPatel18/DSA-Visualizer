@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bit Manipulation | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><h1><i class="fas fa-microchip"></i> Bit Manipulation</h1></div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="bitmanipulation.html" class="active"><i class="fas fa-microchip"></i> Bit Manipulation</a></li>
+        </ul>
+    </nav>
+    <div class="page-header">
+        <div class="header-content">
+            <h2><i class="fas fa-microchip"></i> Bit Manipulation Techniques (Striver A2Z)</h2>
+            <p>Bitwise AND, OR, XOR, shifts, set/reset bits, bitmasking, and single number patterns.</p>
+            <div class="header-stats">
+                <div class="stat"><h3>5</h3><p>Algorithms</p></div>
+                <div class="stat"><h3>15</h3><p>Code Implementations</p></div>
+                <div class="stat"><h3>100%</h3><p>A2Z Coverage</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="algorithm-page">
+        <aside class="algo-sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-filter"></i> Search & Focus</h3>
+                <input type="text" id="searchInput" placeholder="Search bit manipulation..." style="width:100%; padding:0.6rem; border-radius:6px; border:1px solid #ccc; margin-bottom:1rem;">
+            </div>
+        </aside>
+        <main class="algo-main">
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/singlenumber.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Single Number</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-easy">Easy</span></div></div></div>
+                <p class="algo-description">Find element occurring once in array where all other elements occur twice using XOR property (x ^ x = 0).</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/countingbits.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Counting Set Bits</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-easy">Easy</span></div></div></div>
+                <p class="algo-description">Calculate total set bits (1s) in binary representation for numbers from 0 to N using DP bit relation.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/subsetsbitmask.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Power Set (Subsets Bitmask)</h3><div class="algo-tags"><span class="tag-time">O(2ᴺ × N)</span><span class="tag-medium">Medium</span></div></div></div>
+                <p class="algo-description">Generate all 2ᴺ subsets by iterating binary bitmasks from 0 to 2ᴺ - 1.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/minbitflips.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Minimum Bit Flips to Convert Number</h3><div class="algo-tags"><span class="tag-time">O(1)</span><span class="tag-easy">Easy</span></div></div></div>
+                <p class="algo-description">Count set bits in <code>start ^ goal</code> to determine minimum required bit flips.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/poweroftwo.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Power of Two Check</h3><div class="algo-tags"><span class="tag-time">O(1)</span><span class="tag-easy">Easy</span></div></div></div>
+                <p class="algo-description">Determine if n is a power of 2 using <code>(n & (n - 1)) == 0</code>.</p>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tracker.js"></script>
+</body>
+</html>

@@ -3,43 +3,306 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linear Search | DSA Learning Platform</title>
+    <title>Linear Search Algorithm | DSA Learning Platform</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="../css/visualizer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="logo">
-            <h1><i class="fas fa-search"></i> Linear Search</h1>
+            <h1><a href="../index.html" style="color:white; text-decoration:none; display:flex; align-items:center; gap:10px;"><i class="fas fa-code"></i> DSA Master</a></h1>
         </div>
         <ul class="nav-links">
             <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li class="nav-dropdown">
+                <a href="#" class="dropdown-toggle"><i class="fas fa-layer-group"></i> Categories <i class="fas fa-chevron-down" style="font-size:0.75rem;"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="../algorithms/arrays.html"><i class="fas fa-th-large"></i> Arrays</a>
+                    <a href="../algorithms/sorting.html"><i class="fas fa-sort-amount-down"></i> Sorting</a>
+                    <a href="../algorithms/searching.html"><i class="fas fa-search"></i> Searching</a>
+                    <a href="../algorithms/linkedlist.html"><i class="fas fa-link"></i> Linked List</a>
+                    <a href="../algorithms/stack.html"><i class="fas fa-layer-group"></i> Stack</a>
+                    <a href="../algorithms/queue.html"><i class="fas fa-stream"></i> Queue</a>
+                    <a href="../algorithms/backtracking.html"><i class="fas fa-undo-alt"></i> Recursion & Backtracking</a>
+                    <a href="../algorithms/bitmanipulation.html"><i class="fas fa-microchip"></i> Bit Manipulation</a>
+                    <a href="../algorithms/slidingwindow.html"><i class="fas fa-window-maximize"></i> Sliding Window</a>
+                    <a href="../algorithms/twopointers.html"><i class="fas fa-arrows-alt-h"></i> Two Pointers</a>
+                    <a href="../algorithms/binarytrees.html"><i class="fas fa-tree"></i> Binary Trees</a>
+                    <a href="../algorithms/bst.html"><i class="fas fa-network-wired"></i> Binary Search Trees</a>
+                    <a href="../algorithms/heap.html"><i class="fas fa-cubes"></i> Heap</a>
+                    <a href="../algorithms/greedy.html"><i class="fas fa-coins"></i> Greedy</a>
+                    <a href="../algorithms/graph.html"><i class="fas fa-project-diagram"></i> Graph</a>
+                    <a href="../algorithms/dp.html"><i class="fas fa-calculator"></i> Dynamic Programming</a>
+                    <a href="../algorithms/trie.html"><i class="fas fa-sitemap"></i> Trie</a>
+                </div>
+            </li>
             <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-            <li><a href="../algorithms/searching.html"><i class="fas fa-arrow-left"></i> Back to Searching</a></li>
+            <li><a href="../profile.html"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="#" id="logoutBtn" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
+        <div class="hamburger-menu" id="hamburgerMenu"><i class="fas fa-bars"></i></div>
     </nav>
 
+    <!-- 1. Hero Section -->
     <div class="page-header">
         <div class="header-content">
             <h2><i class="fas fa-search"></i> Linear Search</h2>
-            <p>Scan each element in order until the target is found.</p>
+            <p>Sequentially check each element of the list until a match is found or the whole list has been searched.</p>
             <div class="header-stats">
-                <div class="stat"><h3>O(n)</h3><p>Time</p></div>
-                <div class="stat"><h3>O(1)</h3><p>Space</p></div>
-                <div class="stat"><h3>Simple</h3><p>Approach</p></div>
+                <div class="stat"><h3>Searching</h3><p>Category</p></div>
+                <div class="stat"><h3>Easy</h3><p>Difficulty</p></div>
+                <div class="stat"><h3>10 mins</h3><p>Est. Time</p></div>
+                <div class="stat"><h3>O(N)</h3><p>Time Complexity</p></div>
+                <div class="stat"><h3>O(1)</h3><p>Space Complexity</p></div>
             </div>
         </div>
     </div>
 
-    <div class="page-shell">
-        <div class="card">
-            <div class="section-title">
-                <h3><i class="fas fa-lightbulb"></i> Quick reminder</h3>
-                <span class="pill"><i class="fas fa-search"></i> Searching</span>
+    <div class="algorithm-detail-container">
+        <!-- Sidebar -->
+        <aside class="detail-sidebar">
+            <div class="algo-info-card">
+                <h3><i class="fas fa-info-circle"></i> Algorithm Info</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Category:</span>
+                        <span class="info-value searching">Searching</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Difficulty:</span>
+                        <span class="info-value easy">Easy</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Best Time:</span>
+                        <code class="info-value">O(1)</code>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Average Time:</span>
+                        <code class="info-value">O(N)</code>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Worst Time:</span>
+                        <code class="info-value">O(N)</code>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Space:</span>
+                        <code class="info-value">O(1)</code>
+                    </div>
+                </div>
             </div>
-            <p class="muted">Linear search is the most straightforward searching strategy. It works on any array and is useful when simplicity matters more than speed.</p>
-        </div>
+
+            <div class="language-selector-card">
+                <h3><i class="fas fa-globe"></i> Select Language</h3>
+                <div class="language-tabs">
+                    <button class="lang-tab active" data-lang="c"><i class="fab fa-c"></i> C</button>
+                    <button class="lang-tab" data-lang="cpp"><i class="fab fa-cuttlefish"></i>++ C++</button>
+                    <button class="lang-tab" data-lang="java"><i class="fab fa-java"></i> Java</button>
+                </div>
+            </div>
+
+            <div class="visualization-card">
+                <h3><i class="fas fa-play-circle"></i> Demo Linear Search</h3>
+                <div class="search-box">
+                    <input type="number" id="searchKey" placeholder="Enter target number" min="1" max="100" value="42">
+                    <button id="runLinearSearch" class="btn-run"><i class="fas fa-search"></i> Search</button>
+                </div>
+                <div class="search-result" id="searchResult"></div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="detail-main">
+            <!-- 2. Overview Section -->
+            <section class="explanation-section">
+                <h2><i class="fas fa-lightbulb"></i> 2. Algorithm Overview</h2>
+                <p class="intro-text">
+                    Linear Search (Sequential Search) scans array elements one by one from left to right. It requires no prerequisites (works on both sorted and unsorted data).
+                </p>
+                <div class="algorithm-steps">
+                    <h3><i class="fas fa-question-circle"></i> When to Use Linear Search?</h3>
+                    <ul class="steps-list">
+                        <li>When array size is small ($N \le 100$).</li>
+                        <li>When data is unsorted and sorting overhead is undesirable.</li>
+                        <li>When searching in single linked lists or streams.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 3. Working & Steps -->
+            <section class="explanation-section">
+                <h2><i class="fas fa-list-ol"></i> 3. Algorithm Steps & Working</h2>
+                <ol class="steps-list">
+                    <li>Start at index 0 ($i = 0$).</li>
+                    <li>Compare <code>arr[i]</code> with <code>target</code>.</li>
+                    <li>If equal, return index <code>i</code> immediately.</li>
+                    <li>Otherwise, increment <code>i = i + 1</code> and repeat.</li>
+                    <li>If end of array is reached without a match, return <code>-1</code>.</li>
+                </ol>
+            </section>
+
+            <!-- 4. Code Implementation -->
+            <section class="code-section">
+                <h2><i class="fas fa-code"></i> 4. Code Implementations</h2>
+                
+                <!-- C -->
+                <div class="code-container active" id="code-c">
+                    <div class="code-header">
+                        <div class="code-title"><i class="fab fa-c"></i> <h3>C Implementation</h3></div>
+                        <button class="btn-copy" data-lang="c"><i class="far fa-copy"></i> Copy Code</button>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-c">
+#include &lt;stdio.h&gt;
+
+int linearSearch(int arr[], int n, int target) {
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == target) return i;
+    }
+    return -1;
+}
+
+int main() {
+    int arr[] = {10, 20, 30, 42, 50};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int index = linearSearch(arr, n, 42);
+    if (index != -1) printf("Found at index %d\n", index);
+    return 0;
+}
+                        </code></pre>
+                    </div>
+                </div>
+
+                <!-- C++ -->
+                <div class="code-container" id="code-cpp">
+                    <div class="code-header">
+                        <div class="code-title"><i class="fab fa-cuttlefish"></i>++ <h3>C++ Implementation</h3></div>
+                        <button class="btn-copy" data-lang="cpp"><i class="far fa-copy"></i> Copy Code</button>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int linearSearch(const vector&lt;int&gt;& arr, int target) {
+    for (int i = 0; i < arr.size(); i++) {
+        if (arr[i] == target) return i;
+    }
+    return -1;
+}
+
+int main() {
+    vector&lt;int&gt; arr = {10, 20, 30, 42, 50};
+    int index = linearSearch(arr, 42);
+    if (index != -1) cout << "Found at index " << index << endl;
+    return 0;
+}
+                        </code></pre>
+                    </div>
+                </div>
+
+                <!-- Java -->
+                <div class="code-container" id="code-java">
+                    <div class="code-header">
+                        <div class="code-title"><i class="fab fa-java"></i> <h3>Java Implementation</h3></div>
+                        <button class="btn-copy" data-lang="java"><i class="far fa-copy"></i> Copy Code</button>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-java">
+public class LinearSearch {
+    public static int search(int[] arr, int target) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == target) return i;
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {10, 20, 30, 42, 50};
+        int index = search(arr, 42);
+        System.out.println("Index: " + index);
+    }
+}
+                        </code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Complexity Analysis -->
+            <section class="complexity-section">
+                <h2><i class="fas fa-chart-bar"></i> 5. Complexity Analysis</h2>
+                <div class="complexity-grid">
+                    <div class="complexity-card">
+                        <h3>Best Case</h3>
+                        <p><strong>O(1)</strong> - Target is at index 0.</p>
+                    </div>
+                    <div class="complexity-card">
+                        <h3>Average Case</h3>
+                        <p><strong>O(N)</strong> - Target is near the middle ($N/2$ checks).</p>
+                    </div>
+                    <div class="complexity-card">
+                        <h3>Worst Case</h3>
+                        <p><strong>O(N)</strong> - Target is at last position or missing.</p>
+                    </div>
+                    <div class="complexity-card">
+                        <h3>Space Complexity</h3>
+                        <p><strong>O(1)</strong> - Constant extra space used.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Real World Applications -->
+            <section class="applications-section">
+                <h2><i class="fas fa-rocket"></i> 6. Real World Applications</h2>
+                <div class="applications-grid">
+                    <div class="app-card"><div class="app-icon"><i class="fas fa-stream"></i></div><div class="app-content"><h4>Unsorted Stream Lookup</h4><p>Scanning log streams for keyword matches.</p></div></div>
+                    <div class="app-card"><div class="app-icon"><i class="fas fa-list"></i></div><div class="app-content"><h4>Small Collection Search</h4><p>Finding elements in small configuration lists.</p></div></div>
+                </div>
+            </section>
+        </main>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        document.querySelectorAll('.lang-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.code-container').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                const lang = this.dataset.lang;
+                document.getElementById(`code-${lang}`).classList.add('active');
+            });
+        });
+        document.querySelectorAll('.btn-copy').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const lang = this.dataset.lang;
+                const codeText = document.querySelector(`#code-${lang} code`).textContent;
+                navigator.clipboard.writeText(codeText).then(() => {
+                    this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    setTimeout(() => { this.innerHTML = '<i class="far fa-copy"></i> Copy Code'; }, 2000);
+                });
+            });
+        });
+        document.getElementById('runLinearSearch')?.addEventListener('click', function() {
+            const key = parseInt(document.getElementById('searchKey').value);
+            const resultDiv = document.getElementById('searchResult');
+            const arr = [10, 20, 30, 42, 50, 60, 70];
+            const idx = arr.indexOf(key);
+            if (idx !== -1) {
+                resultDiv.innerHTML = `<div class="success"><i class="fas fa-check-circle"></i> Found ${key} at index ${idx}!</div>`;
+            } else {
+                resultDiv.innerHTML = `<div class="error"><i class="fas fa-times-circle"></i> ${key} not found in array.</div>`;
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tracker.js"></script>
 </body>
 </html>

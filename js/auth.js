@@ -16,28 +16,54 @@
         return { success: true };
     }
 
+    function validateEmail(email) {
+        if (!email || typeof email !== 'string') return false;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return emailRegex.test(email.trim());
+    }
+
     function validatePassword(password) {
         return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(password);
     }
 
     async function readCurrentUser() {
         const sessionResult = await window.SupabaseApp?.getCurrentSessionUser?.();
-        return sessionResult?.user ? {
+        if (!sessionResult?.user) return null;
+
+        let stats = null;
+        if (window.SupabaseApp?.loadLearningStats) {
+            stats = await window.SupabaseApp.loadLearningStats(sessionResult.user.id);
+        }
+
+        return {
             id: sessionResult.user.id,
             email: sessionResult.user.email,
-            username: sessionResult.profile?.full_name || sessionResult.profile?.username || sessionResult.user.user_metadata?.full_name || 'Student',
+            username: sessionResult.profile?.full_name || sessionResult.profile?.username || sessionResult.user.user_metadata?.full_name || sessionResult.user.email?.split('@')[0] || 'Student',
             createdAt: sessionResult.profile?.created_at || sessionResult.user.created_at || new Date().toISOString(),
-            progress: sessionResult.profile?.progress || {},
-            lastLogin: new Date().toISOString()
-        } : null;
+            progress: {
+                algorithmsLearned: stats?.algorithms_learned ?? 0,
+                streak: stats?.streak ?? 0,
+                activeDays: stats?.active_days ?? 0,
+                totalHours: stats?.total_hours || '0h 0m',
+                achievements: stats?.achievements ?? 0
+            },
+            lastLogin: sessionResult.user.last_sign_in_at || new Date().toISOString()
+        };
     }
 
     async function register({ username, email, password, rememberMe }) {
         const ready = ensureSupabaseReady();
         if (!ready.success) return ready;
 
-        if (!username || !email || !password) {
+        const cleanUsername = (username || '').trim();
+        const cleanEmail = (email || '').trim();
+
+        if (!cleanUsername || !cleanEmail || !password) {
             return { success: false, message: 'Please fill in all fields.' };
+        }
+
+        if (!validateEmail(cleanEmail)) {
+            return { success: false, message: 'Email address is invalid.' };
         }
 
         if (!validatePassword(password)) {
@@ -49,12 +75,12 @@
 
         try {
             const { data, error } = await window.SupabaseApp.client.auth.signUp({
-                email,
+                email: cleanEmail,
                 password,
                 options: {
                     data: {
-                        full_name: username.trim(),
-                        username: username.trim()
+                        full_name: cleanUsername,
+                        username: cleanUsername
                     }
                 }
             });
@@ -62,9 +88,9 @@
             if (error) throw error;
             if (data.user) {
                 await window.SupabaseApp.ensureUserProfile(data.user, {
-                    full_name: username.trim(),
-                    username: username.trim(),
-                    email
+                    full_name: cleanUsername,
+                    username: cleanUsername,
+                    email: cleanEmail
                 });
                 await window.SupabaseApp.saveLearningStats({
                     algorithms_learned: 0,
@@ -76,7 +102,7 @@
             }
 
             if (rememberMe) {
-                localStorage.setItem(STORAGE_KEYS.rememberedEmail, email.trim().toLowerCase());
+                localStorage.setItem(STORAGE_KEYS.rememberedEmail, cleanEmail.toLowerCase());
             } else {
                 localStorage.removeItem(STORAGE_KEYS.rememberedEmail);
             }
@@ -91,12 +117,22 @@
         const ready = ensureSupabaseReady();
         if (!ready.success) return ready;
 
+        const cleanEmail = (email || '').trim();
+
+        if (!cleanEmail || !password) {
+            return { success: false, message: 'Please fill in all fields.' };
+        }
+
+        if (!validateEmail(cleanEmail)) {
+            return { success: false, message: 'Email address is invalid.' };
+        }
+
         try {
-            const { data, error } = await window.SupabaseApp.client.auth.signInWithPassword({ email, password });
+            const { data, error } = await window.SupabaseApp.client.auth.signInWithPassword({ email: cleanEmail, password });
             if (error) throw error;
 
             if (rememberMe) {
-                localStorage.setItem(STORAGE_KEYS.rememberedEmail, email.trim().toLowerCase());
+                localStorage.setItem(STORAGE_KEYS.rememberedEmail, cleanEmail.toLowerCase());
             } else {
                 localStorage.removeItem(STORAGE_KEYS.rememberedEmail);
             }
@@ -112,43 +148,115 @@
         window.location.href = getRootPath('login.html');
     }
 
-    function updateNavigation(user) {
-        const loginLink = document.querySelector('.btn-login');
-        const registerLink = document.querySelector('.btn-register');
-        const logoutLink = document.getElementById('logoutBtn');
-
-        if (user) {
-            if (loginLink) loginLink.style.display = 'none';
-            if (registerLink) registerLink.style.display = 'none';
-            if (logoutLink) logoutLink.style.display = 'inline-block';
-        } else {
-            if (loginLink) loginLink.style.display = 'inline-block';
-            if (registerLink) registerLink.style.display = 'inline-block';
-            if (logoutLink) logoutLink.style.display = 'none';
-        }
+    function getCurrentPage() {
+        const path = window.location.pathname.toLowerCase();
+        const segments = path.split('/').filter(Boolean);
+        const filename = segments.pop() || 'index.html';
+        return filename;
     }
 
-    function getCurrentPage() {
-        return window.location.pathname.split('/').pop() || 'index.html';
+    function isProtectedHref(href) {
+        if (!href || href === '#' || href.startsWith('javascript:')) return false;
+        const cleanHref = href.split('?')[0].split('#')[0].toLowerCase();
+        const filename = cleanHref.split('/').pop();
+        if (!filename) return false;
+        const publicFiles = ['index.html', 'login.html', 'register.html'];
+        return !publicFiles.includes(filename);
     }
 
     async function protectRoute() {
         const page = getCurrentPage();
         const user = await readCurrentUser();
-        const isProtected = page === 'dashboard.html' || page === 'profile.html';
-        const isAuthPage = page === 'login.html' || page === 'register.html';
 
-        if (isProtected && !user) {
+        const publicPages = ['index.html', 'login.html', 'register.html'];
+        const authPages = ['login.html', 'register.html'];
+
+        const isPublicPage = publicPages.includes(page);
+        const isAuthPage = authPages.includes(page);
+
+        if (!user && !isPublicPage) {
             window.location.replace(getRootPath('login.html'));
             return null;
         }
 
-        if (isAuthPage && user) {
+        if (user && isAuthPage) {
             window.location.replace(getRootPath('dashboard.html'));
             return user;
         }
 
         return user;
+    }
+
+    function updateNavigation(user) {
+        const loginLinks = document.querySelectorAll('.btn-login');
+        const registerLinks = document.querySelectorAll('.btn-register');
+        const logoutButtons = document.querySelectorAll('#logoutBtn, .btn-logout');
+        const categoryDropdowns = document.querySelectorAll('.nav-dropdown');
+        const dashboardLinks = document.querySelectorAll('a[href*="dashboard.html"]');
+        const profileLinks = document.querySelectorAll('a[href*="profile.html"]');
+
+        if (user) {
+            loginLinks.forEach((el) => (el.style.display = 'none'));
+            registerLinks.forEach((el) => (el.style.display = 'none'));
+            logoutButtons.forEach((el) => (el.style.display = 'inline-block'));
+            categoryDropdowns.forEach((el) => (el.style.display = 'inline-block'));
+            dashboardLinks.forEach((el) => {
+                el.style.display = '';
+                if (el.parentElement && el.parentElement.tagName === 'LI') {
+                    el.parentElement.style.display = '';
+                }
+            });
+            profileLinks.forEach((el) => {
+                el.style.display = '';
+                if (el.parentElement && el.parentElement.tagName === 'LI') {
+                    el.parentElement.style.display = '';
+                }
+            });
+        } else {
+            loginLinks.forEach((el) => (el.style.display = 'inline-block'));
+            registerLinks.forEach((el) => (el.style.display = 'inline-block'));
+            logoutButtons.forEach((el) => (el.style.display = 'none'));
+            categoryDropdowns.forEach((el) => (el.style.display = 'none'));
+            dashboardLinks.forEach((el) => {
+                el.style.display = 'none';
+                if (el.parentElement && el.parentElement.tagName === 'LI') {
+                    el.parentElement.style.display = 'none';
+                }
+            });
+            profileLinks.forEach((el) => {
+                el.style.display = 'none';
+                if (el.parentElement && el.parentElement.tagName === 'LI') {
+                    el.parentElement.style.display = 'none';
+                }
+            });
+
+            document.addEventListener(
+                'click',
+                function (e) {
+                    const link = e.target.closest('a');
+                    if (link) {
+                        const href = link.getAttribute('href');
+                        if (isProtectedHref(href)) {
+                            e.preventDefault();
+                            window.location.href = getRootPath('login.html');
+                            return;
+                        }
+                    }
+
+                    const cardOrElem = e.target.closest('[onclick]');
+                    if (cardOrElem) {
+                        const onclickAttr = cardOrElem.getAttribute('onclick') || '';
+                        if (onclickAttr.includes('location.href') && isProtectedHref(onclickAttr)) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            window.location.href = getRootPath('login.html');
+                            return;
+                        }
+                    }
+                },
+                true
+            );
+        }
     }
 
     function bindPasswordToggles() {
@@ -176,7 +284,7 @@
     function bindAuthForms() {
         const loginForm = document.getElementById('loginForm');
         const registerForm = document.getElementById('registerForm');
-        const logoutButtons = document.querySelectorAll('#logoutBtn');
+        const logoutButtons = document.querySelectorAll('#logoutBtn, .btn-logout');
 
         if (loginForm) {
             loginForm.addEventListener('submit', async function (event) {
@@ -304,6 +412,7 @@
         register,
         login,
         logout,
+        validateEmail,
         validatePassword,
         readCurrentUser,
         getRootPath
@@ -311,5 +420,39 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         init();
+
+        const burger = document.getElementById('hamburgerMenu');
+        const navLinks = document.querySelector('.nav-links');
+        if (burger && navLinks) {
+            burger.addEventListener('click', function () {
+                navLinks.classList.toggle('mobile-active');
+            });
+        }
+
+        document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const parent = this.closest('.nav-dropdown');
+                if (parent) parent.classList.toggle('active');
+            });
+        });
+
+        // Close dropdown when selecting a category link or clicking outside
+        document.addEventListener('click', function (e) {
+            const activeDropdown = document.querySelector('.nav-dropdown.active');
+            if (activeDropdown) {
+                if (!activeDropdown.contains(e.target)) {
+                    activeDropdown.classList.remove('active');
+                }
+            }
+        });
+
+        document.querySelectorAll('.nav-dropdown-menu a').forEach(link => {
+            link.addEventListener('click', function () {
+                const parent = this.closest('.nav-dropdown');
+                if (parent) parent.classList.remove('active');
+            });
+        });
     });
 })();

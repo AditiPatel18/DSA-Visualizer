@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kadane's Algorithm | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="../css/visualizer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+</head>
+<body data-algorithm="kadane">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1><a href="../index.html" style="color:white; text-decoration:none; display:flex; align-items:center; gap:10px;"><i class="fas fa-code"></i> DSA Master</a></h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li class="nav-dropdown">
+                <a href="#" class="dropdown-toggle"><i class="fas fa-layer-group"></i> Categories <i class="fas fa-chevron-down" style="font-size:0.75rem;"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="../algorithms/arrays.html"><i class="fas fa-th-large"></i> Arrays</a>
+                    <a href="../algorithms/sorting.html"><i class="fas fa-sort-amount-down"></i> Sorting</a>
+                    <a href="../algorithms/searching.html"><i class="fas fa-search"></i> Searching</a>
+                    <a href="../algorithms/linkedlist.html"><i class="fas fa-link"></i> Linked List</a>
+                    <a href="../algorithms/stack.html"><i class="fas fa-layer-group"></i> Stack</a>
+                    <a href="../algorithms/queue.html"><i class="fas fa-stream"></i> Queue</a>
+                    <a href="../algorithms/backtracking.html"><i class="fas fa-undo-alt"></i> Recursion & Backtracking</a>
+                    <a href="../algorithms/bitmanipulation.html"><i class="fas fa-microchip"></i> Bit Manipulation</a>
+                    <a href="../algorithms/slidingwindow.html"><i class="fas fa-window-maximize"></i> Sliding Window</a>
+                    <a href="../algorithms/twopointers.html"><i class="fas fa-arrows-alt-h"></i> Two Pointers</a>
+                    <a href="../algorithms/binarytrees.html"><i class="fas fa-tree"></i> Binary Trees</a>
+                    <a href="../algorithms/bst.html"><i class="fas fa-network-wired"></i> Binary Search Trees</a>
+                    <a href="../algorithms/heap.html"><i class="fas fa-cubes"></i> Heap</a>
+                    <a href="../algorithms/greedy.html"><i class="fas fa-coins"></i> Greedy</a>
+                    <a href="../algorithms/graph.html"><i class="fas fa-project-diagram"></i> Graph</a>
+                    <a href="../algorithms/dp.html"><i class="fas fa-calculator"></i> Dynamic Programming</a>
+                    <a href="../algorithms/trie.html"><i class="fas fa-sitemap"></i> Trie</a>
+                </div>
+            </li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="../profile.html"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="#" id="logoutBtn" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+        <div class="hamburger-menu" id="hamburgerMenu"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <!-- 1. Hero Header -->
+    <div class="page-header">
+        <div class="header-content">
+            <h2><i class="fas fa-th-large"></i> Kadane's Algorithm (Max Subarray Sum)</h2>
+            <p>Find the contiguous subarray with the largest sum in linear $O(N)$ time using dynamic running sums.</p>
+            <div class="header-stats">
+                <div class="stat"><h3>Arrays</h3><p>Category</p></div>
+                <div class="stat"><h3>Medium</h3><p>Difficulty</p></div>
+                <div class="stat"><h3>15 mins</h3><p>Est. Time</p></div>
+                <div class="stat"><h3>O(N)</h3><p>Time Complexity</p></div>
+                <div class="stat"><h3>O(1)</h3><p>Space Complexity</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="algorithm-detail-container">
+        <!-- 2. Sidebar -->
+        <aside class="detail-sidebar">
+            <div class="algo-info-card">
+                <h3><i class="fas fa-info-circle"></i> Algorithm Info</h3>
+                <div class="info-grid">
+                    <div class="info-item"><span class="info-label">Category:</span><span class="info-value sorting">Arrays</span></div>
+                    <div class="info-item"><span class="info-label">Difficulty:</span><span class="info-value medium">Medium</span></div>
+                    <div class="info-item"><span class="info-label">Time:</span><code class="info-value">O(N)</code></div>
+                    <div class="info-item"><span class="info-label">Space:</span><code class="info-value">O(1)</code></div>
+                    <div class="info-item"><span class="info-label">Prerequisite:</span><span class="info-value">Array Iteration</span></div>
+                </div>
+            </div>
+
+            <div class="language-selector-card">
+                <h3><i class="fas fa-globe"></i> Select Language</h3>
+                <div class="language-tabs">
+                    <button class="lang-tab active" data-lang="c"><i class="fab fa-c"></i> C</button>
+                    <button class="lang-tab" data-lang="cpp"><i class="fab fa-cuttlefish"></i>++ C++</button>
+                    <button class="lang-tab" data-lang="java"><i class="fab fa-java"></i> Java</button>
+                </div>
+            </div>
+
+            <div class="progress-card">
+                <h3><i class="fas fa-chart-line"></i> Actions & Progress</h3>
+                <button class="btn-mark-complete btn-mark-learned" style="margin-bottom:0.5rem; width:100%;"><i class="fas fa-check"></i> Mark as Completed</button>
+                <button class="btn-favorite" style="width:100%; padding:0.6rem; background:#1a237e; color:#fff; border:none; border-radius:6px; font-weight:bold; cursor:pointer;"><i class="fas fa-star"></i> Add to Favorites</button>
+            </div>
+
+            <div class="visualization-card">
+                <h3><i class="fas fa-play-circle"></i> Interactive Demo</h3>
+                <input type="text" id="arrayInput" value="-2, 1, -3, 4, -1, 2, 1, -5, 4" style="width:100%; padding:0.6rem; margin-bottom:0.5rem; border-radius:6px; border:1px solid #ccc;">
+                <button id="runKadaneDemo" class="btn-run" style="width:100%;"><i class="fas fa-play"></i> Run Kadane's</button>
+                <div id="demoResult" style="margin-top:0.5rem;"></div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="detail-main">
+            <!-- 3. Understanding Algorithm & 4. Key Concepts -->
+            <section class="explanation-section">
+                <h2><i class="fas fa-lightbulb"></i> 3. Understanding Kadane's Algorithm</h2>
+                <p class="intro-text">
+                    Kadane's Algorithm is an optimal dynamic programming technique that solves the Maximum Subarray Sum problem in a single pass $O(N)$ time and $O(1)$ space.
+                </p>
+
+                <div class="pivot-options">
+                    <div class="pivot-option">
+                        <div class="option-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="option-content">
+                            <h4>Dynamic Running Sum</h4>
+                            <p>Accumulate <code>sum += arr[i]</code>. Update <code>maxSum = max(maxSum, sum)</code> at each index.</p>
+                        </div>
+                    </div>
+                    <div class="pivot-option">
+                        <div class="option-icon"><i class="fas fa-redo"></i></div>
+                        <div class="option-content">
+                            <h4>Reset Negative Subarrays</h4>
+                            <p>If <code>sum &lt; 0</code>, reset <code>sum = 0</code> because a negative sum reduces subsequent totals.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Interactive Visualization -->
+            <section class="explanation-section">
+                <h2><i class="fas fa-eye"></i> 5. Interactive Visualization</h2>
+                <div class="example-array">
+                    <p>Current Array: <code>[-2, 1, -3, 4, -1, 2, 1, -5, 4]</code></p>
+                    <div class="array-visual">
+                        <div class="array-element">-2</div>
+                        <div class="array-element">1</div>
+                        <div class="array-element">-3</div>
+                        <div class="array-element active">4</div>
+                        <div class="array-element active">-1</div>
+                        <div class="array-element active">2</div>
+                        <div class="array-element active">1</div>
+                        <div class="array-element">-5</div>
+                        <div class="array-element">4</div>
+                    </div>
+                    <p class="example-steps">Subarray <code>[4, -1, 2, 1]</code> yields the maximum sum of <strong>6</strong>.</p>
+                </div>
+            </section>
+
+            <!-- 6. Algorithm Steps -->
+            <section class="explanation-section">
+                <h2><i class="fas fa-list-ol"></i> 6. Algorithm Steps</h2>
+                <ol class="steps-list">
+                    <li>Initialize <code>maxSum = LONG_MIN</code> and <code>sum = 0</code>.</li>
+                    <li>Iterate through the array from <code>i = 0</code> to <code>N-1</code>.</li>
+                    <li>Add <code>arr[i]</code> to <code>sum</code>.</li>
+                    <li>Update <code>maxSum = max(maxSum, sum)</code>.</li>
+                    <li>If <code>sum &lt; 0</code>, reset <code>sum = 0</code>.</li>
+                    <li>Return <code>maxSum</code> after the loop completes.</li>
+                </ol>
+            </section>
+
+            <!-- 7. Dry Run -->
+            <section class="explanation-section">
+                <h2><i class="fas fa-chalkboard-teacher"></i> 7. Dry Run Trace</h2>
+                <div class="visual-guide">
+                    <p>
+                        Array: <code>[-2, 1, -3, 4, -1, 2, 1, -5, 4]</code><br>
+                        • i=0, arr[0]=-2: sum=-2 &rarr; maxSum=-2 &rarr; sum &lt; 0 &rarr; sum=0<br>
+                        • i=1, arr[1]=1: sum=1 &rarr; maxSum=1<br>
+                        • i=2, arr[2]=-3: sum=-2 &rarr; sum &lt; 0 &rarr; sum=0<br>
+                        • i=3, arr[3]=4: sum=4 &rarr; maxSum=4<br>
+                        • i=4, arr[4]=-1: sum=3 &rarr; maxSum=4<br>
+                        • i=5, arr[5]=2: sum=5 &rarr; maxSum=5<br>
+                        • i=6, arr[6]=1: sum=6 &rarr; <strong>maxSum=6</strong><br>
+                        Final Maximum Subarray Sum = <strong>6</strong>
+                    </p>
+                </div>
+            </section>
+
+            <!-- 8. Complexity Analysis -->
+            <section class="complexity-section">
+                <h2><i class="fas fa-chart-bar"></i> 8. Complexity Analysis</h2>
+                <div class="complexity-grid">
+                    <div class="complexity-card">
+                        <h3>Best Case Time</h3>
+                        <code class="case-value">O(N)</code>
+                        <p>Single pass linear scan over array.</p>
+                    </div>
+                    <div class="complexity-card">
+                        <h3>Average Case Time</h3>
+                        <code class="case-value">O(N)</code>
+                        <p>Evaluates each element exactly once.</p>
+                    </div>
+                    <div class="complexity-card">
+                        <h3>Worst Case Time</h3>
+                        <code class="case-value">O(N)</code>
+                        <p>Works in linear time even for all negative numbers.</p>
+                    </div>
+                    <div class="complexity-card">
+                        <h3>Space Complexity</h3>
+                        <code class="case-value">O(1)</code>
+                        <p>Uses auxiliary scalar counters <code>sum</code> and <code>maxSum</code>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. Code Implementation -->
+            <section class="code-section">
+                <h2><i class="fas fa-code"></i> 9. Code Implementations</h2>
+
+                <!-- C -->
+                <div class="code-container active" id="code-c">
+                    <div class="code-header">
+                        <div class="code-title"><i class="fab fa-c"></i> <h3>C Implementation</h3></div>
+                        <button class="btn-copy" data-lang="c"><i class="far fa-copy"></i> Copy Code</button>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-c">
+#include &lt;stdio.h&gt;
+#include &lt;limits.h&gt;
+
+long long maxSubarraySum(int arr[], int n) {
+    long long maxi = LLONG_MIN;
+    long long sum = 0;
+    
+    for (int i = 0; i < n; i++) {
+        sum += arr[i];
+        if (sum > maxi) maxi = sum;
+        if (sum < 0) sum = 0;
+    }
+    return maxi;
+}
+
+int main() {
+    int arr[] = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    printf("Maximum Subarray Sum: %lld\n", maxSubarraySum(arr, n));
+    return 0;
+}
+                        </code></pre>
+                    </div>
+                </div>
+
+                <!-- C++ -->
+                <div class="code-container" id="code-cpp">
+                    <div class="code-header">
+                        <div class="code-title"><i class="fab fa-cuttlefish"></i>++ <h3>C++ Implementation</h3></div>
+                        <button class="btn-copy" data-lang="cpp"><i class="far fa-copy"></i> Copy Code</button>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;climits&gt;
+using namespace std;
+
+long long maxSubarraySum(const vector&lt;int&gt;& arr) {
+    long long maxi = LONG_MIN, sum = 0;
+    for (int num : arr) {
+        sum += num;
+        maxi = max(maxi, sum);
+        if (sum < 0) sum = 0;
+    }
+    return maxi;
+}
+
+int main() {
+    vector&lt;int&gt; arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+    cout << "Maximum Subarray Sum: " << maxSubarraySum(arr) << endl;
+    return 0;
+}
+                        </code></pre>
+                    </div>
+                </div>
+
+                <!-- Java -->
+                <div class="code-container" id="code-java">
+                    <div class="code-header">
+                        <div class="code-title"><i class="fab fa-java"></i> <h3>Java Implementation</h3></div>
+                        <button class="btn-copy" data-lang="java"><i class="far fa-copy"></i> Copy Code</button>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-java">
+public class KadaneAlgorithm {
+    public static long maxSubarraySum(int[] arr) {
+        long maxi = Long.MIN_VALUE;
+        long sum = 0;
+        
+        for (int val : arr) {
+            sum += val;
+            maxi = Math.max(maxi, sum);
+            if (sum < 0) sum = 0;
+        }
+        return maxi;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+        System.out.println("Maximum Subarray Sum: " + maxSubarraySum(arr));
+    }
+}
+                        </code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 10. Real World Applications -->
+            <section class="applications-section">
+                <h2><i class="fas fa-rocket"></i> 10. Real-World Applications</h2>
+                <div class="applications-grid">
+                    <div class="app-card"><div class="app-icon"><i class="fas fa-chart-line"></i></div><div class="app-content"><h4>Stock Market Profit Analysis</h4><p>Finding the period of maximum consecutive gain in price changes.</p></div></div>
+                    <div class="app-card"><div class="app-icon"><i class="fas fa-image"></i></div><div class="app-content"><h4>Computer Vision & Image Processing</h4><p>Maximum brightness region analysis and 2D bounding boxes.</p></div></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        document.querySelectorAll('.lang-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.code-container').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                const lang = this.dataset.lang;
+                document.getElementById(`code-${lang}`).classList.add('active');
+            });
+        });
+        document.querySelectorAll('.btn-copy').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const lang = this.dataset.lang;
+                const codeText = document.querySelector(`#code-${lang} code`).textContent;
+                navigator.clipboard.writeText(codeText).then(() => {
+                    this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    setTimeout(() => { this.innerHTML = '<i class="far fa-copy"></i> Copy Code'; }, 2000);
+                });
+            });
+        });
+        document.getElementById('runKadaneDemo')?.addEventListener('click', function() {
+            const raw = document.getElementById('arrayInput').value;
+            const arr = raw.split(',').map(n => parseInt(n.trim())).filter(n => !isNaN(n));
+            let maxi = -Infinity, sum = 0;
+            for (let x of arr) {
+                sum += x;
+                if (sum > maxi) maxi = sum;
+                if (sum < 0) sum = 0;
+            }
+            document.getElementById('demoResult').innerHTML = `<div class="success" style="color:green; font-weight:bold; margin-top:0.5rem;"><i class="fas fa-check-circle"></i> Max Subarray Sum = <strong>${maxi}</strong></div>`;
+        });
+    </script>
+    <script src="../js/master-template-hydrator.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tracker.js"></script>
+</body>
+</html>

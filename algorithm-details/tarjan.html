@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjan's SCC Algorithm | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="../css/graph.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+</head>
+<body data-algorithm="tarjan">
+    <nav class="navbar">
+        <div class="logo"><h1><i class="fas fa-project-diagram"></i> Tarjan's SCC</h1></div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="../algorithms/graph.html"><i class="fas fa-arrow-left"></i> Back to Graph</a></li>
+        </ul>
+    </nav>
+    <div class="page-header">
+        <div class="header-content">
+            <h2><i class="fas fa-project-diagram"></i> Tarjan's Strongly Connected Components Algorithm</h2>
+            <p>Single-pass DFS algorithm to find all strongly connected components using discovery time, low-link values, and stack tracking.</p>
+            <div class="header-stats">
+                <div class="stat"><h3>O(V + E)</h3><p>Time</p></div>
+                <div class="stat"><h3>O(V)</h3><p>Space</p></div>
+                <div class="stat"><h3>Single Pass</h3><p>DFS</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="graph-detail-page">
+        <div class="graph-shell">
+            <aside class="graph-sidebar">
+                <div class="graph-card">
+                    <h3><i class="fas fa-info-circle"></i> Info</h3>
+                    <div class="graph-info-grid">
+                        <div class="graph-info-item"><span class="graph-info-label">Category</span><span class="graph-info-value">SCC</span></div>
+                        <div class="graph-info-item"><span class="graph-info-label">Difficulty</span><span class="graph-info-value">Hard</span></div>
+                    </div>
+                </div>
+                <div class="graph-card">
+                    <h3><i class="fas fa-bookmark"></i> Actions</h3>
+                    <button class="btn-mark-learned" style="width:100%; padding:0.8rem; margin-bottom:0.5rem; background:#4CAF50; color:#fff; border:none; border-radius:8px; font-weight:bold; cursor:pointer;"><i class="fas fa-check-circle"></i> Mark as Learned</button>
+                    <button class="btn-favorite" style="width:100%; padding:0.8rem; background:#1a237e; color:#fff; border:none; border-radius:8px; font-weight:bold; cursor:pointer;"><i class="fas fa-star"></i> Add to Favorites</button>
+                </div>
+            </aside>
+            <main class="graph-main">
+                <section class="graph-panel">
+                    <h2><i class="fas fa-eye"></i> Interactive Visualization</h2>
+                    <div class="graph-visualizer">
+                        <div class="graph-canvas-card">
+                            <svg id="graphSvg" class="graph-svg"></svg>
+                            <div class="graph-controls">
+                                <button class="graph-btn secondary" id="startBtn"><i class="fas fa-play"></i> Find SCCs (Tarjan)</button>
+                                <button class="graph-btn ghost" id="stepBtn"><i class="fas fa-step-forward"></i> Step</button>
+                                <button class="graph-btn" id="resetBtn"><i class="fas fa-undo"></i> Reset</button>
+                            </div>
+                        </div>
+                        <div class="graph-canvas-card">
+                            <h3><i class="fas fa-chart-bar"></i> Live Stats</h3>
+                            <div class="graph-stats-grid">
+                                <div class="graph-stat"><span class="label">Visited Nodes</span><strong id="visitedCount">0</strong></div>
+                                <div class="graph-stat"><span class="label">Status</span><strong id="statusValue">Ready</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="graph-panel">
+                    <h2><i class="fas fa-code"></i> Code Implementations</h2>
+                    <div class="language-tabs" style="display:flex; gap:0.5rem; margin-bottom:1rem;">
+                        <button class="lang-pill active" onclick="showLang('c')">C</button>
+                        <button class="lang-pill" onclick="showLang('cpp')">C++</button>
+                        <button class="lang-pill" onclick="showLang('java')">Java</button>
+                    </div>
+                    <div id="lang-c" class="code-box active"><pre><code class="language-c">int timer = 1;
+void tarjanDFS(int u, int disc[], int low[], int stack[], int *top, int inStack[], int adj[][10], int deg[]) {
+    disc[u] = low[u] = timer++;
+    stack[--(*top)] = u; inStack[u] = 1;
+    for(int i = 0; i < deg[u]; i++) {
+        int v = adj[u][i];
+        if(disc[v] == -1) {
+            tarjanDFS(v, disc, low, stack, top, inStack, adj, deg);
+            if(low[v] < low[u]) low[u] = low[v];
+        } else if(inStack[v]) {
+            if(disc[v] < low[u]) low[u] = disc[v];
+        }
+    }
+    if(low[u] == disc[u]) {
+        while(1) {
+            int v = stack[(*top)++]; inStack[v] = 0;
+            printf("%d ", v);
+            if(u == v) break;
+        }
+        printf("\n");
+    }
+}</code></pre></div>
+                    <div id="lang-cpp" class="code-box" style="display:none;"><pre><code class="language-cpp">void dfs(int u, vector<int>& disc, vector<int>& low, stack<int>& st, vector<bool>& inStack, vector<int> adj[], vector<vector<int>>& sccs) {
+    static int timer = 0;
+    disc[u] = low[u] = ++timer;
+    st.push(u); inStack[u] = true;
+    for (int v : adj[u]) {
+        if (disc[v] == -1) {
+            dfs(v, disc, low, st, inStack, adj, sccs);
+            low[u] = min(low[u], low[v]);
+        } else if (inStack[v]) {
+            low[u] = min(low[u], disc[v]);
+        }
+    }
+    if (low[u] == disc[u]) {
+        vector<int> component;
+        while (true) {
+            int v = st.top(); st.pop(); inStack[v] = false;
+            component.push_back(v);
+            if (u == v) break;
+        }
+        sccs.push_back(component);
+    }
+}</code></pre></div>
+                    <div id="lang-java" class="code-box" style="display:none;"><pre><code class="language-java">public class Solution {
+    private int timer = 0;
+    public void tarjan(int u, int[] disc, int[] low, Stack<Integer> st, boolean[] inStack, ArrayList<ArrayList<Integer>> adj) {
+        disc[u] = low[u] = ++timer;
+        st.push(u); inStack[u] = true;
+        for (int v : adj.get(u)) {
+            if (disc[v] == -1) {
+                tarjan(v, disc, low, st, inStack, adj);
+                low[u] = Math.min(low[u], low[v]);
+            } else if (inStack[v]) {
+                low[u] = Math.min(low[u], disc[v]);
+            }
+        }
+        if (low[u] == disc[u]) {
+            while (true) {
+                int v = st.pop(); inStack[v] = false;
+                if (u == v) break;
+            }
+        }
+    }
+}</code></pre></div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        function showLang(lang) {
+            document.querySelectorAll('.code-box').forEach(b => b.style.display = 'none');
+            document.querySelectorAll('.lang-pill').forEach(p => p.classList.remove('active'));
+            document.getElementById('lang-' + lang).style.display = 'block';
+            event.target.classList.add('active');
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tracker.js"></script>
+    <script src="../js/graph-visualizer.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue using Stacks | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+</head>
+<body data-algorithm="queueusingstacks">
+    <nav class="navbar">
+        <div class="logo"><h1><i class="fas fa-layer-group"></i> Queue using Stacks</h1></div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="../algorithms/queue.html"><i class="fas fa-arrow-left"></i> Back to Queue</a></li>
+            <li><a href="#" class="btn-mark-learned"><i class="fas fa-check-circle"></i> Mark Learned</a></li>
+        </ul>
+    </nav>
+    <div class="algorithm-detail-container">
+        <aside class="detail-sidebar">
+            <div class="algo-info-card">
+                <h3><i class="fas fa-info-circle"></i> Algorithm Info</h3>
+                <div class="info-grid">
+                    <div class="info-item"><span class="info-label">Category:</span><span class="info-value">Queue / Stack</span></div>
+                    <div class="info-item"><span class="info-label">Difficulty:</span><span class="info-value easy">Easy</span></div>
+                    <div class="info-item"><span class="info-label">Pop Time:</span><code class="info-value">O(1) Amortized</code></div>
+                </div>
+            </div>
+            <div class="progress-card">
+                <h3><i class="fas fa-chart-line"></i> Actions & Progress</h3>
+                <button class="btn-mark-complete btn-mark-learned" style="margin-bottom:0.5rem; width:100%;"><i class="fas fa-check"></i> Mark as Completed</button>
+                <button class="btn-favorite" style="width:100%; padding:0.6rem; background:#1a237e; color:#fff; border:none; border-radius:6px; font-weight:bold; cursor:pointer;"><i class="fas fa-star"></i> Add to Favorites</button>
+            </div>
+        </aside>
+        <main class="detail-main">
+            <section class="explanation-section">
+                <h2><i class="fas fa-lightbulb"></i> Implement Queue using Stacks</h2>
+                <p class="intro-text">Use two LIFO stacks: <code>inputStack</code> for push operations and <code>outputStack</code> for pop/peek operations. Transfer elements from input to output stack only when output stack is empty.</p>
+            </section>
+            <section class="code-section">
+                <h2><i class="fas fa-code"></i> Implementation Code (C++)</h2>
+                <pre><code class="language-cpp">#include &lt;stack&gt;
+
+class MyQueue {
+    std::stack&lt;int&gt; inSt, outSt;
+public:
+    void push(int x) { inSt.push(x); }
+    int pop() {
+        peek();
+        int val = outSt.top(); outSt.pop();
+        return val;
+    }
+    int peek() {
+        if (outSt.empty()) {
+            while (!inSt.empty()) {
+                outSt.push(inSt.top()); inSt.pop();
+            }
+        }
+        return outSt.top();
+    }
+    bool empty() { return inSt.empty() && outSt.empty(); }
+};</code></pre>
+            </section>
+            <div class="algo-navigation" style="display:flex; justify-content:space-between; margin-top:2rem; padding:1rem 0; border-top:1px solid #eee;">
+                <a href="dequealgo.html" class="btn-prev" style="text-decoration:none; padding:0.8rem 1.2rem; background:#f0f2f5; border-radius:8px; color:#1a237e; font-weight:bold;"><i class="fas fa-arrow-left"></i> Deque</a>
+                <a href="stackusingqueues.html" class="btn-next" style="text-decoration:none; padding:0.8rem 1.2rem; background:#1a237e; border-radius:8px; color:#fff; font-weight:bold;">Stack using Queues <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tracker.js"></script>
+</body>
+</html>

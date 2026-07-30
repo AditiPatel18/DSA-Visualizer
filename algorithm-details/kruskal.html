@@ -3,36 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kruskal's MST | DSA Learning Platform</title>
+    <title>Kruskal's MST Algorithm | DSA Learning Platform</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/algorithm.css">
     <link rel="stylesheet" href="../css/graph.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
 </head>
 <body data-algorithm="kruskal">
     <nav class="navbar">
-        <div class="logo">
-            <h1><i class="fas fa-network-wired"></i> Kruskal's MST</h1>
-        </div>
+        <div class="logo"><h1><i class="fas fa-network-wired"></i> Kruskal's MST Algorithm</h1></div>
         <ul class="nav-links">
             <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
             <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
             <li><a href="../algorithms/graph.html"><i class="fas fa-arrow-left"></i> Back to Graph</a></li>
+            <li><a href="#" class="btn-mark-learned"><i class="fas fa-check-circle"></i> Mark Learned</a></li>
         </ul>
     </nav>
-
     <div class="page-header">
         <div class="header-content">
-            <h2><i class="fas fa-network-wired"></i> Kruskal's Minimum Spanning Tree</h2>
-            <p>Select the cheapest edges in ascending order while avoiding cycles to form the minimum spanning tree.</p>
+            <h2><i class="fas fa-network-wired"></i> Kruskal's Minimum Spanning Tree Algorithm</h2>
+            <p>Greedy edge-sorting algorithm for finding a Minimum Spanning Tree using Disjoint Set Union (DSU).</p>
             <div class="header-stats">
-                <div class="stat"><h3>O(E log E)</h3><p>Time</p></div>
-                <div class="stat"><h3>O(V + E)</h3><p>Space</p></div>
-                <div class="stat"><h3>Sorting</h3><p>Approach</p></div>
+                <div class="stat"><h3>O(E log E)</h3><p>Time Complexity</p></div>
+                <div class="stat"><h3>O(V + E)</h3><p>Space Complexity</p></div>
+                <div class="stat"><h3>DSU / Sorting</h3><p>Strategy</p></div>
             </div>
         </div>
     </div>
-
     <div class="graph-detail-page">
         <div class="graph-shell">
             <aside class="graph-sidebar">
@@ -40,40 +38,23 @@
                     <h3><i class="fas fa-info-circle"></i> Algorithm Info</h3>
                     <div class="graph-info-grid">
                         <div class="graph-info-item"><span class="graph-info-label">Category</span><span class="graph-info-value">MST</span></div>
-                        <div class="graph-info-item"><span class="graph-info-label">Best for</span><span class="graph-info-value">Disconnected edge sets</span></div>
-                        <div class="graph-info-item"><span class="graph-info-label">Graph type</span><span class="graph-info-value">Weighted</span></div>
-                        <div class="graph-info-item"><span class="graph-info-label">Complexity</span><span class="graph-info-value">O(E log E)</span></div>
+                        <div class="graph-info-item"><span class="graph-info-label">Disjoint Set</span><span class="graph-info-value">Union-Find</span></div>
                     </div>
                 </div>
                 <div class="graph-card">
-                    <h3><i class="fas fa-code"></i> Implementations</h3>
-                    <div class="language-tabs">
-                        <span class="lang-pill active">C</span>
-                        <span class="lang-pill active">C++</span>
-                        <span class="lang-pill active">Java</span>
-                    </div>
-                    <div class="graph-progress-list">
-                        <div class="graph-progress-row"><span>C</span><div class="progress-bar small"><div class="progress-fill" style="width:74%"></div></div><span>74%</span></div>
-                        <div class="graph-progress-row"><span>C++</span><div class="progress-bar small"><div class="progress-fill" style="width:78%"></div></div><span>78%</span></div>
-                        <div class="graph-progress-row"><span>Java</span><div class="progress-bar small"><div class="progress-fill" style="width:72%"></div></div><span>72%</span></div>
-                    </div>
-                </div>
-                <div class="graph-card">
-                    <h3><i class="fas fa-chart-line"></i> Progress</h3>
-                    <p>Completed: 3/5 checkpoints</p>
-                    <div class="progress-bar small"><div class="progress-fill" style="width:60%"></div></div>
+                    <h3><i class="fas fa-bookmark"></i> Actions & Progress</h3>
+                    <button class="btn-mark-learned" style="width:100%; padding:0.8rem; margin-bottom:0.5rem; background:#4CAF50; color:#fff; border:none; border-radius:8px; font-weight:bold; cursor:pointer;"><i class="fas fa-check-circle"></i> Mark as Complete</button>
+                    <button class="btn-favorite" style="width:100%; padding:0.8rem; background:#1a237e; color:#fff; border:none; border-radius:8px; font-weight:bold; cursor:pointer;"><i class="fas fa-star"></i> Add to Favorites</button>
                 </div>
             </aside>
-
             <main class="graph-main">
                 <section class="graph-panel">
-                    <h2><i class="fas fa-eye"></i> Interactive Visualization</h2>
-                    <p>Inspect the edges sorted by cost and see which ones are accepted into the spanning tree.</p>
+                    <h2><i class="fas fa-eye"></i> Interactive Visualization & Controls</h2>
                     <div class="graph-visualizer">
                         <div class="graph-canvas-card">
                             <svg id="graphSvg" class="graph-svg"></svg>
                             <div class="graph-controls">
-                                <button class="graph-btn secondary" id="startBtn"><i class="fas fa-play"></i> Start</button>
+                                <button class="graph-btn secondary" id="startBtn"><i class="fas fa-play"></i> Build Kruskal's MST</button>
                                 <button class="graph-btn ghost" id="stepBtn"><i class="fas fa-step-forward"></i> Step</button>
                                 <button class="graph-btn" id="resetBtn"><i class="fas fa-undo"></i> Reset</button>
                             </div>
@@ -81,89 +62,126 @@
                         <div class="graph-canvas-card">
                             <h3><i class="fas fa-chart-bar"></i> Live Stats</h3>
                             <div class="graph-stats-grid">
-                                <div class="graph-stat"><span class="label">Visited</span><strong id="visitedCount">0</strong></div>
-                                <div class="graph-stat"><span class="label">Edges</span><strong id="edgeCount">0</strong></div>
+                                <div class="graph-stat"><span class="label">Visited Nodes</span><strong id="visitedCount">0</strong></div>
                                 <div class="graph-stat"><span class="label">Status</span><strong id="statusValue">Ready</strong></div>
                             </div>
-                            <div class="graph-steps" style="margin-top:1rem;">
-                                <h3><i class="fas fa-list-ol"></i> Steps</h3>
-                                <ul>
-                                    <li>Sort edges by weight.</li>
-                                    <li>Keep an edge when it joins two different components.</li>
-                                    <li>Stop once the tree contains V - 1 edges.</li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </section>
-
                 <section class="graph-panel">
-                    <h2><i class="fas fa-lightbulb"></i> Complexity & Applications</h2>
-                    <div class="graph-grid-2">
-                        <div class="graph-steps">
-                            <h3>Complexity</h3>
-                            <ul>
-                                <li>Time: O(E log E)</li>
-                                <li>Space: O(V + E)</li>
-                                <li>Effective for sparse and dense weighted graphs</li>
-                            </ul>
-                        </div>
-                        <div class="graph-steps">
-                            <h3>Applications</h3>
-                            <ul>
-                                <li>Infrastructure planning</li>
-                                <li>Minimum cost wiring</li>
-                                <li>Network backbone design</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <h2><i class="fas fa-lightbulb"></i> Explanation & Dry Run</h2>
+                    <p>Kruskal's algorithm sorts all graph edges by weight in ascending order. It iterates through the sorted edge list and adds each edge to the MST if its endpoints belong to different components (checked using DSU Find-Parent), thereby avoiding cycles.</p>
+                    <h3>Dry Run Example</h3>
+                    <p>Sorted edges: <code>(1-2, w=1), (2-3, w=2), (1-3, w=3)</code>.<br>
+                    1. Add (1-2, w=1) &rarr; DSU Union(1, 2).<br>
+                    2. Add (2-3, w=2) &rarr; DSU Union(2, 3).<br>
+                    3. Check (1-3, w=3) &rarr; Find(1) == Find(3), skip to prevent cycle.</p>
                 </section>
-
                 <section class="graph-panel">
-                    <h2><i class="fas fa-balance-scale"></i> Advantages & Disadvantages</h2>
-                    <div class="graph-grid-2">
-                        <div class="graph-steps">
-                            <h3>Advantages</h3>
-                            <ul>
-                                <li>Simple and intuitive for MST construction.</li>
-                                <li>Works well with edge sorting and cycle checks.</li>
-                            </ul>
-                        </div>
-                        <div class="graph-steps">
-                            <h3>Disadvantages</h3>
-                            <ul>
-                                <li>Needs careful cycle detection.</li>
-                                <li>Less direct than Prim for some implementations.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="graph-panel">
-                    <h2><i class="fas fa-table"></i> Comparison Table</h2>
-                    <table class="graph-table">
-                        <thead>
-                            <tr><th>Algorithm</th><th>Use Case</th><th>Key Strength</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Prim</td><td>Growing a tree from one node</td><td>Priority-based growth</td></tr>
-                            <tr><td>Kruskal</td><td>Building from the cheapest edges</td><td>Global edge sorting</td></tr>
-                            <tr><td>Dijkstra</td><td>Shortest paths</td><td>Cost propagation</td></tr>
-                        </tbody>
-                    </table>
-                </section>
-
-                <section class="graph-panel">
-                    <h2><i class="fas fa-link"></i> Related Algorithms</h2>
-                    <ul class="graph-list">
-                        <li><a href="prim.html">Prim's MST</a></li>
-                        <li><a href="dijkstra.html">Dijkstra's Algorithm</a></li>
+                    <h2><i class="fas fa-tachometer-alt"></i> Complexity Analysis</h2>
+                    <ul>
+                        <li><strong>Time Complexity:</strong> O(E log E) for sorting edges.</li>
+                        <li><strong>Space Complexity:</strong> O(V + E) for DSU structures and edge list.</li>
                     </ul>
                 </section>
+                <section class="graph-panel">
+                    <h2><i class="fas fa-rocket"></i> Real-World Applications</h2>
+                    <ul>
+                        <li>LAN network cable infrastructure wiring.</li>
+                        <li>Image segmentation and cluster analysis.</li>
+                    </ul>
+                </section>
+                <section class="graph-panel">
+                    <h2><i class="fas fa-code"></i> Code Implementations (C, C++, Java)</h2>
+                    <div class="language-tabs" style="display:flex; gap:0.5rem; margin-bottom:1rem;">
+                        <button class="lang-pill active" onclick="showLang('c')">C</button>
+                        <button class="lang-pill" onclick="showLang('cpp')">C++</button>
+                        <button class="lang-pill" onclick="showLang('java')">Java</button>
+                    </div>
+                    <div id="lang-c" class="code-box active"><pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct Edge { int u, v, w; };
+int parent[100];
+
+int findUPar(int node) {
+    if (node == parent[node]) return node;
+    return parent[node] = findUPar(parent[node]);
+}
+int cmp(const void* a, const void* b) {
+    return ((struct Edge*)a)->w - ((struct Edge*)b)->w;
+}
+void kruskal(struct Edge edges[], int V, int E) {
+    qsort(edges, E, sizeof(struct Edge), cmp);
+    for (int i = 0; i < V; i++) parent[i] = i;
+    int mstWt = 0;
+    for (int i = 0; i < E; i++) {
+        int u = findUPar(edges[i].u), v = findUPar(edges[i].v);
+        if (u != v) { parent[u] = v; mstWt += edges[i].w; }
+    }
+}</code></pre></div>
+                    <div id="lang-cpp" class="code-box" style="display:none;"><pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+struct DisjointSet {
+    std::vector&lt;int&gt; parent;
+    DisjointSet(int n) { parent.resize(n); for(int i=0;i&lt;n;i++) parent[i]=i; }
+    int findUPar(int node) { return parent[node] == node ? node : parent[node] = findUPar(parent[node]); }
+    void unionByNode(int u, int v) { int ulp_u = findUPar(u), ulp_v = findUPar(v); if(ulp_u != ulp_v) parent[ulp_u] = ulp_v; }
+};
+
+int kruskal(int V, std::vector&lt;std::vector&lt;int&gt;&gt;& edges) {
+    std::sort(edges.begin(), edges.end(), [](const auto& a, const auto& b){ return a[2] < b[2]; });
+    DisjointSet ds(V); int mstWt = 0;
+    for (auto it : edges) {
+        if (ds.findUPar(it[0]) != ds.findUPar(it[1])) {
+            mstWt += it[2]; ds.unionByNode(it[0], it[1]);
+        }
+    }
+    return mstWt;
+}</code></pre></div>
+                    <div id="lang-java" class="code-box" style="display:none;"><pre><code class="language-java">import java.util.*;
+
+public class Kruskal {
+    static int kruskal(int V, int[][] edges) {
+        Arrays.sort(edges, (a, b) -&gt; a[2] - b[2]);
+        int[] parent = new int[V];
+        for (int i = 0; i &lt; V; i++) parent[i] = i;
+        int mstWt = 0;
+        for (int[] edge : edges) {
+            int u = find(parent, edge[0]), v = find(parent, edge[1]);
+            if (u != v) { parent[u] = v; mstWt += edge[2]; }
+        }
+        return mstWt;
+    }
+    static int find(int[] parent, int i) {
+        if (parent[i] == i) return i;
+        return parent[i] = find(parent, parent[i]);
+    }
+}</code></pre></div>
+                </section>
+                <div class="algo-navigation" style="display:flex; justify-content:space-between; margin-top:2rem; padding:1rem 0; border-top:1px solid #eee;">
+                    <a href="prim.html" class="btn-prev" style="text-decoration:none; padding:0.8rem 1.2rem; background:#f0f2f5; border-radius:8px; color:#1a237e; font-weight:bold;"><i class="fas fa-arrow-left"></i> Prim's MST Algorithm</a>
+                    <a href="dsu.html" class="btn-next" style="text-decoration:none; padding:0.8rem 1.2rem; background:#1a237e; border-radius:8px; color:#fff; font-weight:bold;">Disjoint Set Union (DSU) <i class="fas fa-arrow-right"></i></a>
+                </div>
             </main>
         </div>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        function showLang(lang) {
+            document.querySelectorAll('.code-box').forEach(b => b.style.display = 'none');
+            document.querySelectorAll('.lang-pill').forEach(p => p.classList.remove('active'));
+            document.getElementById('lang-' + lang).style.display = 'block';
+            event.target.classList.add('active');
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tracker.js"></script>
     <script src="../js/graph-visualizer.js"></script>
 </body>
 </html>

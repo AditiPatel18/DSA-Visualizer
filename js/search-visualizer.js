@@ -123,10 +123,12 @@ class SearchingVisualizer {
                 await this.linearSearch(target);
             } else if (this.algorithm === 'binary') {
                 await this.binarySearch(target);
-            } else if (this.algorithm === 'jump') {
-                await this.jumpSearch(target);
+            } else if (this.algorithm === 'lowerbound') {
+                await this.lowerBound(target);
+            } else if (this.algorithm === 'upperbound') {
+                await this.upperBound(target);
             } else {
-                await this.interpolationSearch(target);
+                await this.jumpSearch(target);
             }
         } catch (error) {
             this.searchResult = 'Interrupted';
@@ -237,37 +239,61 @@ class SearchingVisualizer {
         this.updateStats();
     }
 
-    async interpolationSearch(target) {
-        let low = 0;
-        let high = this.array.length - 1;
+    async lowerBound(target) {
+        let left = 0;
+        let right = this.array.length - 1;
+        let ans = this.array.length;
 
-        while (low <= high && target >= this.array[low] && target <= this.array[high]) {
+        while (left <= right) {
             await this.waitForResume();
-            const position = low + Math.floor(((target - this.array[low]) * (high - low)) / (this.array[high] - this.array[low] || 1));
-            this.highlight(position, 'active');
-            this.currentIndex = position;
+            const mid = Math.floor((left + right) / 2);
+            this.highlight(mid, 'active');
+            this.currentIndex = mid;
             this.comparisons += 1;
             this.updateStats();
             await this.delay();
 
-            if (this.array[position] === target) {
-                this.highlight(position, 'success');
-                this.searchResult = `Found at index ${position}`;
-                this.currentIndex = position;
-                this.updateStats();
-                return;
-            }
-
-            this.highlight(position, 'checked');
-            if (this.array[position] < target) {
-                low = position + 1;
+            if (this.array[mid] >= target) {
+                ans = mid;
+                this.highlight(mid, 'success');
+                right = mid - 1;
             } else {
-                high = position - 1;
+                this.highlight(mid, 'checked');
+                left = mid + 1;
             }
         }
 
-        this.searchResult = 'Not found';
-        this.currentIndex = -1;
+        this.currentIndex = ans;
+        this.searchResult = ans < this.array.length ? `Lower Bound at index ${ans}` : `Lower Bound at index ${ans} (end of array)`;
+        this.updateStats();
+    }
+
+    async upperBound(target) {
+        let left = 0;
+        let right = this.array.length - 1;
+        let ans = this.array.length;
+
+        while (left <= right) {
+            await this.waitForResume();
+            const mid = Math.floor((left + right) / 2);
+            this.highlight(mid, 'active');
+            this.currentIndex = mid;
+            this.comparisons += 1;
+            this.updateStats();
+            await this.delay();
+
+            if (this.array[mid] > target) {
+                ans = mid;
+                this.highlight(mid, 'success');
+                right = mid - 1;
+            } else {
+                this.highlight(mid, 'checked');
+                left = mid + 1;
+            }
+        }
+
+        this.currentIndex = ans;
+        this.searchResult = ans < this.array.length ? `Upper Bound at index ${ans}` : `Upper Bound at index ${ans} (end of array)`;
         this.updateStats();
     }
 

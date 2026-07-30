@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upper Bound Algorithm | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="../css/visualizer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+</head>
+<body data-algorithm="upperbound">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1><i class="fas fa-search"></i> Upper Bound Algorithm</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="../algorithms/searching.html"><i class="fas fa-arrow-left"></i> Back to Searching</a></li>
+            <li><a href="#" class="btn-mark-learned"><i class="fas fa-check-circle"></i> Mark Learned</a></li>
+        </ul>
+    </nav>
+
+    <div class="algorithm-detail-container">
+        <!-- Sidebar -->
+        <aside class="detail-sidebar">
+            <div class="algo-info-card">
+                <h3><i class="fas fa-info-circle"></i> Algorithm Info</h3>
+                <div class="info-grid">
+                    <div class="info-item"><span class="info-label">Category:</span><span class="info-value searching">Searching</span></div>
+                    <div class="info-item"><span class="info-label">Difficulty:</span><span class="info-value easy">Easy</span></div>
+                    <div class="info-item"><span class="info-label">Best Time:</span><code class="info-value">O(1)</code></div>
+                    <div class="info-item"><span class="info-label">Average Time:</span><code class="info-value">O(log n)</code></div>
+                    <div class="info-item"><span class="info-label">Worst Time:</span><code class="info-value">O(log n)</code></div>
+                    <div class="info-item"><span class="info-label">Space:</span><code class="info-value">O(1)</code></div>
+                    <div class="info-item"><span class="info-label">Prerequisite:</span><span class="info-value">Sorted Array</span></div>
+                </div>
+            </div>
+
+            <div class="language-selector-card">
+                <h3><i class="fas fa-globe"></i> Select Language</h3>
+                <div class="language-tabs">
+                    <button class="lang-tab active" data-lang="c"><i class="fab fa-c"></i> C</button>
+                    <button class="lang-tab" data-lang="cpp"><i class="fab fa-cuttlefish"></i>++ C++</button>
+                    <button class="lang-tab" data-lang="java"><i class="fab fa-java"></i> Java</button>
+                </div>
+            </div>
+
+            <div class="progress-card">
+                <h3><i class="fas fa-chart-line"></i> Your Progress</h3>
+                <div class="progress-details">
+                    <div class="progress-item"><span>C Implementation</span><div class="progress-bar small"><div class="progress-fill" style="width: 100%"></div></div><span>100%</span></div>
+                    <div class="progress-item"><span>C++ Implementation</span><div class="progress-bar small"><div class="progress-fill" style="width: 100%"></div></div><span>100%</span></div>
+                    <div class="progress-item"><span>Java Implementation</span><div class="progress-bar small"><div class="progress-fill" style="width: 100%"></div></div><span>100%</span></div>
+                </div>
+                <button class="btn-mark-complete btn-mark-learned" style="margin-bottom:0.5rem;"><i class="fas fa-check"></i> Mark as Completed</button>
+                <button class="btn-favorite" style="width:100%; padding:0.6rem; background:#1a237e; color:#fff; border:none; border-radius:6px; font-weight:bold; cursor:pointer;"><i class="fas fa-star"></i> Add to Favorites</button>
+            </div>
+
+            <div class="visualization-card">
+                <h3><i class="fas fa-play-circle"></i> Try Upper Bound</h3>
+                <div class="search-box">
+                    <input type="number" id="searchKey" placeholder="Enter target" value="25" min="1" max="100">
+                    <button id="runUpperBound" class="btn-run"><i class="fas fa-search"></i> Search</button>
+                </div>
+                <div class="search-result" id="searchResult"></div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="detail-main">
+            <!-- Explanation -->
+            <section class="explanation-section">
+                <h2><i class="fas fa-lightbulb"></i> Understanding Upper Bound</h2>
+                <p class="intro-text">
+                    The <strong>Upper Bound</strong> algorithm finds the <strong>smallest index</strong> <code>i</code> in a sorted array such that <code>arr[i] &gt; target</code> (strictly greater).
+                    If no element is strictly greater than target, upper bound returns index <code>n</code> (size of array).
+                </p>
+
+                <div class="algorithm-steps">
+                    <h3><i class="fas fa-list-ol"></i> Algorithm Steps</h3>
+                    <ol class="steps-list">
+                        <li><strong>Initialize:</strong> Set <code>low = 0</code>, <code>high = n - 1</code>, and default <code>ans = n</code>.</li>
+                        <li><strong>Calculate Mid:</strong> <code>mid = low + (high - low) / 2</code>.</li>
+                        <li><strong>Check Condition:</strong> If <code>arr[mid] &gt; target</code>, set <code>ans = mid</code> and eliminate right half by setting <code>high = mid - 1</code>.</li>
+                        <li><strong>Adjust Search Space:</strong> Else if <code>arr[mid] &le; target</code>, set <code>low = mid + 1</code>.</li>
+                        <li><strong>Repeat:</strong> Continue until <code>low &gt; high</code>, then return <code>ans</code>.</li>
+                    </ol>
+                </div>
+
+                <div class="visual-guide">
+                    <h3><i class="fas fa-chalkboard"></i> Visual Example & Dry Run</h3>
+                    <div class="example-array">
+                        <p>Finding Upper Bound of <strong>25</strong> in sorted array <code>[10, 20, 25, 30, 40, 50]</code>:</p>
+                        <div class="array-visual">
+                            <div class="array-element">10</div>
+                            <div class="array-element">20</div>
+                            <div class="array-element">25</div>
+                            <div class="array-element active">30</div>
+                            <div class="array-element">40</div>
+                            <div class="array-element">50</div>
+                        </div>
+                        <p class="example-steps">
+                            <strong>Step 1:</strong> mid = index 2 (val 25). 25 &le; 25 &rarr; low = 3<br>
+                            <strong>Step 2:</strong> mid = index 4 (val 40). 40 &gt; 25 &rarr; ans = 4, high = 3<br>
+                            <strong>Step 3:</strong> mid = index 3 (val 30). 30 &gt; 25 &rarr; ans = 3, high = 2<br>
+                            <strong>Result:</strong> low &gt; high. Return <strong>ans = 3</strong> (value 30).
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Code Section -->
+            <section class="code-section">
+                <div class="code-header">
+                    <h2><i class="fas fa-code"></i> Implementation Code</h2>
+                </div>
+                <div id="code-c" class="code-container active">
+                    <button class="btn-copy" data-lang="c"><i class="fas fa-copy"></i> Copy Code</button>
+                    <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int upperBound(int arr[], int n, int target) {
+    int low = 0, high = n - 1;
+    int ans = n;
+
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (arr[mid] > target) {
+            ans = mid;
+            high = mid - 1; // Look for smaller index on left
+        } else {
+            low = mid + 1;
+        }
+    }
+    return ans;
+}
+
+int main() {
+    int arr[] = {10, 20, 25, 30, 40, 50};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int target = 25;
+    printf("Upper bound index of %d is: %d\n", target, upperBound(arr, n, target));
+    return 0;
+}</code></pre>
+                </div>
+
+                <div id="code-cpp" class="code-container">
+                    <button class="btn-copy" data-lang="cpp"><i class="fas fa-copy"></i> Copy Code</button>
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+int upperBound(const std::vector&lt;int&gt;& arr, int target) {
+    int low = 0, high = arr.size() - 1;
+    int ans = arr.size();
+
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (arr[mid] > target) {
+            ans = mid;
+            high = mid - 1;
+        } else {
+            low = mid + 1;
+        }
+    }
+    return ans;
+}
+
+int main() {
+    std::vector&lt;int&gt; arr = {10, 20, 25, 30, 40, 50};
+    int target = 25;
+    std::cout << "Upper bound index: " << upperBound(arr, target) << std::endl;
+    return 0;
+}</code></pre>
+                </div>
+
+                <div id="code-java" class="code-container">
+                    <button class="btn-copy" data-lang="java"><i class="fas fa-copy"></i> Copy Code</button>
+                    <pre><code class="language-java">public class UpperBound {
+    public static int upperBound(int[] arr, int target) {
+        int low = 0, high = arr.length - 1;
+        int ans = arr.length;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] > target) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {10, 20, 25, 30, 40, 50};
+        int target = 25;
+        System.out.println("Upper bound index: " + upperBound(arr, target));
+    }
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- Complexity Analysis -->
+            <section class="complexity-section">
+                <h2><i class="fas fa-chart-bar"></i> Complexity Analysis</h2>
+                <div class="complexity-grid">
+                    <div class="complexity-card">
+                        <h3><i class="fas fa-clock"></i> Time Complexity</h3>
+                        <div class="complexity-detail">
+                            <div class="case"><span class="case-name">Best Case:</span><code class="case-value">O(1)</code></div>
+                            <p class="case-desc">Target checked at middle on first try</p>
+                        </div>
+                        <div class="complexity-detail">
+                            <div class="case"><span class="case-name">Average / Worst:</span><code class="case-value">O(log n)</code></div>
+                            <p class="case-desc">Halves search space each step</p>
+                        </div>
+                    </div>
+
+                    <div class="complexity-card">
+                        <h3><i class="fas fa-memory"></i> Space Complexity</h3>
+                        <div class="complexity-detail">
+                            <div class="case"><span class="case-name">Auxiliary Space:</span><code class="case-value">O(1)</code></div>
+                            <p class="case-desc">Constant extra memory for pointers</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Real-World Applications -->
+            <section class="applications-section">
+                <h2><i class="fas fa-rocket"></i> Real-World Applications</h2>
+                <div class="applications-grid">
+                    <div class="app-card">
+                        <div class="app-icon"><i class="fas fa-percentage"></i></div>
+                        <div class="app-content"><h4>Count Element Occurrences</h4><p>Total count = <code>upper_bound(x) - lower_bound(x)</code>.</p></div>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <div class="app-content"><h4>Threshold Boundaries</h4><p>Locate the first timestamp or score exceeding a strict threshold.</p></div>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon"><i class="fas fa-layer-group"></i></div>
+                        <div class="app-content"><h4>Ceil and Floor Computation</h4><p>Derive Ceil and Floor values efficiently in O(log n).</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="algo-navigation" style="display:flex; justify-content:space-between; margin-top:2rem; padding:1rem 0; border-top:1px solid #eee;">
+                <a href="lowerbound.html" class="btn-prev" style="text-decoration:none; padding:0.8rem 1.2rem; background:#f0f2f5; border-radius:8px; color:#1a237e; font-weight:bold;"><i class="fas fa-arrow-left"></i> Lower Bound</a>
+                <a href="../algorithms/searching.html" class="btn-next" style="text-decoration:none; padding:0.8rem 1.2rem; background:#1a237e; border-radius:8px; color:#fff; font-weight:bold;">All Searching Algorithms <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        document.querySelectorAll('.lang-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.code-container').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById(`code-${this.dataset.lang}`).classList.add('active');
+            });
+        });
+
+        document.getElementById('runUpperBound').addEventListener('click', function() {
+            const key = parseInt(document.getElementById('searchKey').value);
+            const resultDiv = document.getElementById('searchResult');
+            const arr = [10, 20, 25, 30, 40, 50];
+            let low = 0, high = arr.length - 1, ans = arr.length;
+
+            while (low <= high) {
+                let mid = Math.floor((low + high) / 2);
+                if (arr[mid] > key) {
+                    ans = mid;
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            }
+
+            resultDiv.innerHTML = `<div class="success"><i class="fas fa-check-circle"></i> Upper Bound for <strong>${key}</strong> is index <strong>${ans}</strong> ${ans < arr.length ? '(value: ' + arr[ans] + ')' : '(end of array)'}</div>`;
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tracker.js"></script>
+</body>
+</html>

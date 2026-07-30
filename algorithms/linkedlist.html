@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linked List Algorithms | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><h1><i class="fas fa-link"></i> Linked List</h1></div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="linkedlist.html" class="active"><i class="fas fa-link"></i> Linked List</a></li>
+        </ul>
+    </nav>
+    <div class="page-header">
+        <div class="header-content">
+            <h2><i class="fas fa-link"></i> Linked List Algorithms (Striver A2Z)</h2>
+            <p>Singly LL, Doubly LL, reversal, Floyd's cycle detection, and Tortoise-Hare pointer techniques.</p>
+            <div class="header-stats">
+                <div class="stat"><h3>5</h3><p>Algorithms</p></div>
+                <div class="stat"><h3>15</h3><p>Code Implementations</p></div>
+                <div class="stat"><h3>100%</h3><p>A2Z Coverage</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="algorithm-page">
+        <aside class="algo-sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-filter"></i> Search & Focus</h3>
+                <input type="text" id="searchInput" placeholder="Search linked list..." style="width:100%; padding:0.6rem; border-radius:6px; border:1px solid #ccc; margin-bottom:1rem;">
+            </div>
+        </aside>
+        <main class="algo-main">
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/singlylinkedlist.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Singly Linked List</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-easy">Easy</span></div></div></div>
+                <p class="algo-description">Linear node sequence linked by forward pointers with dynamic allocation.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/doublylinkedlist.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Doubly Linked List</h3><div class="algo-tags"><span class="tag-time">O(1) / O(N)</span><span class="tag-medium">Medium</span></div></div></div>
+                <p class="algo-description">Two-way node traversal supporting forward and backward pointers.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/reverselinkedlist.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Reverse Linked List</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-easy">Easy</span></div></div></div>
+                <p class="algo-description">Reverse next pointer directions iteratively or recursively in-place.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/detectcyclell.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Detect Cycle in Linked List</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-easy">Easy</span></div></div></div>
+                <p class="algo-description">Floyd's Tortoise and Hare fast & slow pointer algorithm for cycle detection.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/middlell.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Middle of Linked List</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-easy">Easy</span></div></div></div>
+                <p class="algo-description">Find middle node in a single pass using slow and fast pointer strategy.</p>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tracker.js"></script>
+</body>
+</html>

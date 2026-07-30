@@ -217,28 +217,6 @@
     text-decoration: underline;
 }
 
-.auth-stats {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid #e0e0e0;
-}
-
-.auth-stats .stat {
-    text-align: center;
-}
-
-.auth-stats h3 {
-    color: #4CAF50;
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-}
-
-.auth-stats p {
-    color: #666;
-    font-size: 0.9rem;
-}
 
 .auth-features {
     background: white;

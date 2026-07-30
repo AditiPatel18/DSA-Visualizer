@@ -115,3 +115,59 @@ ON public.learning_statistics
 FOR UPDATE
 USING (auth.uid() = user_id)
 WITH CHECK (auth.uid() = user_id);
+
+-- Trigger function to automatically create profile and stats rows upon user signup
+create or replace function public.handle_new_user()
+returns trigger as $$
+begin
+  insert into public.profiles (id, email, full_name, username)
+  values (
+    new.id,
+    new.email,
+    coalesce(new.raw_user_meta_data->>'full_name', new.raw_user_meta_data->>'username', split_part(new.email, '@', 1)),
+    coalesce(new.raw_user_meta_data->>'username', split_part(new.email, '@', 1))
+  )
+  on conflict (id) do update set
+    email = excluded.email,
+    full_name = coalesce(public.profiles.full_name, excluded.full_name),
+    username = coalesce(public.profiles.username, excluded.username),
+    updated_at = now();
+
+  insert into public.learning_statistics (user_id, algorithms_learned, streak, active_days, total_hours, achievements)
+  values (new.id, 0, 0, 0, '0h 0m', 0)
+  on conflict (user_id) do nothing;
+
+  return new;
+end;
+$$ language plpgsql security definer;
+
+drop trigger if exists on_auth_user_created on auth.users;
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute function public.handle_new_user();
+
+-- Recent Activity Table
+create table if not exists public.recent_activity (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid references public.profiles(id) on delete cascade,
+  action_type text not null, -- 'completed', 'favorited', 'unfavorited', 'viewed'
+  algorithm_name text not null,
+  category text default 'general',
+  details text,
+  created_at timestamptz default now()
+);
+
+alter table public.recent_activity enable row level security;
+
+DROP POLICY IF EXISTS activity_self_select ON public.recent_activity;
+CREATE POLICY activity_self_select
+ON public.recent_activity
+FOR SELECT
+USING (auth.uid() = user_id);
+
+DROP POLICY IF EXISTS activity_self_insert ON public.recent_activity;
+CREATE POLICY activity_self_insert
+ON public.recent_activity
+FOR INSERT
+WITH CHECK (auth.uid() = user_id);
+

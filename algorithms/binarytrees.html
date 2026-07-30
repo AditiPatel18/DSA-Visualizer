@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Trees | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><h1><i class="fas fa-tree"></i> Binary Trees</h1></div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="binarytrees.html" class="active"><i class="fas fa-tree"></i> Binary Trees</a></li>
+        </ul>
+    </nav>
+    <div class="page-header">
+        <div class="header-content">
+            <h2><i class="fas fa-tree"></i> Binary Trees (Striver A2Z Sheet)</h2>
+            <p>Traversals, height, diameter, balance check, LCA, views, and boundary traversals.</p>
+            <div class="header-stats">
+                <div class="stat"><h3>10</h3><p>Algorithms</p></div>
+                <div class="stat"><h3>30</h3><p>Code Implementations</p></div>
+                <div class="stat"><h3>100%</h3><p>A2Z Coverage</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="algorithm-page">
+        <aside class="algo-sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-filter"></i> Search & Focus</h3>
+                <input type="text" id="searchInput" placeholder="Search binary tree topics..." style="width:100%; padding:0.6rem; border-radius:6px; border:1px solid #ccc; margin-bottom:1rem;">
+            </div>
+        </aside>
+        <main class="algo-main">
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/treetraversals.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Tree Traversals (In, Pre, Post)</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-easy">Easy</span></div></div></div>
+                <p class="algo-description">Recursive and iterative Inorder, Preorder, and Postorder tree traversals.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/treeheight.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Height of Binary Tree</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-easy">Easy</span></div></div></div>
+                <p class="algo-description">Find maximum depth/height from root to leaf node.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/treediameter.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Diameter of Binary Tree</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-medium">Medium</span></div></div></div>
+                <p class="algo-description">Calculate longest path between any two nodes in a binary tree.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/balancedtree.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Balanced Binary Tree Check</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-easy">Easy</span></div></div></div>
+                <p class="algo-description">Verify height difference between left and right subtrees &le; 1 for all nodes.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/lca.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Lowest Common Ancestor (LCA)</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-medium">Medium</span></div></div></div>
+                <p class="algo-description">Find lowest common ancestor node of two given nodes p and q.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/zigzag.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Zigzag Level Order Traversal</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-medium">Medium</span></div></div></div>
+                <p class="algo-description">Level order traversal alternating left-to-right and right-to-left directions.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/boundarytraversal.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Boundary Traversal</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-medium">Medium</span></div></div></div>
+                <p class="algo-description">Traverse left boundary, leaf nodes, and right boundary in anti-clockwise direction.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/verticalorder.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Vertical Order Traversal</h3><div class="algo-tags"><span class="tag-time">O(N log N)</span><span class="tag-hard">Hard</span></div></div></div>
+                <p class="algo-description">Group nodes by vertical column coordinate using map and level order BFS.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/topview.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Top View of Binary Tree</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-medium">Medium</span></div></div></div>
+                <p class="algo-description">Print topmost visible nodes for each vertical column index.</p>
+            </div>
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/bottomview.html'">
+                <div class="algo-card-header"><div class="algo-title"><h3>Bottom View of Binary Tree</h3><div class="algo-tags"><span class="tag-time">O(N)</span><span class="tag-medium">Medium</span></div></div></div>
+                <p class="algo-description">Print bottommost visible nodes for each vertical column index.</p>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tracker.js"></script>
+</body>
+</html>

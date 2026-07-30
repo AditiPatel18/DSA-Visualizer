@@ -8,72 +8,53 @@
     <link rel="stylesheet" href="../css/algorithm.css">
     <link rel="stylesheet" href="../css/graph.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
 </head>
 <body data-algorithm="dijkstra">
     <nav class="navbar">
-        <div class="logo">
-            <h1><i class="fas fa-route"></i> Dijkstra's Algorithm</h1>
-        </div>
+        <div class="logo"><h1><i class="fas fa-route"></i> Dijkstra's Algorithm</h1></div>
         <ul class="nav-links">
             <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
             <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
             <li><a href="../algorithms/graph.html"><i class="fas fa-arrow-left"></i> Back to Graph</a></li>
+            <li><a href="#" class="btn-mark-learned"><i class="fas fa-check-circle"></i> Mark Learned</a></li>
         </ul>
     </nav>
-
     <div class="page-header">
         <div class="header-content">
-            <h2><i class="fas fa-route"></i> Dijkstra's Algorithm</h2>
-            <p>Use a priority-based approach to grow the shortest path tree for graphs with non-negative edge weights.</p>
+            <h2><i class="fas fa-route"></i> Dijkstra's Algorithm (Single Source Shortest Path)</h2>
+            <p>Greedy priority-queue algorithm for finding shortest paths in non-negative weighted graphs.</p>
             <div class="header-stats">
-                <div class="stat"><h3>O(E log V)</h3><p>Time</p></div>
-                <div class="stat"><h3>O(V)</h3><p>Space</p></div>
-                <div class="stat"><h3>Greedy</h3><p>Strategy</p></div>
+                <div class="stat"><h3>O(E log V)</h3><p>Time Complexity</p></div>
+                <div class="stat"><h3>O(V)</h3><p>Space Complexity</p></div>
+                <div class="stat"><h3>Priority Queue</h3><p>Structure</p></div>
             </div>
         </div>
     </div>
-
     <div class="graph-detail-page">
         <div class="graph-shell">
             <aside class="graph-sidebar">
                 <div class="graph-card">
                     <h3><i class="fas fa-info-circle"></i> Algorithm Info</h3>
                     <div class="graph-info-grid">
-                        <div class="graph-info-item"><span class="graph-info-label">Category</span><span class="graph-info-value">Shortest path</span></div>
-                        <div class="graph-info-item"><span class="graph-info-label">Best for</span><span class="graph-info-value">Weighted graphs</span></div>
-                        <div class="graph-info-item"><span class="graph-info-label">Graph type</span><span class="graph-info-value">Positive weights</span></div>
-                        <div class="graph-info-item"><span class="graph-info-label">Complexity</span><span class="graph-info-value">O(E log V)</span></div>
+                        <div class="graph-info-item"><span class="graph-info-label">Category</span><span class="graph-info-value">Shortest Path</span></div>
+                        <div class="graph-info-item"><span class="graph-info-label">Weights</span><span class="graph-info-value">Non-Negative</span></div>
                     </div>
                 </div>
                 <div class="graph-card">
-                    <h3><i class="fas fa-code"></i> Implementations</h3>
-                    <div class="language-tabs">
-                        <span class="lang-pill active">C</span>
-                        <span class="lang-pill active">C++</span>
-                        <span class="lang-pill active">Java</span>
-                    </div>
-                    <div class="graph-progress-list">
-                        <div class="graph-progress-row"><span>C</span><div class="progress-bar small"><div class="progress-fill" style="width:88%"></div></div><span>88%</span></div>
-                        <div class="graph-progress-row"><span>C++</span><div class="progress-bar small"><div class="progress-fill" style="width:92%"></div></div><span>92%</span></div>
-                        <div class="graph-progress-row"><span>Java</span><div class="progress-bar small"><div class="progress-fill" style="width:86%"></div></div><span>86%</span></div>
-                    </div>
-                </div>
-                <div class="graph-card">
-                    <h3><i class="fas fa-chart-line"></i> Progress</h3>
-                    <p>Completed: 4/5 checkpoints</p>
-                    <div class="progress-bar small"><div class="progress-fill" style="width:80%"></div></div>
+                    <h3><i class="fas fa-bookmark"></i> Actions & Progress</h3>
+                    <button class="btn-mark-learned" style="width:100%; padding:0.8rem; margin-bottom:0.5rem; background:#4CAF50; color:#fff; border:none; border-radius:8px; font-weight:bold; cursor:pointer;"><i class="fas fa-check-circle"></i> Mark as Complete</button>
+                    <button class="btn-favorite" style="width:100%; padding:0.8rem; background:#1a237e; color:#fff; border:none; border-radius:8px; font-weight:bold; cursor:pointer;"><i class="fas fa-star"></i> Add to Favorites</button>
                 </div>
             </aside>
-
             <main class="graph-main">
                 <section class="graph-panel">
-                    <h2><i class="fas fa-eye"></i> Interactive Visualization</h2>
-                    <p>Watch how the current node expands and how the shortest distance improves as the algorithm progresses.</p>
+                    <h2><i class="fas fa-eye"></i> Interactive Visualization & Controls</h2>
                     <div class="graph-visualizer">
                         <div class="graph-canvas-card">
                             <svg id="graphSvg" class="graph-svg"></svg>
                             <div class="graph-controls">
-                                <button class="graph-btn secondary" id="startBtn"><i class="fas fa-play"></i> Start</button>
+                                <button class="graph-btn secondary" id="startBtn"><i class="fas fa-play"></i> Start Dijkstra</button>
                                 <button class="graph-btn ghost" id="stepBtn"><i class="fas fa-step-forward"></i> Step</button>
                                 <button class="graph-btn" id="resetBtn"><i class="fas fa-undo"></i> Reset</button>
                             </div>
@@ -81,89 +62,119 @@
                         <div class="graph-canvas-card">
                             <h3><i class="fas fa-chart-bar"></i> Live Stats</h3>
                             <div class="graph-stats-grid">
-                                <div class="graph-stat"><span class="label">Visited</span><strong id="visitedCount">0</strong></div>
-                                <div class="graph-stat"><span class="label">Edges</span><strong id="edgeCount">0</strong></div>
+                                <div class="graph-stat"><span class="label">Visited Nodes</span><strong id="visitedCount">0</strong></div>
                                 <div class="graph-stat"><span class="label">Status</span><strong id="statusValue">Ready</strong></div>
                             </div>
-                            <div class="graph-steps" style="margin-top:1rem;">
-                                <h3><i class="fas fa-list-ol"></i> Steps</h3>
-                                <ul>
-                                    <li>Pick the unvisited node with the smallest distance.</li>
-                                    <li>Relax its outgoing edges.</li>
-                                    <li>Update the shortest known paths.</li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </section>
-
                 <section class="graph-panel">
-                    <h2><i class="fas fa-lightbulb"></i> Complexity & Applications</h2>
-                    <div class="graph-grid-2">
-                        <div class="graph-steps">
-                            <h3>Complexity</h3>
-                            <ul>
-                                <li>Time: O(E log V)</li>
-                                <li>Space: O(V)</li>
-                                <li>Reliable for routing and weighted pathfinding</li>
-                            </ul>
-                        </div>
-                        <div class="graph-steps">
-                            <h3>Applications</h3>
-                            <ul>
-                                <li>Google Maps and GPS routing</li>
-                                <li>Network optimization</li>
-                                <li>Resource planning</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <h2><i class="fas fa-lightbulb"></i> Explanation & Dry Run</h2>
+                    <p>Dijkstra's algorithm maintains a distance array initialized to infinity and source to 0. It repeatedly selects the unvisited node with minimum distance using a Min-Heap / Priority Queue and relaxes its adjacent edges.</p>
+                    <h3>Dry Run Example</h3>
+                    <p>Source node 0: <code>dist[0] = 0</code>, others = &infin;. Extract 0, relax edge (0-1, w=4) &rarr; <code>dist[1]=4</code>, (0-2, w=2) &rarr; <code>dist[2]=2</code>. Next extract 2, relax edge (2-1, w=1) &rarr; <code>dist[1]=min(4, 2+1)=3</code>.</p>
                 </section>
-
                 <section class="graph-panel">
-                    <h2><i class="fas fa-balance-scale"></i> Advantages & Disadvantages</h2>
-                    <div class="graph-grid-2">
-                        <div class="graph-steps">
-                            <h3>Advantages</h3>
-                            <ul>
-                                <li>Efficient for graphs with positive weights.</li>
-                                <li>Produces optimal shortest-path results.</li>
-                            </ul>
-                        </div>
-                        <div class="graph-steps">
-                            <h3>Disadvantages</h3>
-                            <ul>
-                                <li>Requires non-negative weights.</li>
-                                <li>More complex than BFS for simple traversal.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="graph-panel">
-                    <h2><i class="fas fa-table"></i> Comparison Table</h2>
-                    <table class="graph-table">
-                        <thead>
-                            <tr><th>Algorithm</th><th>When to Use</th><th>Key Strength</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>BFS</td><td>Unweighted graphs</td><td>Fast traversal</td></tr>
-                            <tr><td>DFS</td><td>Exploration and backtracking</td><td>Simple recursive logic</td></tr>
-                            <tr><td>Dijkstra</td><td>Weighted shortest paths</td><td>Optimal path costs</td></tr>
-                        </tbody>
-                    </table>
-                </section>
-
-                <section class="graph-panel">
-                    <h2><i class="fas fa-link"></i> Related Algorithms</h2>
-                    <ul class="graph-list">
-                        <li><a href="bfs.html">Breadth-First Search</a></li>
-                        <li><a href="dfs.html">Depth-First Search</a></li>
+                    <h2><i class="fas fa-tachometer-alt"></i> Complexity Analysis</h2>
+                    <ul>
+                        <li><strong>Time Complexity:</strong> O(E log V) with Min-Heap.</li>
+                        <li><strong>Space Complexity:</strong> O(V) for distance array and Min-Heap.</li>
                     </ul>
                 </section>
+                <section class="graph-panel">
+                    <h2><i class="fas fa-rocket"></i> Real-World Applications</h2>
+                    <ul>
+                        <li>Google Maps and OpenStreetMap route navigation.</li>
+                        <li>Network Routing Protocols (OSPF, IS-IS).</li>
+                    </ul>
+                </section>
+                <section class="graph-panel">
+                    <h2><i class="fas fa-code"></i> Code Implementations (C, C++, Java)</h2>
+                    <div class="language-tabs" style="display:flex; gap:0.5rem; margin-bottom:1rem;">
+                        <button class="lang-pill active" onclick="showLang('c')">C</button>
+                        <button class="lang-pill" onclick="showLang('cpp')">C++</button>
+                        <button class="lang-pill" onclick="showLang('java')">Java</button>
+                    </div>
+                    <div id="lang-c" class="code-box active"><pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void dijkstra(int graph[5][5], int V, int src) {
+    int dist[5], vis[5] = {0};
+    for (int i = 0; i < V; i++) dist[i] = 1e9;
+    dist[src] = 0;
+    for (int count = 0; count < V - 1; count++) {
+        int minD = 1e9, u = -1;
+        for (int v = 0; v < V; v++)
+            if (!vis[v] && dist[v] <= minD) { minD = dist[v]; u = v; }
+        vis[u] = 1;
+        for (int v = 0; v < V; v++)
+            if (!vis[v] && graph[u][v] && dist[u] + graph[u][v] < dist[v])
+                dist[v] = dist[u] + graph[u][v];
+    }
+}</code></pre></div>
+                    <div id="lang-cpp" class="code-box" style="display:none;"><pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+
+std::vector&lt;int&gt; dijkstra(int V, std::vector&lt;std::vector&lt;int&gt;&gt; adj[], int S) {
+    std::priority_queue&lt;std::pair&lt;int, int&gt;, std::vector&lt;std::pair&lt;int, int&gt;&gt;, std::greater&lt;std::pair&lt;int, int&gt;&gt;&gt; pq;
+    std::vector&lt;int&gt; dist(V, 1e9);
+    dist[S] = 0; pq.push({0, S});
+    while (!pq.empty()) {
+        int dis = pq.top().first, node = pq.top().second; pq.pop();
+        for (auto it : adj[node]) {
+            int adjNode = it[0], edgeWeight = it[1];
+            if (dis + edgeWeight < dist[adjNode]) {
+                dist[adjNode] = dis + edgeWeight;
+                pq.push({dist[adjNode], adjNode});
+            }
+        }
+    }
+    return dist;
+}</code></pre></div>
+                    <div id="lang-java" class="code-box" style="display:none;"><pre><code class="language-java">import java.util.*;
+
+public class Dijkstra {
+    static int[] dijkstra(int V, ArrayList&lt;ArrayList&lt;ArrayList&lt;Integer&gt;&gt;&gt; adj, int S) {
+        PriorityQueue&lt;int[]&gt; pq = new PriorityQueue&lt;&gt;((a, b) -&gt; a[0] - b[0]);
+        int[] dist = new int[V];
+        Arrays.fill(dist, (int) 1e9);
+        dist[S] = 0; pq.add(new int[]{0, S});
+        while (!pq.isEmpty()) {
+            int[] cell = pq.poll();
+            int dis = cell[0], node = cell[1];
+            for (ArrayList&lt;Integer&gt; it : adj.get(node)) {
+                int adjNode = it.get(0), weight = it.get(1);
+                if (dis + weight &lt; dist[adjNode]) {
+                    dist[adjNode] = dis + weight;
+                    pq.add(new int[]{dist[adjNode], adjNode});
+                }
+            }
+        }
+        return dist;
+    }
+}</code></pre></div>
+                </section>
+                <div class="algo-navigation" style="display:flex; justify-content:space-between; margin-top:2rem; padding:1rem 0; border-top:1px solid #eee;">
+                    <a href="shortestpathdag.html" class="btn-prev" style="text-decoration:none; padding:0.8rem 1.2rem; background:#f0f2f5; border-radius:8px; color:#1a237e; font-weight:bold;"><i class="fas fa-arrow-left"></i> Shortest Path in DAG</a>
+                    <a href="bellmanford.html" class="btn-next" style="text-decoration:none; padding:0.8rem 1.2rem; background:#1a237e; border-radius:8px; color:#fff; font-weight:bold;">Bellman-Ford Algorithm <i class="fas fa-arrow-right"></i></a>
+                </div>
             </main>
         </div>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        function showLang(lang) {
+            document.querySelectorAll('.code-box').forEach(b => b.style.display = 'none');
+            document.querySelectorAll('.lang-pill').forEach(p => p.classList.remove('active'));
+            document.getElementById('lang-' + lang).style.display = 'block';
+            event.target.classList.add('active');
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tracker.js"></script>
     <script src="../js/graph-visualizer.js"></script>
 </body>
 </html>

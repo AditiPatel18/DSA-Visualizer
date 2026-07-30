@@ -8,31 +8,29 @@
     <link rel="stylesheet" href="../css/algorithm.css">
     <link rel="stylesheet" href="../css/graph.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
 </head>
 <body data-algorithm="dfs">
     <nav class="navbar">
-        <div class="logo">
-            <h1><i class="fas fa-code-branch"></i> Depth-First Search</h1>
-        </div>
+        <div class="logo"><h1><i class="fas fa-sitemap"></i> Depth-First Search (DFS)</h1></div>
         <ul class="nav-links">
             <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
             <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
             <li><a href="../algorithms/graph.html"><i class="fas fa-arrow-left"></i> Back to Graph</a></li>
+            <li><a href="#" class="btn-mark-learned"><i class="fas fa-check-circle"></i> Mark Learned</a></li>
         </ul>
     </nav>
-
     <div class="page-header">
         <div class="header-content">
-            <h2><i class="fas fa-code-branch"></i> Depth-First Search</h2>
-            <p>Traverse a graph by following one path as deeply as possible before backtracking.</p>
+            <h2><i class="fas fa-sitemap"></i> Depth-First Search (DFS)</h2>
+            <p>Traverse graph branches deeply using recursion or an explicit LIFO stack before backtracking.</p>
             <div class="header-stats">
-                <div class="stat"><h3>O(V + E)</h3><p>Time</p></div>
-                <div class="stat"><h3>O(V)</h3><p>Space</p></div>
-                <div class="stat"><h3>Stack</h3><p>Structure</p></div>
+                <div class="stat"><h3>O(V + E)</h3><p>Time Complexity</p></div>
+                <div class="stat"><h3>O(V)</h3><p>Space Complexity</p></div>
+                <div class="stat"><h3>Recursion</h3><p>Stack</p></div>
             </div>
         </div>
     </div>
-
     <div class="graph-detail-page">
         <div class="graph-shell">
             <aside class="graph-sidebar">
@@ -40,40 +38,24 @@
                     <h3><i class="fas fa-info-circle"></i> Algorithm Info</h3>
                     <div class="graph-info-grid">
                         <div class="graph-info-item"><span class="graph-info-label">Category</span><span class="graph-info-value">Traversal</span></div>
-                        <div class="graph-info-item"><span class="graph-info-label">Best for</span><span class="graph-info-value">Exploration</span></div>
-                        <div class="graph-info-item"><span class="graph-info-label">Graph type</span><span class="graph-info-value">Any connected graph</span></div>
-                        <div class="graph-info-item"><span class="graph-info-label">Complexity</span><span class="graph-info-value">O(V + E)</span></div>
+                        <div class="graph-info-item"><span class="graph-info-label">Best for</span><span class="graph-info-value">Path Finding</span></div>
+                        <div class="graph-info-item"><span class="graph-info-label">Stack</span><span class="graph-info-value">LIFO</span></div>
                     </div>
                 </div>
                 <div class="graph-card">
-                    <h3><i class="fas fa-code"></i> Implementations</h3>
-                    <div class="language-tabs">
-                        <span class="lang-pill active">C</span>
-                        <span class="lang-pill active">C++</span>
-                        <span class="lang-pill active">Java</span>
-                    </div>
-                    <div class="graph-progress-list">
-                        <div class="graph-progress-row"><span>C</span><div class="progress-bar small"><div class="progress-fill" style="width:86%"></div></div><span>86%</span></div>
-                        <div class="graph-progress-row"><span>C++</span><div class="progress-bar small"><div class="progress-fill" style="width:84%"></div></div><span>84%</span></div>
-                        <div class="graph-progress-row"><span>Java</span><div class="progress-bar small"><div class="progress-fill" style="width:82%"></div></div><span>82%</span></div>
-                    </div>
-                </div>
-                <div class="graph-card">
-                    <h3><i class="fas fa-chart-line"></i> Progress</h3>
-                    <p>Completed: 2/5 checkpoints</p>
-                    <div class="progress-bar small"><div class="progress-fill" style="width:40%"></div></div>
+                    <h3><i class="fas fa-bookmark"></i> Actions & Progress</h3>
+                    <button class="btn-mark-learned" style="width:100%; padding:0.8rem; margin-bottom:0.5rem; background:#4CAF50; color:#fff; border:none; border-radius:8px; font-weight:bold; cursor:pointer;"><i class="fas fa-check-circle"></i> Mark as Complete</button>
+                    <button class="btn-favorite" style="width:100%; padding:0.8rem; background:#1a237e; color:#fff; border:none; border-radius:8px; font-weight:bold; cursor:pointer;"><i class="fas fa-star"></i> Add to Favorites</button>
                 </div>
             </aside>
-
             <main class="graph-main">
                 <section class="graph-panel">
-                    <h2><i class="fas fa-eye"></i> Interactive Visualization</h2>
-                    <p>Observe how DFS dives into a branch before backtracking to the next one.</p>
+                    <h2><i class="fas fa-eye"></i> Interactive Visualization & Controls</h2>
                     <div class="graph-visualizer">
                         <div class="graph-canvas-card">
                             <svg id="graphSvg" class="graph-svg"></svg>
                             <div class="graph-controls">
-                                <button class="graph-btn secondary" id="startBtn"><i class="fas fa-play"></i> Start</button>
+                                <button class="graph-btn secondary" id="startBtn"><i class="fas fa-play"></i> Start DFS</button>
                                 <button class="graph-btn ghost" id="stepBtn"><i class="fas fa-step-forward"></i> Step</button>
                                 <button class="graph-btn" id="resetBtn"><i class="fas fa-undo"></i> Reset</button>
                             </div>
@@ -81,89 +63,93 @@
                         <div class="graph-canvas-card">
                             <h3><i class="fas fa-chart-bar"></i> Live Stats</h3>
                             <div class="graph-stats-grid">
-                                <div class="graph-stat"><span class="label">Visited</span><strong id="visitedCount">0</strong></div>
-                                <div class="graph-stat"><span class="label">Edges</span><strong id="edgeCount">0</strong></div>
+                                <div class="graph-stat"><span class="label">Visited Nodes</span><strong id="visitedCount">0</strong></div>
+                                <div class="graph-stat"><span class="label">Total Edges</span><strong id="edgeCount">7</strong></div>
                                 <div class="graph-stat"><span class="label">Status</span><strong id="statusValue">Ready</strong></div>
                             </div>
-                            <div class="graph-steps" style="margin-top:1rem;">
-                                <h3><i class="fas fa-list-ol"></i> Steps</h3>
-                                <ul>
-                                    <li>Push the starting node onto a stack.</li>
-                                    <li>Visit one neighbor, then continue deeper.</li>
-                                    <li>Backtrack when no new paths remain.</li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </section>
-
                 <section class="graph-panel">
-                    <h2><i class="fas fa-lightbulb"></i> Complexity & Applications</h2>
-                    <div class="graph-grid-2">
-                        <div class="graph-steps">
-                            <h3>Complexity</h3>
-                            <ul>
-                                <li>Time: O(V + E)</li>
-                                <li>Space: O(V)</li>
-                                <li>Useful for cycle detection and topology checks</li>
-                            </ul>
-                        </div>
-                        <div class="graph-steps">
-                            <h3>Applications</h3>
-                            <ul>
-                                <li>Maze solving</li>
-                                <li>Pathfinding in puzzles</li>
-                                <li>Dependency and workflow analysis</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <h2><i class="fas fa-lightbulb"></i> Explanation & Dry Run</h2>
+                    <p>Depth-First Search traverses down a path until it reaches an unvisited node or dead end, then backtracks to explore remaining branches.</p>
+                    <h3>Dry Run Example</h3>
+                    <p>Start at 1 &rarr; visit neighbor 2 &rarr; visit neighbor 4. Backtrack to 2 &rarr; backtrack to 1 &rarr; visit neighbor 3. Visited sequence: <code>1, 2, 4, 3</code>.</p>
                 </section>
-
                 <section class="graph-panel">
-                    <h2><i class="fas fa-balance-scale"></i> Advantages & Disadvantages</h2>
-                    <div class="graph-grid-2">
-                        <div class="graph-steps">
-                            <h3>Advantages</h3>
-                            <ul>
-                                <li>Low memory footprint with iterative form.</li>
-                                <li>Great for exploring full connected areas.</li>
-                            </ul>
-                        </div>
-                        <div class="graph-steps">
-                            <h3>Disadvantages</h3>
-                            <ul>
-                                <li>Finds paths but not shortest ones by default.</li>
-                                <li>Can get stuck in deep branches without careful handling.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="graph-panel">
-                    <h2><i class="fas fa-table"></i> Comparison Table</h2>
-                    <table class="graph-table">
-                        <thead>
-                            <tr><th>Algorithm</th><th>When to Use</th><th>Key Strength</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>BFS</td><td>Unweighted shortest paths</td><td>Level-order traversal</td></tr>
-                            <tr><td>DFS</td><td>Traversal and backtracking</td><td>Memory-efficient search</td></tr>
-                            <tr><td>Dijkstra</td><td>Weighted shortest paths</td><td>Optimal path costs</td></tr>
-                        </tbody>
-                    </table>
-                </section>
-
-                <section class="graph-panel">
-                    <h2><i class="fas fa-link"></i> Related Algorithms</h2>
-                    <ul class="graph-list">
-                        <li><a href="bfs.html">Breadth-First Search</a></li>
-                        <li><a href="dijkstra.html">Dijkstra's Algorithm</a></li>
+                    <h2><i class="fas fa-tachometer-alt"></i> Complexity Analysis</h2>
+                    <ul>
+                        <li><strong>Time Complexity:</strong> O(V + E) where V is vertices and E is edges.</li>
+                        <li><strong>Space Complexity:</strong> O(V) due to call stack depth.</li>
                     </ul>
                 </section>
+                <section class="graph-panel">
+                    <h2><i class="fas fa-rocket"></i> Real-World Applications</h2>
+                    <ul>
+                        <li>Solving mazes and puzzle states.</li>
+                        <li>Topological sorting and connected components analysis.</li>
+                        <li>Cycle detection in dependency graphs.</li>
+                    </ul>
+                </section>
+                <section class="graph-panel">
+                    <h2><i class="fas fa-code"></i> Code Implementations (C, C++, Java)</h2>
+                    <div class="language-tabs" style="display:flex; gap:0.5rem; margin-bottom:1rem;">
+                        <button class="lang-pill active" onclick="showLang('c')">C</button>
+                        <button class="lang-pill" onclick="showLang('cpp')">C++</button>
+                        <button class="lang-pill" onclick="showLang('java')">Java</button>
+                    </div>
+                    <div id="lang-c" class="code-box active"><pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void dfs(int node, int adj[][10], int deg[], int vis[]) {
+    vis[node] = 1;
+    printf("%d ", node);
+    for (int i = 0; i < deg[node]; i++) {
+        int neighbor = adj[node][i];
+        if (!vis[neighbor]) dfs(neighbor, adj, deg, vis);
+    }
+}</code></pre></div>
+                    <div id="lang-cpp" class="code-box" style="display:none;"><pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+void dfs(int node, std::vector&lt;int&gt; adj[], std::vector&lt;int&gt;& vis, std::vector&lt;int&gt;& ls) {
+    vis[node] = 1;
+    ls.push_back(node);
+    for(auto it: adj[node]) {
+        if(!vis[it]) dfs(it, adj, vis, ls);
+    }
+}</code></pre></div>
+                    <div id="lang-java" class="code-box" style="display:none;"><pre><code class="language-java">import java.util.*;
+
+public class DFS {
+    public void dfs(int node, boolean vis[], ArrayList&lt;ArrayList&lt;Integer&gt;&gt; adj, ArrayList&lt;Integer&gt; ls) {
+        vis[node] = true; ls.add(node);
+        for (Integer it : adj.get(node)) {
+            if (!vis[it]) dfs(it, vis, adj, ls);
+        }
+    }
+}</code></pre></div>
+                </section>
+                <div class="algo-navigation" style="display:flex; justify-content:space-between; margin-top:2rem; padding:1rem 0; border-top:1px solid #eee;">
+                    <a href="bfs.html" class="btn-prev" style="text-decoration:none; padding:0.8rem 1.2rem; background:#f0f2f5; border-radius:8px; color:#1a237e; font-weight:bold;"><i class="fas fa-arrow-left"></i> BFS Traversal</a>
+                    <a href="provinces.html" class="btn-next" style="text-decoration:none; padding:0.8rem 1.2rem; background:#1a237e; border-radius:8px; color:#fff; font-weight:bold;">Number of Provinces <i class="fas fa-arrow-right"></i></a>
+                </div>
             </main>
         </div>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        function showLang(lang) {
+            document.querySelectorAll('.code-box').forEach(b => b.style.display = 'none');
+            document.querySelectorAll('.lang-pill').forEach(p => p.classList.remove('active'));
+            document.getElementById('lang-' + lang).style.display = 'block';
+            event.target.classList.add('active');
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tracker.js"></script>
     <script src="../js/graph-visualizer.js"></script>
 </body>
 </html>

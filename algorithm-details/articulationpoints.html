@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articulation Points | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="../css/graph.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+</head>
+<body data-algorithm="articulationpoints">
+    <nav class="navbar">
+        <div class="logo"><h1><i class="fas fa-map-pin"></i> Articulation Points</h1></div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="../algorithms/graph.html"><i class="fas fa-arrow-left"></i> Back to Graph</a></li>
+        </ul>
+    </nav>
+    <div class="page-header">
+        <div class="header-content">
+            <h2><i class="fas fa-map-pin"></i> Articulation Points (Cut Vertices)</h2>
+            <p>Identify critical vertices whose removal increases the number of connected components using <code>tin</code> and <code>low</code> arrays.</p>
+            <div class="header-stats">
+                <div class="stat"><h3>O(V + E)</h3><p>Time</p></div>
+                <div class="stat"><h3>O(V)</h3><p>Space</p></div>
+                <div class="stat"><h3>Cut Vertices</h3><p>Detection</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="graph-detail-page">
+        <div class="graph-shell">
+            <aside class="graph-sidebar">
+                <div class="graph-card">
+                    <h3><i class="fas fa-info-circle"></i> Info</h3>
+                    <div class="graph-info-grid">
+                        <div class="graph-info-item"><span class="graph-info-label">Category</span><span class="graph-info-value">Graph Connectivity</span></div>
+                        <div class="graph-info-item"><span class="graph-info-label">Difficulty</span><span class="graph-info-value">Hard</span></div>
+                    </div>
+                </div>
+                <div class="graph-card">
+                    <h3><i class="fas fa-bookmark"></i> Actions</h3>
+                    <button class="btn-mark-learned" style="width:100%; padding:0.8rem; margin-bottom:0.5rem; background:#4CAF50; color:#fff; border:none; border-radius:8px; font-weight:bold; cursor:pointer;"><i class="fas fa-check-circle"></i> Mark as Learned</button>
+                    <button class="btn-favorite" style="width:100%; padding:0.8rem; background:#1a237e; color:#fff; border:none; border-radius:8px; font-weight:bold; cursor:pointer;"><i class="fas fa-star"></i> Add to Favorites</button>
+                </div>
+            </aside>
+            <main class="graph-main">
+                <section class="graph-panel">
+                    <h2><i class="fas fa-eye"></i> Interactive Visualization</h2>
+                    <div class="graph-visualizer">
+                        <div class="graph-canvas-card">
+                            <svg id="graphSvg" class="graph-svg"></svg>
+                            <div class="graph-controls">
+                                <button class="graph-btn secondary" id="startBtn"><i class="fas fa-play"></i> Find Articulation Points</button>
+                                <button class="graph-btn ghost" id="stepBtn"><i class="fas fa-step-forward"></i> Step</button>
+                                <button class="graph-btn" id="resetBtn"><i class="fas fa-undo"></i> Reset</button>
+                            </div>
+                        </div>
+                        <div class="graph-canvas-card">
+                            <h3><i class="fas fa-chart-bar"></i> Live Stats</h3>
+                            <div class="graph-stats-grid">
+                                <div class="graph-stat"><span class="label">Visited Nodes</span><strong id="visitedCount">0</strong></div>
+                                <div class="graph-stat"><span class="label">Status</span><strong id="statusValue">Ready</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="graph-panel">
+                    <h2><i class="fas fa-code"></i> Code Implementations</h2>
+                    <div class="language-tabs" style="display:flex; gap:0.5rem; margin-bottom:1rem;">
+                        <button class="lang-pill active" onclick="showLang('c')">C</button>
+                        <button class="lang-pill" onclick="showLang('cpp')">C++</button>
+                        <button class="lang-pill" onclick="showLang('java')">Java</button>
+                    </div>
+                    <div id="lang-c" class="code-box active"><pre><code class="language-c">int timer = 1;
+void dfsAP(int node, int parent, int vis[], int tin[], int low[], int mark[], int adj[][10], int deg[]) {
+    vis[node] = 1; tin[node] = low[node] = timer++;
+    int child = 0;
+    for(int i = 0; i < deg[node]; i++) {
+        int it = adj[node][i];
+        if(it == parent) continue;
+        if(!vis[it]) {
+            dfsAP(it, node, vis, tin, low, mark, adj, deg);
+            if(low[it] < low[node]) low[node] = low[it];
+            if(low[it] >= tin[node] && parent != -1) mark[node] = 1;
+            child++;
+        } else {
+            if(tin[it] < low[node]) low[node] = tin[it];
+        }
+    }
+    if(child > 1 && parent == -1) mark[node] = 1;
+}</code></pre></div>
+                    <div id="lang-cpp" class="code-box" style="display:none;"><pre><code class="language-cpp">int timer = 1;
+void dfs(int node, int parent, vector<int>& vis, int tin[], int low[], vector<int>& mark, vector<int> adj[]) {
+    vis[node] = 1; tin[node] = low[node] = timer++; int child = 0;
+    for(auto it: adj[node]) {
+        if(it == parent) continue;
+        if(!vis[it]) {
+            dfs(it, node, vis, tin, low, mark, adj);
+            low[node] = min(low[node], low[it]);
+            if(low[it] >= tin[node] && parent != -1) mark[node] = 1;
+            child++;
+        } else {
+            low[node] = min(low[node], tin[it]);
+        }
+    }
+    if(child > 1 && parent == -1) mark[node] = 1;
+}</code></pre></div>
+                    <div id="lang-java" class="code-box" style="display:none;"><pre><code class="language-java">public class Solution {
+    private int timer = 1;
+    private void dfs(int node, int parent, int[] vis, int[] tin, int[] low, int[] mark, ArrayList<ArrayList<Integer>> adj) {
+        vis[node] = 1; tin[node] = low[node] = timer++; int child = 0;
+        for (Integer it : adj.get(node)) {
+            if (it == parent) continue;
+            if (vis[it] == 0) {
+                dfs(it, node, vis, tin, low, mark, adj);
+                low[node] = Math.min(low[node], low[it]);
+                if (low[it] >= tin[node] && parent != -1) mark[node] = 1;
+                child++;
+            } else {
+                low[node] = Math.min(low[node], tin[it]);
+            }
+        }
+        if (child > 1 && parent == -1) mark[node] = 1;
+    }
+}</code></pre></div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+        function showLang(lang) {
+            document.querySelectorAll('.code-box').forEach(b => b.style.display = 'none');
+            document.querySelectorAll('.lang-pill').forEach(p => p.classList.remove('active'));
+            document.getElementById('lang-' + lang).style.display = 'block';
+            event.target.classList.add('active');
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tracker.js"></script>
+    <script src="../js/graph-visualizer.js"></script>
+</body>
+</html>

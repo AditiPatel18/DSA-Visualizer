@@ -13,26 +13,47 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="logo">
-            <h1><i class="fas fa-search"></i> Searching Algorithms</h1>
+            <h1><a href="../index.html" style="color:white; text-decoration:none; display:flex; align-items:center; gap:10px;"><i class="fas fa-code"></i> DSA Master</a></h1>
         </div>
         <ul class="nav-links">
             <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li class="nav-dropdown">
+                <a href="#" class="dropdown-toggle active"><i class="fas fa-layer-group"></i> Categories <i class="fas fa-chevron-down" style="font-size:0.75rem;"></i></a>
+                <div class="nav-dropdown-menu">
+                    <a href="arrays.html"><i class="fas fa-th-large"></i> Arrays</a>
+                    <a href="sorting.html"><i class="fas fa-sort-amount-down"></i> Sorting</a>
+                    <a href="searching.html"><i class="fas fa-search"></i> Searching</a>
+                    <a href="linkedlist.html"><i class="fas fa-link"></i> Linked List</a>
+                    <a href="stack.html"><i class="fas fa-layer-group"></i> Stack</a>
+                    <a href="queue.html"><i class="fas fa-stream"></i> Queue</a>
+                    <a href="backtracking.html"><i class="fas fa-undo-alt"></i> Recursion & Backtracking</a>
+                    <a href="bitmanipulation.html"><i class="fas fa-microchip"></i> Bit Manipulation</a>
+                    <a href="slidingwindow.html"><i class="fas fa-window-maximize"></i> Sliding Window</a>
+                    <a href="twopointers.html"><i class="fas fa-arrows-alt-h"></i> Two Pointers</a>
+                    <a href="binarytrees.html"><i class="fas fa-tree"></i> Binary Trees</a>
+                    <a href="bst.html"><i class="fas fa-network-wired"></i> Binary Search Trees</a>
+                    <a href="heap.html"><i class="fas fa-cubes"></i> Heap</a>
+                    <a href="greedy.html"><i class="fas fa-coins"></i> Greedy</a>
+                    <a href="graph.html"><i class="fas fa-project-diagram"></i> Graph</a>
+                    <a href="dp.html"><i class="fas fa-calculator"></i> Dynamic Programming</a>
+                    <a href="trie.html"><i class="fas fa-sitemap"></i> Trie</a>
+                </div>
+            </li>
             <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-            <li><a href="sorting.html"><i class="fas fa-sort-amount-down"></i> Sorting</a></li>
-            <li><a href="searching.html" class="active"><i class="fas fa-search"></i> Searching</a></li>
-            <li><a href="graph.html"><i class="fas fa-project-diagram"></i> Graph</a></li>
-            <li><a href="sorting.html"><i class="fas fa-sort-amount-down"></i> Sorting</a></li>
+            <li><a href="../profile.html"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="#" id="logoutBtn" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
+        <div class="hamburger-menu" id="hamburgerMenu"><i class="fas fa-bars"></i></div>
     </nav>
 
     <!-- Page Header -->
     <div class="page-header">
         <div class="header-content">
             <h2><i class="fas fa-search"></i> Searching Algorithms</h2>
-            <p>Learn and visualize 8+ searching algorithms with implementations in C, C++, and Java</p>
+            <p>Learn and visualize Searching algorithms (Linear, Binary, Lower Bound, Upper Bound) with implementations in C, C++, and Java</p>
             <div class="header-stats">
                 <div class="stat">
-                    <h3>8</h3>
+                    <h3>4</h3>
                     <p>Algorithms</p>
                 </div>
                 <div class="stat">
@@ -257,88 +278,76 @@
                 </div>
             </div>
 
-            <!-- Interpolation Search -->
-            <div class="algo-detail-card">
+            <!-- Lower Bound -->
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/lowerbound.html'">
                 <div class="algo-card-header">
                     <div class="algo-title">
-                        <h3>Interpolation Search</h3>
+                        <h3>Lower Bound</h3>
                         <div class="algo-tags">
-                            <span class="tag-time">O(log log n)</span>
+                            <span class="tag-time">O(log n)</span>
                             <span class="tag-space">O(1)</span>
-                            <span class="tag-medium">Medium</span>
+                            <span class="tag-easy">Easy</span>
                         </div>
                     </div>
                     <div class="algo-status">
-                        <span class="status-not-started"><i class="fas fa-clock"></i> Not Started</span>
+                        <span class="status-completed"><i class="fas fa-check-circle"></i> Learned</span>
                     </div>
                 </div>
-                <p class="algo-description">Improved binary search for uniformly distributed sorted arrays.</p>
+                <p class="algo-description">Finds the first index in a sorted array where element is greater than or equal to target.</p>
                 <div class="algo-features">
-                    <span><i class="fas fa-chart-line"></i> Uniform distribution</span>
-                    <span><i class="fas fa-bolt"></i> Faster than binary</span>
-                    <span><i class="fas fa-calculator"></i> Uses interpolation formula</span>
+                    <span><i class="fas fa-sort-amount-up"></i> Sorted array required</span>
+                    <span><i class="fas fa-divide"></i> Binary search pattern</span>
+                    <span><i class="fas fa-bolt"></i> Striver A2Z essential</span>
                 </div>
                 <div class="algo-languages">
                     <div class="lang-progress">
                         <span class="lang-name c">C</span>
-                        <div class="progress-bar small">
-                            <div class="progress-fill" style="width: 0%"></div>
-                        </div>
+                        <div class="progress-bar small"><div class="progress-fill" style="width: 90%"></div></div>
                     </div>
                     <div class="lang-progress">
                         <span class="lang-name cpp">C++</span>
-                        <div class="progress-bar small">
-                            <div class="progress-fill" style="width: 0%"></div>
-                        </div>
+                        <div class="progress-bar small"><div class="progress-fill" style="width: 95%"></div></div>
                     </div>
                     <div class="lang-progress">
                         <span class="lang-name java">Java</span>
-                        <div class="progress-bar small">
-                            <div class="progress-fill" style="width: 0%"></div>
-                        </div>
+                        <div class="progress-bar small"><div class="progress-fill" style="width: 90%"></div></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Exponential Search -->
-            <div class="algo-detail-card">
+            <!-- Upper Bound -->
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/upperbound.html'">
                 <div class="algo-card-header">
                     <div class="algo-title">
-                        <h3>Exponential Search</h3>
+                        <h3>Upper Bound</h3>
                         <div class="algo-tags">
                             <span class="tag-time">O(log n)</span>
                             <span class="tag-space">O(1)</span>
-                            <span class="tag-medium">Medium</span>
+                            <span class="tag-easy">Easy</span>
                         </div>
                     </div>
                     <div class="algo-status">
-                        <span class="status-in-progress"><i class="fas fa-sync-alt"></i> In Progress</span>
+                        <span class="status-completed"><i class="fas fa-check-circle"></i> Learned</span>
                     </div>
                 </div>
-                <p class="algo-description">Search algorithm for unbounded/infinite sorted arrays.</p>
+                <p class="algo-description">Finds the first index in a sorted array where element is strictly greater than target.</p>
                 <div class="algo-features">
-                    <span><i class="fas fa-infinity"></i> For unbounded arrays</span>
-                    <span><i class="fas fa-search-plus"></i> Finds range first</span>
-                    <span><i class="fas fa-sort-amount-up"></i> Sorted array needed</span>
+                    <span><i class="fas fa-sort-amount-up"></i> Sorted array required</span>
+                    <span><i class="fas fa-divide"></i> Binary search variation</span>
+                    <span><i class="fas fa-layer-group"></i> Useful for frequency queries</span>
                 </div>
                 <div class="algo-languages">
                     <div class="lang-progress">
                         <span class="lang-name c">C</span>
-                        <div class="progress-bar small">
-                            <div class="progress-fill" style="width: 40%"></div>
-                        </div>
+                        <div class="progress-bar small"><div class="progress-fill" style="width: 90%"></div></div>
                     </div>
                     <div class="lang-progress">
                         <span class="lang-name cpp">C++</span>
-                        <div class="progress-bar small">
-                            <div class="progress-fill" style="width: 45%"></div>
-                        </div>
+                        <div class="progress-bar small"><div class="progress-fill" style="width: 95%"></div></div>
                     </div>
                     <div class="lang-progress">
                         <span class="lang-name java">Java</span>
-                        <div class="progress-bar small">
-                            <div class="progress-fill" style="width: 35%"></div>
-                        </div>
+                        <div class="progress-bar small"><div class="progress-fill" style="width: 90%"></div></div>
                     </div>
                 </div>
             </div>
@@ -433,22 +442,22 @@
                         <td>Moderate sorted arrays</td>
                     </tr>
                     <tr>
-                        <td><strong>Interpolation Search</strong></td>
-                        <td>O(1)</td>
-                        <td>O(log log n)</td>
-                        <td>O(n)</td>
-                        <td>O(1)</td>
-                        <td>Sorted & Uniform</td>
-                        <td>Uniformly distributed data</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Exponential Search</strong></td>
+                        <td><strong>Lower Bound</strong></td>
                         <td>O(1)</td>
                         <td>O(log n)</td>
                         <td>O(log n)</td>
                         <td>O(1)</td>
                         <td>Sorted</td>
-                        <td>Unbounded/infinite arrays</td>
+                        <td>Find first element &ge; target</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Upper Bound</strong></td>
+                        <td>O(1)</td>
+                        <td>O(log n)</td>
+                        <td>O(log n)</td>
+                        <td>O(1)</td>
+                        <td>Sorted</td>
+                        <td>Find first element &gt; target</td>
                     </tr>
                 </tbody>
             </table>
@@ -482,8 +491,9 @@
                         <select id="algorithmSelect">
                             <option value="binary">Binary Search</option>
                             <option value="linear">Linear Search</option>
+                            <option value="lowerbound">Lower Bound</option>
+                            <option value="upperbound">Upper Bound</option>
                             <option value="jump">Jump Search</option>
-                            <option value="interpolation">Interpolation Search</option>
                         </select>
                     </div>
                     <div class="control-row">
@@ -555,6 +565,10 @@
         </div>
     </section>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/tracker.js"></script>
     <script src="../js/search-visualizer.js"></script>
 </body>
 </html>
