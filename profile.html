@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | DSA Learning Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1><i class="fas fa-user"></i> My Profile</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="profile.html" class="active"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="#" id="logoutBtn" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-shell">
+        <section class="profile-hero card soft-card">
+            <div class="profile-avatar-wrap">
+                <div class="avatar-circle">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <p class="eyebrow">Student Profile</p>
+                    <h2 id="profileName">John Doe</h2>
+                    <p id="profileEmail" class="muted">john.doe@example.com</p>
+                    <div class="profile-stats">
+                        <span><i class="fas fa-code"></i> 15 Algorithms</span>
+                        <span><i class="fas fa-clock"></i> 48h 30m</span>
+                        <span><i class="fas fa-trophy"></i> 8 Achievements</span>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-actions">
+                <button class="btn btn-secondary btn-edit-profile"><i class="fas fa-edit"></i> Edit Profile</button>
+                <a href="#" id="logoutBtn" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </section>
+
+        <div class="profile-grid">
+            <div class="profile-left">
+                <div class="card">
+                    <div class="section-title">
+                        <h3><i class="fas fa-info-circle"></i> Personal Information</h3>
+                        <span class="pill"><i class="fas fa-shield-alt"></i> Verified</span>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Full Name</span>
+                            <span class="info-value" id="fullName">John Doe</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Email</span>
+                            <span class="info-value" id="userEmail">john.doe@example.com</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Member Since</span>
+                            <span class="info-value" id="joinDate">January 15, 2024</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Learning Level</span>
+                            <span class="info-value level-intermediate">Intermediate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="section-title">
+                        <h3><i class="fas fa-lock"></i> Security</h3>
+                    </div>
+                    <div class="settings-list">
+                        <div class="setting-item">
+                            <div class="setting-content">
+                                <h4>Change Password</h4>
+                                <p>Update your access credentials anytime.</p>
+                            </div>
+                            <button class="btn btn-secondary"><i class="fas fa-key"></i> Update</button>
+                        </div>
+                        <div class="setting-item">
+                            <div class="setting-content">
+                                <h4>Two-Factor Reminder</h4>
+                                <p>Add more protection to your account.</p>
+                            </div>
+                            <button class="btn btn-secondary"><i class="fas fa-shield-alt"></i> Enable</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-right">
+                <div class="card">
+                    <div class="section-title">
+                        <h3><i class="fas fa-trophy"></i> Badges</h3>
+                    </div>
+                    <div class="achievements-grid">
+                        <div class="achievement">
+                            <div class="achievement-icon gold"><i class="fas fa-star"></i></div>
+                            <div class="achievement-content"><h4>Sorting Master</h4><p>Completed all sorting algorithms.</p></div>
+                        </div>
+                        <div class="achievement">
+                            <div class="achievement-icon silver"><i class="fas fa-project-diagram"></i></div>
+                            <div class="achievement-content"><h4>Graph Explorer</h4><p>Learned 5 graph topics.</p></div>
+                        </div>
+                        <div class="achievement">
+                            <div class="achievement-icon bronze"><i class="fas fa-fire"></i></div>
+                            <div class="achievement-content"><h4>7-Day Streak</h4><p>Practiced every day this week.</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="section-title">
+                        <h3><i class="fas fa-flag"></i> Goals</h3>
+                    </div>
+                    <div class="goals-progress">
+                        <div class="goal">
+                            <div class="goal-info"><span class="goal-name">Master C Programming</span><span class="goal-percent">85%</span></div>
+                            <div class="progress-bar"><div class="progress-fill" style="width: 85%"></div></div>
+                        </div>
+                        <div class="goal">
+                            <div class="goal-info"><span class="goal-name">Complete 30 Algorithms</span><span class="goal-percent">50%</span></div>
+                            <div class="progress-bar"><div class="progress-fill" style="width: 50%"></div></div>
+                        </div>
+                        <div class="goal">
+                            <div class="goal-info"><span class="goal-name">30-Day Streak</span><span class="goal-percent">47%</span></div>
+                            <div class="progress-bar"><div class="progress-fill" style="width: 47%"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

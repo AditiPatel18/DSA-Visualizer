@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Sort Algorithm | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="../css/visualizer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1><i class="fas fa-code"></i> Quick Sort Algorithm</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="../algorithms/sorting.html"><i class="fas fa-arrow-left"></i> Back to Sorting</a></li>
+            <li><a href="#" class="btn-mark-learned"><i class="fas fa-check-circle"></i> Mark Learned</a></li>
+        </ul>
+    </nav>
+
+    <div class="algorithm-detail-container">
+        <!-- Left Sidebar -->
+        <aside class="detail-sidebar">
+            <div class="algo-info-card">
+                <h3><i class="fas fa-info-circle"></i> Algorithm Info</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Category:</span>
+                        <span class="info-value sorting">Sorting</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Difficulty:</span>
+                        <span class="info-value medium">Medium</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Best Time:</span>
+                        <code class="info-value">O(n log n)</code>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Average Time:</span>
+                        <code class="info-value">O(n log n)</code>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Worst Time:</span>
+                        <code class="info-value">O(n²)</code>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Space:</span>
+                        <code class="info-value">O(log n)</code>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">In-place:</span>
+                        <span class="info-value yes">Yes</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Stable:</span>
+                        <span class="info-value no">No</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="language-selector-card">
+                <h3><i class="fas fa-globe"></i> Select Language</h3>
+                <div class="language-tabs">
+                    <button class="lang-tab active" data-lang="c">
+                        <i class="fab fa-c"></i> C
+                    </button>
+                    <button class="lang-tab" data-lang="cpp">
+                        <i class="fab fa-cuttlefish"></i>++ C++
+                    </button>
+                    <button class="lang-tab" data-lang="java">
+                        <i class="fab fa-java"></i> Java
+                    </button>
+                </div>
+                <div class="language-stats">
+                    <div class="stat">
+                        <span>Lines:</span>
+                        <strong id="lines-count">35</strong>
+                    </div>
+                    <div class="stat">
+                        <span>Complexity:</span>
+                        <strong id="complexity-score">8.5/10</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-card">
+                <h3><i class="fas fa-chart-line"></i> Your Progress</h3>
+                <div class="progress-details">
+                    <div class="progress-item">
+                        <span>C Implementation</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                        <span>90%</span>
+                    </div>
+                    <div class="progress-item">
+                        <span>C++ Implementation</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                        <span>85%</span>
+                    </div>
+                    <div class="progress-item">
+                        <span>Java Implementation</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                        <span>75%</span>
+                    </div>
+                </div>
+                <button class="btn-mark-complete">
+                    <i class="fas fa-check"></i> Mark as Complete
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="detail-main">
+            <!-- Algorithm Explanation -->
+            <section class="explanation-section">
+                <h2><i class="fas fa-lightbulb"></i> Understanding Quick Sort</h2>
+                <p class="intro-text">
+                    QuickSort is a Divide and Conquer algorithm. It picks an element as pivot and partitions the given array around the picked pivot.
+                    Different versions of QuickSort pick pivot in different ways:
+                </p>
+                
+                <div class="pivot-options">
+                    <div class="pivot-option">
+                        <div class="option-icon">
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <div class="option-content">
+                            <h4>Always pick first element as pivot</h4>
+                            <p>Simple but leads to O(n²) for sorted arrays</p>
+                        </div>
+                    </div>
+                    <div class="pivot-option">
+                        <div class="option-icon">
+                            <i class="fas fa-flag-checkered"></i>
+                        </div>
+                        <div class="option-content">
+                            <h4>Always pick last element as pivot</h4>
+                            <p>Common implementation (shown in examples)</p>
+                        </div>
+                    </div>
+                    <div class="pivot-option">
+                        <div class="option-icon">
+                            <i class="fas fa-random"></i>
+                        </div>
+                        <div class="option-content">
+                            <h4>Pick a random element as pivot</h4>
+                            <p>Reduces chance of worst case O(n²)</p>
+                        </div>
+                    </div>
+                    <div class="pivot-option">
+                        <div class="option-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <div class="option-content">
+                            <h4>Pick median as pivot</h4>
+                            <p>Optimal for performance, avoids worst case</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="algorithm-steps">
+                    <h3><i class="fas fa-list-ol"></i> Algorithm Steps</h3>
+                    <ol class="steps-list">
+                        <li>
+                            <strong>Choose Pivot:</strong> Select an element from the array as the pivot
+                        </li>
+                        <li>
+                            <strong>Partition:</strong> Rearrange array so elements less than pivot come before,
+                            and elements greater than pivot come after
+                        </li>
+                        <li>
+                            <strong>Recurse:</strong> Apply quick sort recursively to left and right sub-arrays
+                        </li>
+                        <li>
+                            <strong>Combine:</strong> Since the sub-arrays are sorted in place, no combine step needed
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Visualization -->
+            <section class="visualization-section">
+                <h2><i class="fas fa-eye"></i> Interactive Visualization</h2>
+                <div class="visualizer-container">
+                    <div class="array-display" id="arrayDisplay">
+                        <!-- Array bars will be generated by JavaScript -->
+                    </div>
+                    
+                    <div class="visualizer-controls">
+                        <div class="control-group">
+                            <label for="arraySize">Array Size:</label>
+                            <input type="range" id="arraySize" min="5" max="50" value="20">
+                            <span id="sizeValue">20</span>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="animationSpeed">Speed:</label>
+                            <input type="range" id="animationSpeed" min="1" max="100" value="50">
+                            <span id="speedValue">Normal</span>
+                        </div>
+                        
+                        <div class="control-buttons">
+                            <button id="generateBtn" class="btn-control">
+                                <i class="fas fa-sync-alt"></i> New Array
+                            </button>
+                            <button id="startBtn" class="btn-control btn-primary">
+                                <i class="fas fa-play"></i> Start Sort
+                            </button>
+                            <button id="pauseBtn" class="btn-control btn-warning" disabled>
+                                <i class="fas fa-pause"></i> Pause
+                            </button>
+                            <button id="resetBtn" class="btn-control btn-danger">
+                                <i class="fas fa-undo"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="visualizer-stats">
+                        <div class="stat-box">
+                            <div class="stat-label">Comparisons</div>
+                            <div class="stat-value" id="comparisonCount">0</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Swaps</div>
+                            <div class="stat-value" id="swapCount">0</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Time</div>
+                            <div class="stat-value" id="timeCount">0ms</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Operations</div>
+                            <div class="stat-value" id="opCount">0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="color-box" style="background-color: #3498db;"></div>
+                            <span>Normal Element</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="background-color: #e74c3c;"></div>
+                            <span>Pivot Element</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="background-color: #2ecc71;"></div>
+                            <span>Comparing</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="background-color: #f39c12;"></div>
+                            <span>Swapping</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="color-box" style="background-color: #9b59b6;"></div>
+                            <span>Sorted</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Code Implementation (3 Languages) -->
+            <section class="code-section">
+                <h2><i class="fas fa-code"></i> Implementation in Multiple Languages</h2>
+                
+                <!-- C Implementation -->
+                <div class="code-container active" id="code-c">
+                    <div class="code-header">
+                        <div class="code-title">
+                            <i class="fab fa-c"></i>
+                            <h3>C Implementation</h3>
+                            <span class="code-badge">35 lines</span>
+                        </div>
+                        <div class="code-actions">
+                            <button class="btn-copy" data-lang="c">
+                                <i class="far fa-copy"></i> Copy Code
+                            </button>
+                            <button class="btn-run" data-lang="c">
+                                <i class="fas fa-play"></i> Run Code
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-c">
+#include &lt;stdio.h&gt;
+
+// Function to swap two elements
+void swap(int* a, int* b) {
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
+
+// Partition function - takes last element as pivot
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];  // pivot element
+    int i = (low - 1);      // index of smaller element
+    
+    for (int j = low; j <= high - 1; j++) {
+        // If current element is smaller than pivot
+        if (arr[j] < pivot) {
+            i++;  // increment index of smaller element
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i + 1], &arr[high]);
+    return (i + 1);
+}
+
+// QuickSort function
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        // pi is partitioning index
+        int pi = partition(arr, low, high);
+        
+        // Separately sort elements before and after partition
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+// Function to print array
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++)
+        printf("%d ", arr[i]);
+    printf("\\n");
+}
+
+// Main function - Driver code
+int main() {
+    int arr[] = {10, 7, 8, 9, 1, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    
+    printf("Original array: ");
+    printArray(arr, n);
+    
+    quickSort(arr, 0, n - 1);
+    
+    printf("Sorted array: ");
+    printArray(arr, n);
+    return 0;
+}
+                        </code></pre>
+                    </div>
+                    <div class="code-explanation">
+                        <h4><i class="fas fa-info-circle"></i> Key Points - C Implementation:</h4>
+                        <ul>
+                            <li>Uses <strong>pointers</strong> for swap function</li>
+                            <li><strong>Last element</strong> is chosen as pivot</li>
+                            <li><strong>In-place</strong> sorting (O(1) extra space)</li>
+                            <li>Time complexity: <strong>O(n log n)</strong> average case</li>
+                            <li>Space complexity: <strong>O(log n)</strong> for recursion stack</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- C++ Implementation -->
+                <div class="code-container" id="code-cpp">
+                    <div class="code-header">
+                        <div class="code-title">
+                            <i class="fab fa-cuttlefish"></i>++
+                            <h3>C++ Implementation</h3>
+                            <span class="code-badge">40 lines</span>
+                        </div>
+                        <div class="code-actions">
+                            <button class="btn-copy" data-lang="cpp">
+                                <i class="far fa-copy"></i> Copy Code
+                            </button>
+                            <button class="btn-run" data-lang="cpp">
+                                <i class="fas fa-play"></i> Run Code
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+class QuickSort {
+private:
+    // Partition function
+    int partition(vector&lt;int&gt;& arr, int low, int high) {
+        int pivot = arr[high];  // pivot element
+        int i = low - 1;        // index of smaller element
+        
+        for (int j = low; j < high; j++) {
+            // If current element is smaller than pivot
+            if (arr[j] < pivot) {
+                i++;
+                swap(arr[i], arr[j]);
+            }
+        }
+        swap(arr[i + 1], arr[high]);
+        return i + 1;
+    }
+    
+public:
+    // QuickSort function (public interface)
+    void sort(vector&lt;int&gt;& arr) {
+        quickSort(arr, 0, arr.size() - 1);
+    }
+    
+private:
+    // Recursive QuickSort
+    void quickSort(vector&lt;int&gt;& arr, int low, int high) {
+        if (low < high) {
+            int pi = partition(arr, low, high);
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
+        }
+    }
+    
+public:
+    // Utility function to print array
+    void printArray(const vector&lt;int&gt;& arr) {
+        for (int num : arr) {
+            cout << num << " ";
+        }
+        cout << endl;
+    }
+};
+
+// Main function
+int main() {
+    QuickSort sorter;
+    vector&lt;int&gt; arr = {10, 7, 8, 9, 1, 5};
+    
+    cout << "Original array: ";
+    sorter.printArray(arr);
+    
+    sorter.sort(arr);
+    
+    cout << "Sorted array: ";
+    sorter.printArray(arr);
+    
+    return 0;
+}
+                        </code></pre>
+                    </div>
+                    <div class="code-explanation">
+                        <h4><i class="fas fa-info-circle"></i> Key Points - C++ Implementation:</h4>
+                        <ul>
+                            <li>Uses <strong>vector</strong> instead of raw arrays</li>
+                            <li><strong>Object-oriented</strong> design with class</li>
+                            <li><strong>std::swap</strong> function for swapping</li>
+                            <li><strong>Encapsulated</strong> implementation</li>
+                            <li>Better <strong>type safety</strong> compared to C</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Java Implementation -->
+                <div class="code-container" id="code-java">
+                    <div class="code-header">
+                        <div class="code-title">
+                            <i class="fab fa-java"></i>
+                            <h3>Java Implementation</h3>
+                            <span class="code-badge">45 lines</span>
+                        </div>
+                        <div class="code-actions">
+                            <button class="btn-copy" data-lang="java">
+                                <i class="far fa-copy"></i> Copy Code
+                            </button>
+                            <button class="btn-run" data-lang="java">
+                                <i class="fas fa-play"></i> Run Code
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-java">
+public class QuickSort {
+    
+    // Method to partition the array
+    private int partition(int[] arr, int low, int high) {
+        int pivot = arr[high];
+        int i = low - 1;  // index of smaller element
+        
+        for (int j = low; j < high; j++) {
+            // If current element is smaller than pivot
+            if (arr[j] < pivot) {
+                i++;
+                
+                // Swap arr[i] and arr[j]
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        
+        // Swap arr[i+1] and arr[high] (or pivot)
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+        
+        return i + 1;
+    }
+    
+    // QuickSort method
+    public void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            int pi = partition(arr, low, high);
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
+        }
+    }
+    
+    // Utility method to print array
+    public void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
+    }
+    
+    // Driver code
+    public static void main(String[] args) {
+        QuickSort sorter = new QuickSort();
+        int[] arr = {10, 7, 8, 9, 1, 5};
+        
+        System.out.print("Original array: ");
+        sorter.printArray(arr);
+        
+        sorter.quickSort(arr, 0, arr.length - 1);
+        
+        System.out.print("Sorted array: ");
+        sorter.printArray(arr);
+    }
+}
+                        </code></pre>
+                    </div>
+                    <div class="code-explanation">
+                        <h4><i class="fas fa-info-circle"></i> Key Points - Java Implementation:</h4>
+                        <ul>
+                            <li><strong>Class-based</strong> implementation</li>
+                            <li>Uses <strong>array indexing</strong> similar to C</li>
+                            <li><strong>No pointers</strong> - uses array indices</li>
+                            <li><strong>Platform independent</strong></li>
+                            <li><strong>Automatic memory management</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Complexity Analysis -->
+            <section class="complexity-section">
+                <h2><i class="fas fa-chart-bar"></i> Complexity Analysis</h2>
+                <div class="complexity-grid">
+                    <div class="complexity-card">
+                        <h3><i class="fas fa-clock"></i> Time Complexity</h3>
+                        <div class="complexity-detail">
+                            <div class="case">
+                                <span class="case-name">Best Case:</span>
+                                <code class="case-value">O(n log n)</code>
+                            </div>
+                            <p class="case-desc">When partition always divides array into two equal halves</p>
+                        </div>
+                        <div class="complexity-detail">
+                            <div class="case">
+                                <span class="case-name">Average Case:</span>
+                                <code class="case-value">O(n log n)</code>
+                            </div>
+                            <p class="case-desc">Random pivot selection gives this complexity on average</p>
+                        </div>
+                        <div class="complexity-detail">
+                            <div class="case">
+                                <span class="case-name">Worst Case:</span>
+                                <code class="case-value">O(n²)</code>
+                            </div>
+                            <p class="case-desc">When array is already sorted and pivot is always smallest/largest</p>
+                        </div>
+                    </div>
+                    
+                    <div class="complexity-card">
+                        <h3><i class="fas fa-memory"></i> Space Complexity</h3>
+                        <div class="complexity-detail">
+                            <div class="case">
+                                <span class="case-name">Auxiliary Space:</span>
+                                <code class="case-value">O(log n)</code>
+                            </div>
+                            <p class="case-desc">Due to recursive call stack in average case</p>
+                        </div>
+                        <div class="complexity-detail">
+                            <div class="case">
+                                <span class="case-name">Worst Case Space:</span>
+                                <code class="case-value">O(n)</code>
+                            </div>
+                            <p class="case-desc">In worst case (sorted array), recursion depth is n</p>
+                        </div>
+                        <div class="complexity-detail">
+                            <div class="case">
+                                <span class="case-name">In-place:</span>
+                                <span class="case-value yes">Yes</span>
+                            </div>
+                            <p class="case-desc">Only requires constant extra space for swapping</p>
+                        </div>
+                    </div>
+                    
+                    <div class="complexity-card">
+                        <h3><i class="fas fa-balance-scale"></i> Language Comparison</h3>
+                        <table class="lang-comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Language</th>
+                                    <th>Memory Usage</th>
+                                    <th>Speed</th>
+                                    <th>Code Size</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i class="fab fa-c"></i> C</td>
+                                    <td>4KB</td>
+                                    <td>Fastest</td>
+                                    <td>35 lines</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fab fa-cuttlefish"></i>++ C++</td>
+                                    <td>6KB</td>
+                                    <td>Fast</td>
+                                    <td>40 lines</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fab fa-java"></i> Java</td>
+                                    <td>8KB</td>
+                                    <td>Moderate</td>
+                                    <td>45 lines</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Applications -->
+            <section class="applications-section">
+                <h2><i class="fas fa-rocket"></i> Real-World Applications</h2>
+                <div class="applications-grid">
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="app-content">
+                            <h4>Sorting Large Datasets</h4>
+                            <p>QuickSort is preferred for large datasets due to its O(n log n) average time complexity</p>
+                        </div>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="app-content">
+                            <h4>Database Indexing</h4>
+                            <p>Many database systems use QuickSort for creating and maintaining indexes</p>
+                        </div>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="app-content">
+                            <h4>Data Analysis</h4>
+                            <p>Used in statistical computing and data analysis for sorting observations</p>
+                        </div>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="app-content">
+                            <h4>Game Development</h4>
+                            <p>Used in game engines for spatial sorting and collision detection</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../algorithms/sorting.html">Sorting Algorithms</a></li>
+                    <li><a href="../algorithms/searching.html">Searching Algorithms</a></li>
+                    <li><a href="../algorithms/graph.html">Graph Algorithms</a></li>
+                    <li><a href="../algorithms/searching.html">Searching Algorithms</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Languages</h3>
+                <ul>
+                    <li><a href="?lang=c">C Programming</a></li>
+                    <li><a href="?lang=cpp">C++ Programming</a></li>
+                    <li><a href="?lang=java">Java Programming</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Practice Problems</a></li>
+                    <li><a href="#">Interview Questions</a></li>
+                    <li><a href="#">Complexity Cheatsheet</a></li>
+                    <li><a href="#">Code Examples</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DSA Learning Platform. Quick Sort Algorithm - Implementation in C, C++, Java.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="../js/visualizer.js"></script>
+    <script src="../js/code-viewer.js"></script>
+    <script>
+        // Initialize code highlighting
+        hljs.highlightAll();
+        
+        // Language switching
+        document.querySelectorAll('.lang-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.code-container').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                const lang = this.dataset.lang;
+                document.getElementById(`code-${lang}`).classList.add('active');
+                
+                // Update line count based on language
+                const lineCounts = { c: 35, cpp: 40, java: 45 };
+                document.getElementById('lines-count').textContent = lineCounts[lang];
+            });
+        });
+        
+        // Copy code functionality
+        document.querySelectorAll('.btn-copy').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const lang = this.dataset.lang;
+                const codeElement = document.querySelector(`#code-${lang} code`);
+                const codeText = codeElement.textContent;
+                
+                navigator.clipboard.writeText(codeText).then(() => {
+                    const originalHTML = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    setTimeout(() => {
+                        this.innerHTML = originalHTML;
+                    }, 2000);
+                });
+            });
+        });
+        
+        // Mark as learned
+        document.querySelector('.btn-mark-complete').addEventListener('click', function() {
+            this.innerHTML = '<i class="fas fa-check-circle"></i> Completed!';
+            this.classList.add('completed');
+            alert('Algorithm marked as completed! Progress updated.');
+        });
+        
+        // Array size slider
+        const sizeSlider = document.getElementById('arraySize');
+        const sizeValue = document.getElementById('sizeValue');
+        sizeSlider.addEventListener('input', function() {
+            sizeValue.textContent = this.value;
+        });
+        
+        // Speed slider
+        const speedSlider = document.getElementById('animationSpeed');
+        const speedValue = document.getElementById('speedValue');
+        speedSlider.addEventListener('input', function() {
+            const value = this.value;
+            if (value < 33) speedValue.textContent = 'Slow';
+            else if (value < 66) speedValue.textContent = 'Normal';
+            else speedValue.textContent = 'Fast';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Visualizer - Interactive Learning Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #8b5cf6;
+            --active: #fbbf24;
+            --comparing: #ef4444;
+            --sorted: #10b981;
+            --border: #475569;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            margin-bottom: 30px;
+            border-radius: 12px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 12px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .category {
+            margin-bottom: 25px;
+        }
+
+        .category h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .algo-btn {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            text-align: left;
+        }
+
+        .algo-btn:hover {
+            background: var(--accent-primary);
+            transform: translateX(5px);
+        }
+
+        .algo-btn.active {
+            background: var(--accent-primary);
+            border-color: var(--text-primary);
+        }
+
+        .visualization-area {
+            background: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .control-group label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        input[type="range"] {
+            width: 150px;
+            height: 6px;
+            border-radius: 5px;
+            background: var(--bg-primary);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            cursor: pointer;
+        }
+
+        input[type="number"] {
+            padding: 8px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            width: 100px;
+        }
+
+        .canvas-container {
+            background: var(--bg-primary);
+            border-radius: 8px;
+            padding: 30px;
+            min-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .bar-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 2px;
+            height: 350px;
+            width: 100%;
+        }
+
+        .bar {
+            flex: 1;
+            max-width: 60px;
+            background: var(--accent-primary);
+            border-radius: 4px 4px 0 0;
+            transition: all 0.3s;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.85rem;
+            padding-bottom: 5px;
+        }
+
+        .bar.active {
+            background: var(--active);
+        }
+
+        .bar.comparing {
+            background: var(--comparing);
+        }
+
+        .bar.sorted {
+            background: var(--sorted);
+        }
+
+        .info-panels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .info-panel {
+            background: var(--bg-tertiary);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .info-panel h3 {
+            margin-bottom: 15px;
+            color: var(--accent-primary);
+            font-size: 1.2rem;
+        }
+
+        .pseudocode {
+            background: var(--bg-primary);
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .pseudocode-line {
+            padding: 2px 0;
+            transition: all 0.3s;
+        }
+
+        .pseudocode-line.active {
+            background: var(--accent-primary);
+            padding-left: 10px;
+            margin-left: -10px;
+        }
+
+        .explanation {
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: var(--bg-primary);
+            padding: 10px 15px;
+            border-radius: 6px;
+        }
+
+        .stat-item strong {
+            color: var(--accent-primary);
+        }
+
+        .legend {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .stack-container, .queue-container, .linkedlist-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 40px;
+        }
+
+        .data-structure-visual {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            min-height: 100px;
+        }
+
+        .node {
+            background: var(--accent-primary);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            animation: nodeAppear 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        @keyframes nodeAppear {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .node.removing {
+            animation: nodeDisappear 0.3s ease forwards;
+        }
+
+        @keyframes nodeDisappear {
+            from {
+                transform: scale(1);
+                opacity: 1;
+            }
+            to {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+
+        .arrow {
+            width: 30px;
+            height: 3px;
+            background: var(--text-secondary);
+            position: relative;
+        }
+
+        .arrow::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid var(--text-secondary);
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+
+        .tree-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .tree-node {
+            background: var(--accent-primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 10px;
+            position: relative;
+        }
+
+        .tree-node.visited {
+            background: var(--sorted);
+            animation: pulse 0.5s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .graph-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+        }
+
+        .graph-node {
+            position: absolute;
+            background: var(--accent-primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .graph-node.visited {
+            background: var(--sorted);
+        }
+
+        .graph-node.current {
+            background: var(--active);
+            transform: scale(1.3);
+        }
+
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .edge {
+            stroke: var(--border);
+            stroke-width: 2;
+        }
+
+        .edge.active {
+            stroke: var(--active);
+            stroke-width: 4;
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .info-panels {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 DSA Visualizer</h1>
+            <p>Interactive Data Structures & Algorithms Learning Platform</p>
+        </header>
+
+        <div class="main-grid">
+            <aside class="sidebar">
+                <div class="category">
+                    <h3>Sorting Algorithms</h3>
+                    <button class="algo-btn active" data-algo="bubble">Bubble Sort</button>
+                    <button class="algo-btn" data-algo="selection">Selection Sort</button>
+                    <button class="algo-btn" data-algo="insertion">Insertion Sort</button>
+                    <button class="algo-btn" data-algo="merge">Merge Sort</button>
+                    <button class="algo-btn" data-algo="quick">Quick Sort</button>
+                </div>
+
+                <div class="category">
+                    <h3>Searching</h3>
+                    <button class="algo-btn" data-algo="linear">Linear Search</button>
+                    <button class="algo-btn" data-algo="binary">Binary Search</button>
+                </div>
+
+                <div class="category">
+                    <h3>Data Structures</h3>
+                    <button class="algo-btn" data-algo="stack">Stack</button>
+                    <button class="algo-btn" data-algo="queue">Queue</button>
+                    <button class="algo-btn" data-algo="linkedlist">Linked List</button>
+                </div>
+
+                <div class="category">
+                    <h3>Trees</h3>
+                    <button class="algo-btn" data-algo="bst">Binary Search Tree</button>
+                </div>
+
+                <div class="category">
+                    <h3>Graphs</h3>
+                    <button class="algo-btn" data-algo="bfs">BFS Traversal</button>
+                    <button class="algo-btn" data-algo="dfs">DFS Traversal</button>
+                </div>
+            </aside>
+
+            <main class="visualization-area">
+                <div class="controls">
+                    <div class="control-group">
+                        <label>Speed</label>
+                        <input type="range" id="speed" min="1" max="100" value="50">
+                    </div>
+                    <div class="control-group">
+                        <label>Array Size</label>
+                        <input type="number" id="arraySize" min="5" max="50" value="15">
+                    </div>
+                    <div class="control-group">
+                        <label>Value (for DS)</label>
+                        <input type="number" id="inputValue" min="1" max="100" value="42">
+                    </div>
+                    <button id="startBtn">Start</button>
+                    <button id="pauseBtn" disabled>Pause</button>
+                    <button id="resetBtn">Reset</button>
+                    <button id="generateBtn">Generate New</button>
+                </div>
+
+                <div class="canvas-container" id="canvas"></div>
+
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: var(--active)"></div>
+                        <span>Active</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: var(--comparing)"></div>
+                        <span>Comparing</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: var(--sorted)"></div>
+                        <span>Sorted/Visited</span>
+                    </div>
+                </div>
+
+                <div class="info-panels">
+                    <div class="info-panel">
+                        <h3>📋 Pseudocode</h3>
+                        <div class="pseudocode" id="pseudocode"></div>
+                        <div class="stats">
+                            <div class="stat-item">
+                                <strong>Comparisons:</strong> <span id="comparisons">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <strong>Swaps:</strong> <span id="swaps">0</span>
+                            </div>
+                            <div class="stat-item">
+                                <strong>Time:</strong> <span id="timeComplexity">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-panel">
+                        <h3>💡 Explanation</h3>
+                        <div class="explanation" id="explanation"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // State Management
+        const state = {
+            currentAlgo: 'bubble',
+            array: [],
+            isRunning: false,
+            isPaused: false,
+            speed: 50,
+            comparisons: 0,
+            swaps: 0,
+            dataStructure: null
+        };
+
+        // Algorithm Metadata
+        const algoData = {
+            bubble: {
+                name: 'Bubble Sort',
+                timeComplexity: 'O(n²)',
+                pseudocode: [
+                    'for i = 0 to n-1:',
+                    '  for j = 0 to n-i-1:',
+                    '    if arr[j] > arr[j+1]:',
+                    '      swap(arr[j], arr[j+1])'
+                ],
+                explanation: 'Bubble Sort repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted.'
+            },
+            selection: {
+                name: 'Selection Sort',
+                timeComplexity: 'O(n²)',
+                pseudocode: [
+                    'for i = 0 to n-1:',
+                    '  min_idx = i',
+                    '  for j = i+1 to n:',
+                    '    if arr[j] < arr[min_idx]:',
+                    '      min_idx = j',
+                    '  swap(arr[i], arr[min_idx])'
+                ],
+                explanation: 'Selection Sort divides the array into sorted and unsorted regions. It repeatedly selects the smallest element from the unsorted region and moves it to the end of the sorted region.'
+            },
+            insertion: {
+                name: 'Insertion Sort',
+                timeComplexity: 'O(n²)',
+                pseudocode: [
+                    'for i = 1 to n:',
+                    '  key = arr[i]',
+                    '  j = i - 1',
+                    '  while j >= 0 and arr[j] > key:',
+                    '    arr[j+1] = arr[j]',
+                    '    j = j - 1',
+                    '  arr[j+1] = key'
+                ],
+                explanation: 'Insertion Sort builds the final sorted array one item at a time. It takes each element and inserts it into its correct position in the already sorted portion of the array.'
+            },
+            merge: {
+                name: 'Merge Sort',
+                timeComplexity: 'O(n log n)',
+                pseudocode: [
+                    'function mergeSort(arr):',
+                    '  if length(arr) <= 1: return',
+                    '  mid = length(arr) / 2',
+                    '  left = mergeSort(arr[0:mid])',
+                    '  right = mergeSort(arr[mid:n])',
+                    '  return merge(left, right)'
+                ],
+                explanation: 'Merge Sort is a divide-and-conquer algorithm that divides the array into two halves, recursively sorts them, and then merges the sorted halves.'
+            },
+            quick: {
+                name: 'Quick Sort',
+                timeComplexity: 'O(n log n)',
+                pseudocode: [
+                    'function quickSort(arr, low, high):',
+                    '  if low < high:',
+                    '    pivot = partition(arr, low, high)',
+                    '    quickSort(arr, low, pivot-1)',
+                    '    quickSort(arr, pivot+1, high)'
+                ],
+                explanation: 'Quick Sort picks a pivot element and partitions the array around it, placing smaller elements before and larger elements after the pivot, then recursively sorts the subarrays.'
+            },
+            linear: {
+                name: 'Linear Search',
+                timeComplexity: 'O(n)',
+                pseudocode: [
+                    'function linearSearch(arr, target):',
+                    '  for i = 0 to n:',
+                    '    if arr[i] == target:',
+                    '      return i',
+                    '  return -1'
+                ],
+                explanation: 'Linear Search checks each element sequentially until the target is found or the end of the array is reached.'
+            },
+            binary: {
+                name: 'Binary Search',
+                timeComplexity: 'O(log n)',
+                pseudocode: [
+                    'function binarySearch(arr, target):',
+                    '  low = 0, high = n-1',
+                    '  while low <= high:',
+                    '    mid = (low + high) / 2',
+                    '    if arr[mid] == target: return mid',
+                    '    if arr[mid] < target: low = mid+1',
+                    '    else: high = mid-1',
+                    '  return -1'
+                ],
+                explanation: 'Binary Search works on sorted arrays by repeatedly dividing the search interval in half, comparing the middle element with the target.'
+            },
+            stack: {
+                name: 'Stack (LIFO)',
+                timeComplexity: 'O(1)',
+                pseudocode: [
+                    'push(item):',
+                    '  stack.append(item)',
+                    '',
+                    'pop():',
+                    '  if not empty():',
+                    '    return stack.pop()'
+                ],
+                explanation: 'Stack is a Last-In-First-Out (LIFO) data structure. Elements are added and removed from the same end (top). Use Push to add and Pop to remove.'
+            },
+            queue: {
+                name: 'Queue (FIFO)',
+                timeComplexity: 'O(1)',
+                pseudocode: [
+                    'enqueue(item):',
+                    '  queue.append(item)',
+                    '',
+                    'dequeue():',
+                    '  if not empty():',
+                    '    return queue.removeFirst()'
+                ],
+                explanation: 'Queue is a First-In-First-Out (FIFO) data structure. Elements are added at the rear and removed from the front. Use Enqueue to add and Dequeue to remove.'
+            },
+            linkedlist: {
+                name: 'Linked List',
+                timeComplexity: 'O(1) insert, O(n) search',
+                pseudocode: [
+                    'class Node:',
+                    '  data, next',
+                    '',
+                    'insertFront(data):',
+                    '  node = new Node(data)',
+                    '  node.next = head',
+                    '  head = node'
+                ],
+                explanation: 'Linked List is a linear data structure where elements are stored in nodes. Each node contains data and a reference to the next node.'
+            },
+            bst: {
+                name: 'Binary Search Tree',
+                timeComplexity: 'O(log n) average',
+                pseudocode: [
+                    'insert(node, key):',
+                    '  if node == null:',
+                    '    return new Node(key)',
+                    '  if key < node.data:',
+                    '    node.left = insert(node.left, key)',
+                    '  else:',
+                    '    node.right = insert(node.right, key)',
+                    '  return node'
+                ],
+                explanation: 'Binary Search Tree is a tree where each node has at most two children. Left child < parent < right child. Supports efficient search, insert, and delete.'
+            },
+            bfs: {
+                name: 'Breadth-First Search',
+                timeComplexity: 'O(V + E)',
+                pseudocode: [
+                    'function BFS(start):',
+                    '  queue = [start]',
+                    '  visited = {start}',
+                    '  while queue not empty:',
+                    '    node = queue.dequeue()',
+                    '    for neighbor in node.neighbors:',
+                    '      if neighbor not in visited:',
+                    '        visited.add(neighbor)',
+                    '        queue.enqueue(neighbor)'
+                ],
+                explanation: 'BFS explores a graph level by level using a queue. It visits all neighbors of a node before moving to the next level. Useful for shortest path in unweighted graphs.'
+            },
+            dfs: {
+                name: 'Depth-First Search',
+                timeComplexity: 'O(V + E)',
+                pseudocode: [
+                    'function DFS(node, visited):',
+                    '  visited.add(node)',
+                    '  for neighbor in node.neighbors:',
+                    '    if neighbor not in visited:',
+                    '      DFS(neighbor, visited)'
+                ],
+                explanation: 'DFS explores a graph by going as deep as possible along each branch before backtracking. It uses recursion or a stack to track the path.'
+            }
+        };
+
+        // DOM Elements
+        const canvas = document.getElementById('canvas');
+        const pseudocodeEl = document.getElementById('pseudocode');
+        const explanationEl = document.getElementById('explanation');
+        const comparisonsEl = document.getElementById('comparisons');
+        const swapsEl = document.getElementById('swaps');
+        const timeComplexityEl = document.getElementById('timeComplexity');
+        const startBtn = document.getElementById('startBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const generateBtn = document.getElementById('generateBtn');
+        const speedInput = document.getElementById('speed');
+        const arraySizeInput = document.getElementById('arraySize');
+
+        // Initialize
+        function init() {
+            generateArray();
+            updateUI();
+            attachEventListeners();
+        }
+
+        function generateArray() {
+            const size = parseInt(arraySizeInput.value);
+            state.array = Array.from({length: size}, () => Math.floor(Math.random() * 100) + 10);
+            state.comparisons = 0;
+            state.swaps = 0;
+            renderBars();
+            updateStats();
+        }
+
+        function renderBars() {
+            const maxVal = Math.max(...state.array);
+            canvas.innerHTML = `
+                <div class="bar-container">
+                    ${state.array.map((val, idx) => `
+                        <div class="bar" data-index="${idx}" style="height: ${(val/maxVal) * 100}%">
+                            ${val}
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function updateUI() {
+            const data = algoData[state.currentAlgo];
+            pseudocodeEl.innerHTML = data.pseudocode.map(line => 
+                `<div class="pseudocode-line">${line}</div>`
+            ).join('');
+            explanationEl.textContent = data.explanation;
+            timeComplexityEl.textContent = data.timeComplexity;
+        }
+
+        function updateStats() {
+            comparisonsEl.textContent = state.comparisons;
+            swapsEl.textContent = state.swaps;
+        }
+
+        async function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function getDelay() {
+            return 1000 - (state.speed * 9);
+        }
+
+        // Sorting Algorithms
+        async function bubbleSort() {
+            const n = state.array.length;
+            const bars = document.querySelectorAll('.bar');
+            
+            for (let i = 0; i < n - 1; i++) {
+                for (let j = 0; j < n - i - 1; j++) {
+                    if (!state.isRunning) return;
+                    while (state.isPaused) await sleep(100);
+                    
+                    bars[j].classList.add('active');
+                    bars[j + 1].classList.add('comparing');
+                    state.comparisons++;
+                    updateStats();
+                    await sleep(getDelay());
+                    
+                    if (state.array[j] > state.array[j + 1]) {
+                        [state.array[j], state.array[j + 1]] = [state.array[j + 1], state.array[j]];
+                        state.swaps++;
+                        updateStats();
+                        renderBars();
+                        const newBars = document.querySelectorAll('.bar');
+                        newBars[j].classList.add('active');
+                        newBars[j + 1].classList.add('comparing');
+                        await sleep(getDelay());
+                    }
+                    
+                    bars[j].classList.remove('active');
+                    bars[j + 1].classList.remove('comparing');
+                }
+                
+                const currentBars = document.querySelectorAll('.bar');
+                currentBars[n - i - 1].classList.add('sorted');
+            }
+            
+            document.querySelectorAll('.bar').forEach(bar => bar.classList.add('sorted'));
+            state.isRunning = false;
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+        }
+
+        async function selectionSort() {
+            const n = state.array.length;
+            
+            for (let i = 0; i < n - 1; i++) {
+                if (!state.isRunning) return;
+                let minIdx = i;
+                const bars = document.querySelectorAll('.bar');
+                bars[i].classList.add('active');
+                
+                for (let j = i + 1; j < n; j++) {
+                    if (!state.isRunning) return;
+                    while (state.isPaused) await sleep(100);
+                    
+                    bars[j].classList.add('comparing');
+                    state.comparisons++;
+                    updateStats();
+                    await sleep(getDelay());
+                    
+                    if (state.array[j] < state.array[minIdx]) {
+                        if (minIdx !== i) bars[minIdx].classList.remove('comparing');
+                        minIdx = j;
+                    } else {
+                        bars[j].classList.remove('comparing');
+                    }
+                }
+                
+                if (minIdx !== i) {
+                    [state.array[i], state.array[minIdx]] = [state.array[minIdx], state.array[i]];
+                    state.swaps++;
+                    updateStats();
+                    renderBars();
+                    await sleep(getDelay());
+                }
+                
+                const currentBars = document.querySelectorAll('.bar');
+                currentBars[i].classList.add('sorted');
+            }
+            
+            document.querySelectorAll('.bar')[n-1].classList.add('sorted');
+            state.isRunning = false;
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+        }
+
+        async function insertionSort() {
+            const n = state.array.length;
+            
+            for (let i = 1; i < n; i++) {
+                if (!state.isRunning) return;
+                while (state.isPaused) await sleep(100);
+                
+                let key = state.array[i];
+                let j = i - 1;
+                
+                const bars = document.querySelectorAll('.bar');
+                bars[i].classList.add('active');
+                await sleep(getDelay());
+                
+                while (j >= 0 && state.array[j] > key) {
+                    if (!state.isRunning) return;
+                    while (state.isPaused) await sleep(100);
+                    
+                    bars[j].classList.add('comparing');
+                    state.comparisons++;
+                    updateStats();
+                    
+                    state.array[j + 1] = state.array[j];
+                    state.swaps++;
+                    updateStats();
+                    
+                    renderBars();
+                    await sleep(getDelay());
+                    j--;
+                }
+                
+                state.array[j + 1] = key;
+                renderBars();
+                await sleep(getDelay());
+            }
+            
+            document.querySelectorAll('.bar').forEach(bar => bar.classList.add('sorted'));
+            state.isRunning = false;
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+        }
+
+        async function mergeSort() {
+            await mergeSortHelper(0, state.array.length - 1);
+            document.querySelectorAll('.bar').forEach(bar => bar.classList.add('sorted'));
+            state.isRunning = false;
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+        }
+
+        async function mergeSortHelper(left, right) {
+            if (left >= right || !state.isRunning) return;
+            
+            const mid = Math.floor((left + right) / 2);
+            await mergeSortHelper(left, mid);
+            await mergeSortHelper(mid + 1, right);
+            await merge(left, mid, right);
+        }
+
+        async function merge(left, mid, right) {
+            const leftArr = state.array.slice(left, mid + 1);
+            const rightArr = state.array.slice(mid + 1, right + 1);
+            
+            let i = 0, j = 0, k = left;
+            
+            while (i < leftArr.length && j < rightArr.length) {
+                if (!state.isRunning) return;
+                while (state.isPaused) await sleep(100);
+                
+                state.comparisons++;
+                updateStats();
+                
+                if (leftArr[i] <= rightArr[j]) {
+                    state.array[k] = leftArr[i];
+                    i++;
+                } else {
+                    state.array[k] = rightArr[j];
+                    j++;
+                }
+                
+                state.swaps++;
+                updateStats();
+                renderBars();
+                
+                const bars = document.querySelectorAll('.bar');
+                bars[k].classList.add('active');
+                await sleep(getDelay());
+                bars[k].classList.remove('active');
+                
+                k++;
+            }
+            
+            while (i < leftArr.length) {
+                state.array[k++] = leftArr[i++];
+                state.swaps++;
+                renderBars();
+                await sleep(getDelay() / 2);
+            }
+            
+            while (j < rightArr.length) {
+                state.array[k++] = rightArr[j++];
+                state.swaps++;
+                renderBars();
+                await sleep(getDelay() / 2);
+            }
+        }
+
+        async function quickSort() {
+            await quickSortHelper(0, state.array.length - 1);
+            document.querySelectorAll('.bar').forEach(bar => bar.classList.add('sorted'));
+            state.isRunning = false;
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+        }
+
+        async function quickSortHelper(low, high) {
+            if (low < high && state.isRunning) {
+                const pi = await partition(low, high);
+                await quickSortHelper(low, pi - 1);
+                await quickSortHelper(pi + 1, high);
+            }
+        }
+
+        async function partition(low, high) {
+            const pivot = state.array[high];
+            let i = low - 1;
+            
+            const bars = document.querySelectorAll('.bar');
+            bars[high].classList.add('active');
+            
+            for (let j = low; j < high; j++) {
+                if (!state.isRunning) return i + 1;
+                while (state.isPaused) await sleep(100);
+                
+                bars[j].classList.add('comparing');
+                state.comparisons++;
+                updateStats();
+                await sleep(getDelay());
+                
+                if (state.array[j] < pivot) {
+                    i++;
+                    [state.array[i], state.array[j]] = [state.array[j], state.array[i]];
+                    state.swaps++;
+                    updateStats();
+                    renderBars();
+                    await sleep(getDelay());
+                }
+                
+                const currentBars = document.querySelectorAll('.bar');
+                currentBars[j].classList.remove('comparing');
+            }
+            
+            [state.array[i + 1], state.array[high]] = [state.array[high], state.array[i + 1]];
+            state.swaps++;
+            updateStats();
+            renderBars();
+            await sleep(getDelay());
+            
+            return i + 1;
+        }
+
+        async function linearSearch() {
+            const target = state.array[Math.floor(Math.random() * state.array.length)];
+            explanationEl.textContent = `Searching for ${target}...`;
+            
+            const bars = document.querySelectorAll('.bar');
+            
+            for (let i = 0; i < state.array.length; i++) {
+                if (!state.isRunning) return;
+                while (state.isPaused) await sleep(100);
+                
+                bars[i].classList.add('comparing');
+                state.comparisons++;
+                updateStats();
+                await sleep(getDelay());
+                
+                if (state.array[i] === target) {
+                    bars[i].classList.remove('comparing');
+                    bars[i].classList.add('sorted');
+                    explanationEl.textContent = `Found ${target} at index ${i}!`;
+                    state.isRunning = false;
+                    startBtn.disabled = false;
+                    pauseBtn.disabled = true;
+                    return;
+                }
+                
+                bars[i].classList.remove('comparing');
+            }
+            
+            explanationEl.textContent = `${target} not found in array.`;
+            state.isRunning = false;
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+        }
+
+        async function binarySearch() {
+            state.array.sort((a, b) => a - b);
+            renderBars();
+            await sleep(500);
+            
+            const target = state.array[Math.floor(Math.random() * state.array.length)];
+            explanationEl.textContent = `Searching for ${target} in sorted array...`;
+            
+            let left = 0;
+            let right = state.array.length - 1;
+            
+            while (left <= right) {
+                if (!state.isRunning) return;
+                while (state.isPaused) await sleep(100);
+                
+                const mid = Math.floor((left + right) / 2);
+                const bars = document.querySelectorAll('.bar');
+                
+                bars[mid].classList.add('active');
+                state.comparisons++;
+                updateStats();
+                await sleep(getDelay());
+                
+                if (state.array[mid] === target) {
+                    bars[mid].classList.remove('active');
+                    bars[mid].classList.add('sorted');
+                    explanationEl.textContent = `Found ${target} at index ${mid}!`;
+                    state.isRunning = false;
+                    startBtn.disabled = false;
+                    pauseBtn.disabled = true;
+                    return;
+                }
+                
+                bars[mid].classList.remove('active');
+                
+                if (state.array[mid] < target) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+            
+            explanationEl.textContent = `${target} not found.`;
+            state.isRunning = false;
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+        }
+
+        // Data Structures
+        function renderStack() {
+            if (!state.dataStructure) {
+                state.dataStructure = [];
+            }
+            
+            canvas.innerHTML = `
+                <div class="stack-container">
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <button onclick="pushStack()">Push</button>
+                        <button onclick="popStack()">Pop</button>
+                        <button onclick="peekStack()">Peek</button>
+                    </div>
+                    <div class="data-structure-visual" style="flex-direction: column-reverse;">
+                        ${state.dataStructure.map(val => `<div class="node">${val}</div>`).join('')}
+                    </div>
+                    <div style="margin-top: 20px; color: var(--text-secondary);">
+                        ${state.dataStructure.length === 0 ? 'Stack is empty' : `Top: ${state.dataStructure[state.dataStructure.length - 1]}`}
+                    </div>
+                </div>
+            `;
+        }
+
+        function pushStack() {
+            const val = parseInt(document.getElementById('inputValue').value);
+            state.dataStructure.push(val);
+            renderStack();
+        }
+
+        function popStack() {
+            if (state.dataStructure.length > 0) {
+                const popped = state.dataStructure.pop();
+                explanationEl.textContent = `Popped ${popped} from stack`;
+                renderStack();
+            }
+        }
+
+        function peekStack() {
+            if (state.dataStructure.length > 0) {
+                explanationEl.textContent = `Top element: ${state.dataStructure[state.dataStructure.length - 1]}`;
+            }
+        }
+
+        function renderQueue() {
+            if (!state.dataStructure) {
+                state.dataStructure = [];
+            }
+            
+            canvas.innerHTML = `
+                <div class="queue-container">
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <button onclick="enqueue()">Enqueue</button>
+                        <button onclick="dequeue()">Dequeue</button>
+                        <button onclick="peekQueue()">Peek</button>
+                    </div>
+                    <div class="data-structure-visual">
+                        ${state.dataStructure.map((val, idx) => `
+                            <div class="node">${val}</div>
+                            ${idx < state.dataStructure.length - 1 ? '<div class="arrow"></div>' : ''}
+                        `).join('')}
+                    </div>
+                    <div style="margin-top: 20px; color: var(--text-secondary);">
+                        ${state.dataStructure.length === 0 ? 'Queue is empty' : `Front: ${state.dataStructure[0]}, Rear: ${state.dataStructure[state.dataStructure.length - 1]}`}
+                    </div>
+                </div>
+            `;
+        }
+
+        function enqueue() {
+            const val = parseInt(document.getElementById('inputValue').value);
+            state.dataStructure.push(val);
+            renderQueue();
+        }
+
+        function dequeue() {
+            if (state.dataStructure.length > 0) {
+                const dequeued = state.dataStructure.shift();
+                explanationEl.textContent = `Dequeued ${dequeued} from queue`;
+                renderQueue();
+            }
+        }
+
+        function peekQueue() {
+            if (state.dataStructure.length > 0) {
+                explanationEl.textContent = `Front element: ${state.dataStructure[0]}`;
+            }
+        }
+
+        function renderLinkedList() {
+            if (!state.dataStructure) {
+                state.dataStructure = [];
+            }
+            
+            canvas.innerHTML = `
+                <div class="linkedlist-container">
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <button onclick="insertFront()">Insert Front</button>
+                        <button onclick="insertEnd()">Insert End</button>
+                        <button onclick="deleteNode()">Delete Front</button>
+                    </div>
+                    <div class="data-structure-visual">
+                        ${state.dataStructure.map((val, idx) => `
+                            <div class="node">${val}</div>
+                            ${idx < state.dataStructure.length - 1 ? '<div class="arrow"></div>' : ''}
+                        `).join('')}
+                    </div>
+                    <div style="margin-top: 20px; color: var(--text-secondary);">
+                        ${state.dataStructure.length === 0 ? 'List is empty' : `Head: ${state.dataStructure[0]}, Length: ${state.dataStructure.length}`}
+                    </div>
+                </div>
+            `;
+        }
+
+        function insertFront() {
+            const val = parseInt(document.getElementById('inputValue').value);
+            state.dataStructure.unshift(val);
+            renderLinkedList();
+        }
+
+        function insertEnd() {
+            const val = parseInt(document.getElementById('inputValue').value);
+            state.dataStructure.push(val);
+            renderLinkedList();
+        }
+
+        function deleteNode() {
+            if (state.dataStructure.length > 0) {
+                const deleted = state.dataStructure.shift();
+                explanationEl.textContent = `Deleted ${deleted} from list`;
+                renderLinkedList();
+            }
+        }
+
+        function renderBST() {
+            if (!state.dataStructure) {
+                state.dataStructure = [50, 30, 70, 20, 40, 60, 80];
+            }
+            
+            canvas.innerHTML = `
+                <div class="tree-container">
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <button onclick="traverseInOrder()">In-Order</button>
+                        <button onclick="traversePreOrder()">Pre-Order</button>
+                        <button onclick="traversePostOrder()">Post-Order</button>
+                    </div>
+                    <svg width="600" height="300">
+                        <g>
+                            <line x1="300" y1="50" x2="200" y2="120" stroke="var(--border)" stroke-width="2"/>
+                            <line x1="300" y1="50" x2="400" y2="120" stroke="var(--border)" stroke-width="2"/>
+                            <line x1="200" y1="120" x2="150" y2="190" stroke="var(--border)" stroke-width="2"/>
+                            <line x1="200" y1="120" x2="250" y2="190" stroke="var(--border)" stroke-width="2"/>
+                            <line x1="400" y1="120" x2="350" y2="190" stroke="var(--border)" stroke-width="2"/>
+                            <line x1="400" y1="120" x2="450" y2="190" stroke="var(--border)" stroke-width="2"/>
+                        </g>
+                    </svg>
+                    <div style="position: absolute; top: 100px; left: 50%; transform: translateX(-50%);">
+                        <div class="tree-node" style="position: absolute; left: 275px; top: 0px;" data-val="50">${state.dataStructure[0]}</div>
+                        <div class="tree-node" style="position: absolute; left: 175px; top: 70px;" data-val="30">${state.dataStructure[1]}</div>
+                        <div class="tree-node" style="position: absolute; left: 375px; top: 70px;" data-val="70">${state.dataStructure[2]}</div>
+                        <div class="tree-node" style="position: absolute; left: 125px; top: 140px;" data-val="20">${state.dataStructure[3]}</div>
+                        <div class="tree-node" style="position: absolute; left: 225px; top: 140px;" data-val="40">${state.dataStructure[4]}</div>
+                        <div class="tree-node" style="position: absolute; left: 325px; top: 140px;" data-val="60">${state.dataStructure[5]}</div>
+                        <div class="tree-node" style="position: absolute; left: 425px; top: 140px;" data-val="80">${state.dataStructure[6]}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function traverseInOrder() {
+            const order = [3, 1, 4, 0, 5, 2, 6];
+            await animateTraversal(order, "In-Order: 20, 30, 40, 50, 60, 70, 80");
+        }
+
+        async function traversePreOrder() {
+            const order = [0, 1, 3, 4, 2, 5, 6];
+            await animateTraversal(order, "Pre-Order: 50, 30, 20, 40, 70, 60, 80");
+        }
+
+        async function traversePostOrder() {
+            const order = [3, 4, 1, 5, 6, 2, 0];
+            await animateTraversal(order, "Post-Order: 20, 40, 30, 60, 80, 70, 50");
+        }
+
+        async function animateTraversal(order, message) {
+            const nodes = document.querySelectorAll('.tree-node');
+            explanationEl.textContent = message;
+            
+            for (let idx of order) {
+                nodes[idx].classList.add('visited');
+                await sleep(800);
+            }
+            
+            setTimeout(() => {
+                nodes.forEach(n => n.classList.remove('visited'));
+            }, 2000);
+        }
+
+        function renderGraph() {
+            canvas.innerHTML = `
+                <div class="graph-container">
+                    <svg width="100%" height="400">
+                        <line class="edge" x1="150" y1="100" x2="250" y2="100"/>
+                        <line class="edge" x1="150" y1="100" x2="100" y2="250"/>
+                        <line class="edge" x1="250" y1="100" x2="350" y2="100"/>
+                        <line class="edge" x1="250" y1="100" x2="250" y2="250"/>
+                        <line class="edge" x1="100" y1="250" x2="250" y2="250"/>
+                        <line class="edge" x1="250" y1="250" x2="350" y2="100"/>
+                    </svg>
+                    <div class="graph-node" style="left: 125px; top: 75px;" data-node="0">A</div>
+                    <div class="graph-node" style="left: 225px; top: 75px;" data-node="1">B</div>
+                    <div class="graph-node" style="left: 325px; top: 75px;" data-node="2">C</div>
+                    <div class="graph-node" style="left: 75px; top: 225px;" data-node="3">D</div>
+                    <div class="graph-node" style="left: 225px; top: 225px;" data-node="4">E</div>
+                </div>
+            `;
+        }
+
+        async function bfsTraversal() {
+            renderGraph();
+            await sleep(500);
+            
+            const nodes = document.querySelectorAll('.graph-node');
+            const adjacency = [[1, 3], [0, 2, 4], [1], [0, 4], [1, 3, 2]];
+            const visited = new Set();
+            const queue = [0];
+            visited.add(0);
+            
+            while (queue.length > 0) {
+                if (!state.isRunning) return;
+                
+                const current = queue.shift();
+                nodes[current].classList.add('current');
+                await sleep(getDelay() * 2);
+                
+                for (let neighbor of adjacency[current]) {
+                    if (!visited.has(neighbor)) {
+                        visited.add(neighbor);
+                        queue.push(neighbor);
+                        nodes[neighbor].classList.add('visited');
+                        await sleep(getDelay() * 2);
+                    }
+                }
+                
+                nodes[current].classList.remove('current');
+                nodes[current].classList.add('visited');
+            }
+            
+            state.isRunning = false;
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+        }
+
+        async function dfsTraversal() {
+            renderGraph();
+            await sleep(500);
+            
+            const nodes = document.querySelectorAll('.graph-node');
+            const adjacency = [[1, 3], [0, 2, 4], [1], [0, 4], [1, 3, 2]];
+            const visited = new Set();
+            
+            async function dfs(node) {
+                if (!state.isRunning || visited.has(node)) return;
+                
+                visited.add(node);
+                nodes[node].classList.add('current');
+                await sleep(getDelay() * 2);
+                
+                for (let neighbor of adjacency[node]) {
+                    await dfs(neighbor);
+                }
+                
+                nodes[node].classList.remove('current');
+                nodes[node].classList.add('visited');
+            }
+            
+            await dfs(0);
+            
+            state.isRunning = false;
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+        }
+
+        // Event Listeners
+        function attachEventListeners() {
+            document.querySelectorAll('.algo-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.algo-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    state.currentAlgo = btn.dataset.algo;
+                    state.dataStructure = null;
+                    resetVisualization();
+                });
+            });
+
+            startBtn.addEventListener('click', startVisualization);
+            pauseBtn.addEventListener('click', () => {
+                state.isPaused = !state.isPaused;
+                pauseBtn.textContent = state.isPaused ? 'Resume' : 'Pause';
+            });
+            resetBtn.addEventListener('click', resetVisualization);
+            generateBtn.addEventListener('click', generateArray);
+            speedInput.addEventListener('input', (e) => {
+                state.speed = parseInt(e.target.value);
+            });
+        }
+
+        function startVisualization() {
+            if (state.isRunning) return;
+            
+            state.isRunning = true;
+            state.isPaused = false;
+            startBtn.disabled = true;
+            pauseBtn.disabled = false;
+            pauseBtn.textContent = 'Pause';
+            
+            const algoMap = {
+                bubble: bubbleSort,
+                selection: selectionSort,
+                insertion: insertionSort,
+                merge: mergeSort,
+                quick: quickSort,
+                linear: linearSearch,
+                binary: binarySearch,
+                stack: () => { renderStack(); state.isRunning = false; startBtn.disabled = false; },
+                queue: () => { renderQueue(); state.isRunning = false; startBtn.disabled = false; },
+                linkedlist: () => { renderLinkedList(); state.isRunning = false; startBtn.disabled = false; },
+                bst: () => { renderBST(); state.isRunning = false; startBtn.disabled = false; },
+                bfs: bfsTraversal,
+                dfs: dfsTraversal
+            };
+            
+            algoMap[state.currentAlgo]();
+        }
+
+        function resetVisualization() {
+            state.isRunning = false;
+            state.isPaused = false;
+            state.comparisons = 0;
+            state.swaps = 0;
+            startBtn.disabled = false;
+            pauseBtn.disabled = true;
+            
+            const dsAlgos = ['stack', 'queue', 'linkedlist', 'bst', 'bfs', 'dfs'];
+            
+            if (dsAlgos.includes(state.currentAlgo)) {
+                const renderMap = {
+                    stack: renderStack,
+                    queue: renderQueue,
+                    linkedlist: renderLinkedList,
+                    bst: renderBST,
+                    bfs: renderGraph,
+                    dfs: renderGraph
+                };
+                renderMap[state.currentAlgo]();
+            } else {
+                generateArray();
+            }
+            
+            updateUI();
+            updateStats();
+        }
+
+        // Make functions global for onclick
+        window.pushStack = pushStack;
+        window.popStack = popStack;
+        window.peekStack = peekStack;
+        window.enqueue = enqueue;
+        window.dequeue = dequeue;
+        window.peekQueue = peekQueue;
+        window.insertFront = insertFront;
+        window.insertEnd = insertEnd;
+        window.deleteNode = deleteNode;
+        window.traverseInOrder = traverseInOrder;
+        window.traversePreOrder = traversePreOrder;
+        window.traversePostOrder = traversePostOrder;
+
+        init();
+    </script>
+</body>
+</html>

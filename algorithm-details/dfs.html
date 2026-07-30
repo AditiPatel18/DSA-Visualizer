@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depth-First Search | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="../css/graph.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body data-algorithm="dfs">
+    <nav class="navbar">
+        <div class="logo">
+            <h1><i class="fas fa-code-branch"></i> Depth-First Search</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="../algorithms/graph.html"><i class="fas fa-arrow-left"></i> Back to Graph</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-header">
+        <div class="header-content">
+            <h2><i class="fas fa-code-branch"></i> Depth-First Search</h2>
+            <p>Traverse a graph by following one path as deeply as possible before backtracking.</p>
+            <div class="header-stats">
+                <div class="stat"><h3>O(V + E)</h3><p>Time</p></div>
+                <div class="stat"><h3>O(V)</h3><p>Space</p></div>
+                <div class="stat"><h3>Stack</h3><p>Structure</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="graph-detail-page">
+        <div class="graph-shell">
+            <aside class="graph-sidebar">
+                <div class="graph-card">
+                    <h3><i class="fas fa-info-circle"></i> Algorithm Info</h3>
+                    <div class="graph-info-grid">
+                        <div class="graph-info-item"><span class="graph-info-label">Category</span><span class="graph-info-value">Traversal</span></div>
+                        <div class="graph-info-item"><span class="graph-info-label">Best for</span><span class="graph-info-value">Exploration</span></div>
+                        <div class="graph-info-item"><span class="graph-info-label">Graph type</span><span class="graph-info-value">Any connected graph</span></div>
+                        <div class="graph-info-item"><span class="graph-info-label">Complexity</span><span class="graph-info-value">O(V + E)</span></div>
+                    </div>
+                </div>
+                <div class="graph-card">
+                    <h3><i class="fas fa-code"></i> Implementations</h3>
+                    <div class="language-tabs">
+                        <span class="lang-pill active">C</span>
+                        <span class="lang-pill active">C++</span>
+                        <span class="lang-pill active">Java</span>
+                    </div>
+                    <div class="graph-progress-list">
+                        <div class="graph-progress-row"><span>C</span><div class="progress-bar small"><div class="progress-fill" style="width:86%"></div></div><span>86%</span></div>
+                        <div class="graph-progress-row"><span>C++</span><div class="progress-bar small"><div class="progress-fill" style="width:84%"></div></div><span>84%</span></div>
+                        <div class="graph-progress-row"><span>Java</span><div class="progress-bar small"><div class="progress-fill" style="width:82%"></div></div><span>82%</span></div>
+                    </div>
+                </div>
+                <div class="graph-card">
+                    <h3><i class="fas fa-chart-line"></i> Progress</h3>
+                    <p>Completed: 2/5 checkpoints</p>
+                    <div class="progress-bar small"><div class="progress-fill" style="width:40%"></div></div>
+                </div>
+            </aside>
+
+            <main class="graph-main">
+                <section class="graph-panel">
+                    <h2><i class="fas fa-eye"></i> Interactive Visualization</h2>
+                    <p>Observe how DFS dives into a branch before backtracking to the next one.</p>
+                    <div class="graph-visualizer">
+                        <div class="graph-canvas-card">
+                            <svg id="graphSvg" class="graph-svg"></svg>
+                            <div class="graph-controls">
+                                <button class="graph-btn secondary" id="startBtn"><i class="fas fa-play"></i> Start</button>
+                                <button class="graph-btn ghost" id="stepBtn"><i class="fas fa-step-forward"></i> Step</button>
+                                <button class="graph-btn" id="resetBtn"><i class="fas fa-undo"></i> Reset</button>
+                            </div>
+                        </div>
+                        <div class="graph-canvas-card">
+                            <h3><i class="fas fa-chart-bar"></i> Live Stats</h3>
+                            <div class="graph-stats-grid">
+                                <div class="graph-stat"><span class="label">Visited</span><strong id="visitedCount">0</strong></div>
+                                <div class="graph-stat"><span class="label">Edges</span><strong id="edgeCount">0</strong></div>
+                                <div class="graph-stat"><span class="label">Status</span><strong id="statusValue">Ready</strong></div>
+                            </div>
+                            <div class="graph-steps" style="margin-top:1rem;">
+                                <h3><i class="fas fa-list-ol"></i> Steps</h3>
+                                <ul>
+                                    <li>Push the starting node onto a stack.</li>
+                                    <li>Visit one neighbor, then continue deeper.</li>
+                                    <li>Backtrack when no new paths remain.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="graph-panel">
+                    <h2><i class="fas fa-lightbulb"></i> Complexity & Applications</h2>
+                    <div class="graph-grid-2">
+                        <div class="graph-steps">
+                            <h3>Complexity</h3>
+                            <ul>
+                                <li>Time: O(V + E)</li>
+                                <li>Space: O(V)</li>
+                                <li>Useful for cycle detection and topology checks</li>
+                            </ul>
+                        </div>
+                        <div class="graph-steps">
+                            <h3>Applications</h3>
+                            <ul>
+                                <li>Maze solving</li>
+                                <li>Pathfinding in puzzles</li>
+                                <li>Dependency and workflow analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="graph-panel">
+                    <h2><i class="fas fa-balance-scale"></i> Advantages & Disadvantages</h2>
+                    <div class="graph-grid-2">
+                        <div class="graph-steps">
+                            <h3>Advantages</h3>
+                            <ul>
+                                <li>Low memory footprint with iterative form.</li>
+                                <li>Great for exploring full connected areas.</li>
+                            </ul>
+                        </div>
+                        <div class="graph-steps">
+                            <h3>Disadvantages</h3>
+                            <ul>
+                                <li>Finds paths but not shortest ones by default.</li>
+                                <li>Can get stuck in deep branches without careful handling.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="graph-panel">
+                    <h2><i class="fas fa-table"></i> Comparison Table</h2>
+                    <table class="graph-table">
+                        <thead>
+                            <tr><th>Algorithm</th><th>When to Use</th><th>Key Strength</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>BFS</td><td>Unweighted shortest paths</td><td>Level-order traversal</td></tr>
+                            <tr><td>DFS</td><td>Traversal and backtracking</td><td>Memory-efficient search</td></tr>
+                            <tr><td>Dijkstra</td><td>Weighted shortest paths</td><td>Optimal path costs</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="graph-panel">
+                    <h2><i class="fas fa-link"></i> Related Algorithms</h2>
+                    <ul class="graph-list">
+                        <li><a href="bfs.html">Breadth-First Search</a></li>
+                        <li><a href="dijkstra.html">Dijkstra's Algorithm</a></li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="../js/graph-visualizer.js"></script>
+</body>
+</html>

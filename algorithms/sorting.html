@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Algorithms | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1><i class="fas fa-sort-amount-down"></i> Sorting Algorithms</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="sorting.html" class="active"><i class="fas fa-sort-amount-down"></i> Sorting</a></li>
+            <li><a href="searching.html"><i class="fas fa-search"></i> Searching</a></li>
+            <li><a href="graph.html"><i class="fas fa-project-diagram"></i> Graph</a></li>
+            <li><a href="searching.html"><i class="fas fa-search"></i> Searching</a></li>
+        </ul>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="header-content">
+            <h2><i class="fas fa-sort-amount-down-alt"></i> Sorting Algorithms</h2>
+            <p>Learn and visualize 12+ sorting algorithms with implementations in C, C++, and Java</p>
+            <div class="header-stats">
+                <div class="stat">
+                    <h3>12</h3>
+                    <p>Algorithms</p>
+                </div>
+                <div class="stat">
+                    <h3>36</h3>
+                    <p>Code Examples</p>
+                </div>
+                <div class="stat">
+                    <h3>85%</h3>
+                    <p>Completion Rate</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Algorithm Grid -->
+    <div class="algorithm-page">
+        <!-- Sidebar -->
+        <aside class="algo-sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-filter"></i> Filter by</h3>
+                <div class="filter-options">
+                    <div class="filter-group">
+                        <h4>Complexity</h4>
+                        <label class="checkbox">
+                            <input type="checkbox" checked> O(n log n)
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox"> O(n²)
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox"> O(n)
+                        </label>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Language</h4>
+                        <label class="checkbox">
+                            <input type="checkbox" checked> C
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" checked> C++
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" checked> Java
+                        </label>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Difficulty</h4>
+                        <label class="checkbox">
+                            <input type="checkbox"> Easy
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" checked> Medium
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox"> Hard
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3><i class="fas fa-chart-pie"></i> Your Progress</h3>
+                <div class="progress-circle">
+                    <svg width="120" height="120" viewBox="0 0 120 120">
+                        <circle cx="60" cy="60" r="54" fill="none" stroke="#e0e0e0" stroke-width="12"/>
+                        <circle cx="60" cy="60" r="54" fill="none" stroke="#4CAF50" stroke-width="12"
+                                stroke-dasharray="339.292" stroke-dashoffset="169.646" stroke-linecap="round"
+                                transform="rotate(-90 60 60)"/>
+                        <text x="60" y="65" text-anchor="middle" font-size="20" font-weight="bold" fill="#1a237e">50%</text>
+                    </svg>
+                </div>
+                <p class="progress-text">6 of 12 algorithms learned</p>
+                <button class="btn-resume">
+                    <i class="fas fa-play"></i> Resume Learning
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="algo-main">
+            <!-- Quick Sort -->
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/quicksort.html'">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Quick Sort</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(n log n)</span>
+                            <span class="tag-space">O(log n)</span>
+                            <span class="tag-inplace">In-place</span>
+                        </div>
+                    </div>
+                    <div class="algo-status">
+                        <span class="status-completed"><i class="fas fa-check-circle"></i> Learned</span>
+                    </div>
+                </div>
+                <p class="algo-description">Divide and conquer algorithm that picks an element as pivot and partitions the array around it.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-random"></i> Divide & Conquer</span>
+                    <span><i class="fas fa-bolt"></i> Fast average case</span>
+                    <span><i class="fas fa-code"></i> Recursive</span>
+                </div>
+                <div class="algo-languages">
+                    <div class="lang-progress">
+                        <span class="lang-name c">C</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name cpp">C++</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name java">Java</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Merge Sort -->
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/mergesort.html'">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Merge Sort</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(n log n)</span>
+                            <span class="tag-space">O(n)</span>
+                            <span class="tag-stable">Stable</span>
+                        </div>
+                    </div>
+                    <div class="algo-status">
+                        <span class="status-in-progress"><i class="fas fa-sync-alt"></i> In Progress</span>
+                    </div>
+                </div>
+                <p class="algo-description">Stable divide and conquer algorithm that divides array into halves, sorts them, and merges.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-random"></i> Divide & Conquer</span>
+                    <span><i class="fas fa-shield-alt"></i> Stable sort</span>
+                    <span><i class="fas fa-code"></i> Recursive/Iterative</span>
+                </div>
+                <div class="algo-languages">
+                    <div class="lang-progress">
+                        <span class="lang-name c">C</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name cpp">C++</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name java">Java</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bubble Sort -->
+            <div class="algo-detail-card">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Bubble Sort</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(n²)</span>
+                            <span class="tag-space">O(1)</span>
+                            <span class="tag-easy">Easy</span>
+                        </div>
+                    </div>
+                    <div class="algo-status">
+                        <span class="status-not-started"><i class="fas fa-clock"></i> Not Started</span>
+                    </div>
+                </div>
+                <p class="algo-description">Simple comparison-based algorithm that repeatedly swaps adjacent elements if they are in wrong order.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-exchange-alt"></i> Comparison-based</span>
+                    <span><i class="fas fa-sort-amount-up"></i> Adaptive</span>
+                    <span><i class="fas fa-code"></i> Simple implementation</span>
+                </div>
+                <div class="algo-languages">
+                    <div class="lang-progress">
+                        <span class="lang-name c">C</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name cpp">C++</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name java">Java</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Heap Sort -->
+            <div class="algo-detail-card">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Heap Sort</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(n log n)</span>
+                            <span class="tag-space">O(1)</span>
+                            <span class="tag-inplace">In-place</span>
+                        </div>
+                    </div>
+                    <div class="algo-status">
+                        <span class="status-completed"><i class="fas fa-check-circle"></i> Learned</span>
+                    </div>
+                </div>
+                <p class="algo-description">Comparison-based sorting algorithm that uses binary heap data structure.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-tree"></i> Uses Heap</span>
+                    <span><i class="fas fa-bolt"></i> O(n log n) worst case</span>
+                    <span><i class="fas fa-code"></i> In-place</span>
+                </div>
+                <div class="algo-languages">
+                    <div class="lang-progress">
+                        <span class="lang-name c">C</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name cpp">C++</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name java">Java</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 70%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insertion Sort -->
+            <div class="algo-detail-card">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Insertion Sort</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(n²)</span>
+                            <span class="tag-space">O(1)</span>
+                            <span class="tag-easy">Easy</span>
+                        </div>
+                    </div>
+                    <div class="algo-status">
+                        <span class="status-in-progress"><i class="fas fa-sync-alt"></i> In Progress</span>
+                    </div>
+                </div>
+                <p class="algo-description">Simple algorithm that builds final sorted array one item at a time.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-plus-circle"></i> Online algorithm</span>
+                    <span><i class="fas fa-sort-amount-up"></i> Adaptive</span>
+                    <span><i class="fas fa-code"></i> Simple</span>
+                </div>
+                <div class="algo-languages">
+                    <div class="lang-progress">
+                        <span class="lang-name c">C</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name cpp">C++</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 55%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name java">Java</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 65%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Selection Sort -->
+            <div class="algo-detail-card">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Selection Sort</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(n²)</span>
+                            <span class="tag-space">O(1)</span>
+                            <span class="tag-easy">Easy</span>
+                        </div>
+                    </div>
+                    <div class="algo-status">
+                        <span class="status-completed"><i class="fas fa-check-circle"></i> Learned</span>
+                    </div>
+                </div>
+                <p class="algo-description">Simple algorithm that repeatedly finds minimum element from unsorted part.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-search"></i> Minimum selection</span>
+                    <span><i class="fas fa-exchange-alt"></i> Fewer swaps</span>
+                    <span><i class="fas fa-code"></i> Simple</span>
+                </div>
+                <div class="algo-languages">
+                    <div class="lang-progress">
+                        <span class="lang-name c">C</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name cpp">C++</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name java">Java</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Algorithm Comparison -->
+    <div class="comparison-section">
+        <h2><i class="fas fa-balance-scale"></i> Algorithm Comparison</h2>
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Algorithm</th>
+                        <th>Best Case</th>
+                        <th>Average Case</th>
+                        <th>Worst Case</th>
+                        <th>Space</th>
+                        <th>Stable</th>
+                        <th>In-place</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Quick Sort</strong></td>
+                        <td>O(n log n)</td>
+                        <td>O(n log n)</td>
+                        <td>O(n²)</td>
+                        <td>O(log n)</td>
+                        <td>No</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Merge Sort</strong></td>
+                        <td>O(n log n)</td>
+                        <td>O(n log n)</td>
+                        <td>O(n log n)</td>
+                        <td>O(n)</td>
+                        <td>Yes</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Heap Sort</strong></td>
+                        <td>O(n log n)</td>
+                        <td>O(n log n)</td>
+                        <td>O(n log n)</td>
+                        <td>O(1)</td>
+                        <td>No</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Insertion Sort</strong></td>
+                        <td>O(n)</td>
+                        <td>O(n²)</td>
+                        <td>O(n²)</td>
+                        <td>O(1)</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bubble Sort</strong></td>
+                        <td>O(n)</td>
+                        <td>O(n²)</td>
+                        <td>O(n²)</td>
+                        <td>O(1)</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

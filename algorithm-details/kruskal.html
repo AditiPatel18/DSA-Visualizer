@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kruskal's MST | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="../css/graph.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body data-algorithm="kruskal">
+    <nav class="navbar">
+        <div class="logo">
+            <h1><i class="fas fa-network-wired"></i> Kruskal's MST</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="../algorithms/graph.html"><i class="fas fa-arrow-left"></i> Back to Graph</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-header">
+        <div class="header-content">
+            <h2><i class="fas fa-network-wired"></i> Kruskal's Minimum Spanning Tree</h2>
+            <p>Select the cheapest edges in ascending order while avoiding cycles to form the minimum spanning tree.</p>
+            <div class="header-stats">
+                <div class="stat"><h3>O(E log E)</h3><p>Time</p></div>
+                <div class="stat"><h3>O(V + E)</h3><p>Space</p></div>
+                <div class="stat"><h3>Sorting</h3><p>Approach</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="graph-detail-page">
+        <div class="graph-shell">
+            <aside class="graph-sidebar">
+                <div class="graph-card">
+                    <h3><i class="fas fa-info-circle"></i> Algorithm Info</h3>
+                    <div class="graph-info-grid">
+                        <div class="graph-info-item"><span class="graph-info-label">Category</span><span class="graph-info-value">MST</span></div>
+                        <div class="graph-info-item"><span class="graph-info-label">Best for</span><span class="graph-info-value">Disconnected edge sets</span></div>
+                        <div class="graph-info-item"><span class="graph-info-label">Graph type</span><span class="graph-info-value">Weighted</span></div>
+                        <div class="graph-info-item"><span class="graph-info-label">Complexity</span><span class="graph-info-value">O(E log E)</span></div>
+                    </div>
+                </div>
+                <div class="graph-card">
+                    <h3><i class="fas fa-code"></i> Implementations</h3>
+                    <div class="language-tabs">
+                        <span class="lang-pill active">C</span>
+                        <span class="lang-pill active">C++</span>
+                        <span class="lang-pill active">Java</span>
+                    </div>
+                    <div class="graph-progress-list">
+                        <div class="graph-progress-row"><span>C</span><div class="progress-bar small"><div class="progress-fill" style="width:74%"></div></div><span>74%</span></div>
+                        <div class="graph-progress-row"><span>C++</span><div class="progress-bar small"><div class="progress-fill" style="width:78%"></div></div><span>78%</span></div>
+                        <div class="graph-progress-row"><span>Java</span><div class="progress-bar small"><div class="progress-fill" style="width:72%"></div></div><span>72%</span></div>
+                    </div>
+                </div>
+                <div class="graph-card">
+                    <h3><i class="fas fa-chart-line"></i> Progress</h3>
+                    <p>Completed: 3/5 checkpoints</p>
+                    <div class="progress-bar small"><div class="progress-fill" style="width:60%"></div></div>
+                </div>
+            </aside>
+
+            <main class="graph-main">
+                <section class="graph-panel">
+                    <h2><i class="fas fa-eye"></i> Interactive Visualization</h2>
+                    <p>Inspect the edges sorted by cost and see which ones are accepted into the spanning tree.</p>
+                    <div class="graph-visualizer">
+                        <div class="graph-canvas-card">
+                            <svg id="graphSvg" class="graph-svg"></svg>
+                            <div class="graph-controls">
+                                <button class="graph-btn secondary" id="startBtn"><i class="fas fa-play"></i> Start</button>
+                                <button class="graph-btn ghost" id="stepBtn"><i class="fas fa-step-forward"></i> Step</button>
+                                <button class="graph-btn" id="resetBtn"><i class="fas fa-undo"></i> Reset</button>
+                            </div>
+                        </div>
+                        <div class="graph-canvas-card">
+                            <h3><i class="fas fa-chart-bar"></i> Live Stats</h3>
+                            <div class="graph-stats-grid">
+                                <div class="graph-stat"><span class="label">Visited</span><strong id="visitedCount">0</strong></div>
+                                <div class="graph-stat"><span class="label">Edges</span><strong id="edgeCount">0</strong></div>
+                                <div class="graph-stat"><span class="label">Status</span><strong id="statusValue">Ready</strong></div>
+                            </div>
+                            <div class="graph-steps" style="margin-top:1rem;">
+                                <h3><i class="fas fa-list-ol"></i> Steps</h3>
+                                <ul>
+                                    <li>Sort edges by weight.</li>
+                                    <li>Keep an edge when it joins two different components.</li>
+                                    <li>Stop once the tree contains V - 1 edges.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="graph-panel">
+                    <h2><i class="fas fa-lightbulb"></i> Complexity & Applications</h2>
+                    <div class="graph-grid-2">
+                        <div class="graph-steps">
+                            <h3>Complexity</h3>
+                            <ul>
+                                <li>Time: O(E log E)</li>
+                                <li>Space: O(V + E)</li>
+                                <li>Effective for sparse and dense weighted graphs</li>
+                            </ul>
+                        </div>
+                        <div class="graph-steps">
+                            <h3>Applications</h3>
+                            <ul>
+                                <li>Infrastructure planning</li>
+                                <li>Minimum cost wiring</li>
+                                <li>Network backbone design</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="graph-panel">
+                    <h2><i class="fas fa-balance-scale"></i> Advantages & Disadvantages</h2>
+                    <div class="graph-grid-2">
+                        <div class="graph-steps">
+                            <h3>Advantages</h3>
+                            <ul>
+                                <li>Simple and intuitive for MST construction.</li>
+                                <li>Works well with edge sorting and cycle checks.</li>
+                            </ul>
+                        </div>
+                        <div class="graph-steps">
+                            <h3>Disadvantages</h3>
+                            <ul>
+                                <li>Needs careful cycle detection.</li>
+                                <li>Less direct than Prim for some implementations.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="graph-panel">
+                    <h2><i class="fas fa-table"></i> Comparison Table</h2>
+                    <table class="graph-table">
+                        <thead>
+                            <tr><th>Algorithm</th><th>Use Case</th><th>Key Strength</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Prim</td><td>Growing a tree from one node</td><td>Priority-based growth</td></tr>
+                            <tr><td>Kruskal</td><td>Building from the cheapest edges</td><td>Global edge sorting</td></tr>
+                            <tr><td>Dijkstra</td><td>Shortest paths</td><td>Cost propagation</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="graph-panel">
+                    <h2><i class="fas fa-link"></i> Related Algorithms</h2>
+                    <ul class="graph-list">
+                        <li><a href="prim.html">Prim's MST</a></li>
+                        <li><a href="dijkstra.html">Dijkstra's Algorithm</a></li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="../js/graph-visualizer.js"></script>
+</body>
+</html>

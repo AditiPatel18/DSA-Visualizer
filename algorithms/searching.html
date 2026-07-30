@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Searching Algorithms | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="../css/searching.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1><i class="fas fa-search"></i> Searching Algorithms</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="sorting.html"><i class="fas fa-sort-amount-down"></i> Sorting</a></li>
+            <li><a href="searching.html" class="active"><i class="fas fa-search"></i> Searching</a></li>
+            <li><a href="graph.html"><i class="fas fa-project-diagram"></i> Graph</a></li>
+            <li><a href="sorting.html"><i class="fas fa-sort-amount-down"></i> Sorting</a></li>
+        </ul>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="header-content">
+            <h2><i class="fas fa-search"></i> Searching Algorithms</h2>
+            <p>Learn and visualize 8+ searching algorithms with implementations in C, C++, and Java</p>
+            <div class="header-stats">
+                <div class="stat">
+                    <h3>8</h3>
+                    <p>Algorithms</p>
+                </div>
+                <div class="stat">
+                    <h3>24</h3>
+                    <p>Code Examples</p>
+                </div>
+                <div class="stat">
+                    <h3>70%</h3>
+                    <p>Completion Rate</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Algorithm Grid -->
+    <div class="algorithm-page">
+        <!-- Sidebar -->
+        <aside class="algo-sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-filter"></i> Filter by</h3>
+                <div class="filter-options">
+                    <div class="filter-group">
+                        <h4>Complexity</h4>
+                        <label class="checkbox">
+                            <input type="checkbox" checked> O(log n)
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" checked> O(n)
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox"> O(1)
+                        </label>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Language</h4>
+                        <label class="checkbox">
+                            <input type="checkbox" checked> C
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" checked> C++
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" checked> Java
+                        </label>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Array Type</h4>
+                        <label class="checkbox">
+                            <input type="checkbox"> Sorted
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox"> Unsorted
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3><i class="fas fa-chart-pie"></i> Your Progress</h3>
+                <div class="progress-circle">
+                    <svg width="120" height="120" viewBox="0 0 120 120">
+                        <circle cx="60" cy="60" r="54" fill="none" stroke="#e0e0e0" stroke-width="12"/>
+                        <circle cx="60" cy="60" r="54" fill="none" stroke="#4CAF50" stroke-width="12"
+                                stroke-dasharray="339.292" stroke-dashoffset="203.575" stroke-linecap="round"
+                                transform="rotate(-90 60 60)"/>
+                        <text x="60" y="65" text-anchor="middle" font-size="20" font-weight="bold" fill="#1a237e">40%</text>
+                    </svg>
+                </div>
+                <p class="progress-text">3 of 8 algorithms learned</p>
+                <button class="btn-resume" onclick="window.location.href='../algorithm-details/binarysearch.html'">
+                    <i class="fas fa-play"></i> Resume Learning
+                </button>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3><i class="fas fa-lightbulb"></i> Quick Tips</h3>
+                <div class="tips">
+                    <div class="tip">
+                        <i class="fas fa-check-circle"></i>
+                        <p>Binary Search requires sorted array</p>
+                    </div>
+                    <div class="tip">
+                        <i class="fas fa-check-circle"></i>
+                        <p>Linear Search works on any array</p>
+                    </div>
+                    <div class="tip">
+                        <i class="fas fa-check-circle"></i>
+                        <p>Jump Search is between linear and binary</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="algo-main">
+            <!-- Binary Search -->
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/binarysearch.html'">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Binary Search</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(log n)</span>
+                            <span class="tag-space">O(1)</span>
+                            <span class="tag-easy">Easy</span>
+                        </div>
+                    </div>
+                    <div class="algo-status">
+                        <span class="status-completed"><i class="fas fa-check-circle"></i> Learned</span>
+                    </div>
+                </div>
+                <p class="algo-description">Search algorithm that finds the position of a target value within a sorted array.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-sort-amount-up"></i> Requires sorted array</span>
+                    <span><i class="fas fa-divide"></i> Divide and conquer</span>
+                    <span><i class="fas fa-bolt"></i> Very fast</span>
+                </div>
+                <div class="algo-languages">
+                    <div class="lang-progress">
+                        <span class="lang-name c">C</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name cpp">C++</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name java">Java</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Linear Search -->
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/linearsearch.html'">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Linear Search</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(n)</span>
+                            <span class="tag-space">O(1)</span>
+                            <span class="tag-easy">Easy</span>
+                        </div>
+                    </div>
+                    <div class="algo-status">
+                        <span class="status-completed"><i class="fas fa-check-circle"></i> Learned</span>
+                    </div>
+                </div>
+                <p class="algo-description">Simple search algorithm that checks every element until the target is found.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-list"></i> Works on any array</span>
+                    <span><i class="fas fa-code"></i> Simple implementation</span>
+                    <span><i class="fas fa-universal-access"></i> No prerequisites</span>
+                </div>
+                <div class="algo-languages">
+                    <div class="lang-progress">
+                        <span class="lang-name c">C</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name cpp">C++</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name java">Java</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jump Search -->
+            <div class="algo-detail-card">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Jump Search</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(√n)</span>
+                            <span class="tag-space">O(1)</span>
+                            <span class="tag-medium">Medium</span>
+                        </div>
+                    </div>
+                    <div class="algo-status">
+                        <span class="status-in-progress"><i class="fas fa-sync-alt"></i> In Progress</span>
+                    </div>
+                </div>
+                <p class="algo-description">Search algorithm for sorted arrays that jumps ahead by fixed steps.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-forward"></i> Jumps ahead by steps</span>
+                    <span><i class="fas fa-search"></i> Better than linear</span>
+                    <span><i class="fas fa-sort-amount-up"></i> Needs sorted array</span>
+                </div>
+                <div class="algo-languages">
+                    <div class="lang-progress">
+                        <span class="lang-name c">C</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name cpp">C++</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 65%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name java">Java</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 55%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interpolation Search -->
+            <div class="algo-detail-card">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Interpolation Search</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(log log n)</span>
+                            <span class="tag-space">O(1)</span>
+                            <span class="tag-medium">Medium</span>
+                        </div>
+                    </div>
+                    <div class="algo-status">
+                        <span class="status-not-started"><i class="fas fa-clock"></i> Not Started</span>
+                    </div>
+                </div>
+                <p class="algo-description">Improved binary search for uniformly distributed sorted arrays.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-chart-line"></i> Uniform distribution</span>
+                    <span><i class="fas fa-bolt"></i> Faster than binary</span>
+                    <span><i class="fas fa-calculator"></i> Uses interpolation formula</span>
+                </div>
+                <div class="algo-languages">
+                    <div class="lang-progress">
+                        <span class="lang-name c">C</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name cpp">C++</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name java">Java</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exponential Search -->
+            <div class="algo-detail-card">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Exponential Search</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(log n)</span>
+                            <span class="tag-space">O(1)</span>
+                            <span class="tag-medium">Medium</span>
+                        </div>
+                    </div>
+                    <div class="algo-status">
+                        <span class="status-in-progress"><i class="fas fa-sync-alt"></i> In Progress</span>
+                    </div>
+                </div>
+                <p class="algo-description">Search algorithm for unbounded/infinite sorted arrays.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-infinity"></i> For unbounded arrays</span>
+                    <span><i class="fas fa-search-plus"></i> Finds range first</span>
+                    <span><i class="fas fa-sort-amount-up"></i> Sorted array needed</span>
+                </div>
+                <div class="algo-languages">
+                    <div class="lang-progress">
+                        <span class="lang-name c">C</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 40%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name cpp">C++</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 45%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name java">Java</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 35%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ternary Search -->
+            <div class="algo-detail-card">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Ternary Search</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(log₃ n)</span>
+                            <span class="tag-space">O(1)</span>
+                            <span class="tag-medium">Medium</span>
+                        </div>
+                    </div>
+                    <div class="algo-status">
+                        <span class="status-not-started"><i class="fas fa-clock"></i> Not Started</span>
+                    </div>
+                </div>
+                <p class="algo-description">Divide and conquer algorithm that divides array into three parts.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-divide"></i> Divides into 3 parts</span>
+                    <span><i class="fas fa-sort-amount-up"></i> Sorted array</span>
+                    <span><i class="fas fa-chart-line"></i> For unimodal functions</span>
+                </div>
+                <div class="algo-languages">
+                    <div class="lang-progress">
+                        <span class="lang-name c">C</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name cpp">C++</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="lang-progress">
+                        <span class="lang-name java">Java</span>
+                        <div class="progress-bar small">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Algorithm Comparison -->
+    <div class="comparison-section">
+        <h2><i class="fas fa-balance-scale"></i> Searching Algorithms Comparison</h2>
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Algorithm</th>
+                        <th>Best Case</th>
+                        <th>Average Case</th>
+                        <th>Worst Case</th>
+                        <th>Space</th>
+                        <th>Array Type</th>
+                        <th>When to Use</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Linear Search</strong></td>
+                        <td>O(1)</td>
+                        <td>O(n)</td>
+                        <td>O(n)</td>
+                        <td>O(1)</td>
+                        <td>Any</td>
+                        <td>Small or unsorted arrays</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Binary Search</strong></td>
+                        <td>O(1)</td>
+                        <td>O(log n)</td>
+                        <td>O(log n)</td>
+                        <td>O(1)</td>
+                        <td>Sorted</td>
+                        <td>Large sorted arrays</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Jump Search</strong></td>
+                        <td>O(1)</td>
+                        <td>O(√n)</td>
+                        <td>O(√n)</td>
+                        <td>O(1)</td>
+                        <td>Sorted</td>
+                        <td>Moderate sorted arrays</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Interpolation Search</strong></td>
+                        <td>O(1)</td>
+                        <td>O(log log n)</td>
+                        <td>O(n)</td>
+                        <td>O(1)</td>
+                        <td>Sorted & Uniform</td>
+                        <td>Uniformly distributed data</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Exponential Search</strong></td>
+                        <td>O(1)</td>
+                        <td>O(log n)</td>
+                        <td>O(log n)</td>
+                        <td>O(1)</td>
+                        <td>Sorted</td>
+                        <td>Unbounded/infinite arrays</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <section class="comparison-section" style="padding-top: 0;">
+        <div class="visualizer-card">
+            <div class="visualizer-header">
+                <div>
+                    <h3><i class="fas fa-eye"></i> Interactive Search Visualizer</h3>
+                    <p>Generate arrays, compare search strategies, and watch the step-by-step animation.</p>
+                </div>
+                <span class="status-completed"><i class="fas fa-sync-alt"></i> Live demo</span>
+            </div>
+
+            <div class="visualizer-controls-grid">
+                <div class="control-panel">
+                    <div class="control-row">
+                        <label for="arraySize">Array Size</label>
+                        <input type="range" id="arraySize" min="8" max="30" value="20">
+                        <span class="value-pill" id="sizeValue">20</span>
+                    </div>
+                    <div class="control-row">
+                        <label for="animationSpeed">Animation Speed</label>
+                        <input type="range" id="animationSpeed" min="20" max="100" value="60">
+                        <span class="value-pill" id="speedValue">Normal</span>
+                    </div>
+                    <div class="control-row">
+                        <label for="algorithmSelect">Algorithm</label>
+                        <select id="algorithmSelect">
+                            <option value="binary">Binary Search</option>
+                            <option value="linear">Linear Search</option>
+                            <option value="jump">Jump Search</option>
+                            <option value="interpolation">Interpolation Search</option>
+                        </select>
+                    </div>
+                    <div class="control-row">
+                        <label for="searchValue">Target Value</label>
+                        <input type="number" id="searchValue" min="1" max="500" value="42">
+                    </div>
+                    <div class="button-row">
+                        <button class="btn-visual primary" id="generateBtn"><i class="fas fa-random"></i> Generate</button>
+                        <button class="btn-visual secondary" id="startBtn"><i class="fas fa-play"></i> Start Search</button>
+                        <button class="btn-visual warning" id="pauseBtn" disabled><i class="fas fa-pause"></i> Pause</button>
+                        <button class="btn-visual danger" id="resetBtn"><i class="fas fa-undo"></i> Reset</button>
+                    </div>
+                </div>
+
+                <div class="visualizer-panel">
+                    <div class="search-array-display" id="searchArrayDisplay"></div>
+                    <div class="visualizer-legend">
+                        <div class="legend-item"><span class="legend-box" style="background:#FF9800"></span> Current</div>
+                        <div class="legend-item"><span class="legend-box" style="background:#1a237e"></span> Checked</div>
+                        <div class="legend-item"><span class="legend-box" style="background:#10B981"></span> Found</div>
+                        <div class="legend-item"><span class="legend-box" style="background:#EF4444"></span> Not Found</div>
+                    </div>
+                    <div class="visualizer-stats-grid">
+                        <div class="visualizer-stat">
+                            <span class="label">Current Index</span>
+                            <strong id="currentIndex">—</strong>
+                        </div>
+                        <div class="visualizer-stat">
+                            <span class="label">Comparisons</span>
+                            <strong id="comparisonCount">0</strong>
+                        </div>
+                        <div class="visualizer-stat">
+                            <span class="label">Execution Time</span>
+                            <strong id="timeCount">0ms</strong>
+                        </div>
+                        <div class="visualizer-stat">
+                            <span class="label">Search Result</span>
+                            <strong id="searchResult">Not searched</strong>
+                        </div>
+                    </div>
+                    <div class="insight-grid">
+                        <div class="insight-card">
+                            <h4><i class="fas fa-chart-line"></i> Complexity</h4>
+                            <ul>
+                                <li>Linear: O(n)</li>
+                                <li>Binary: O(log n)</li>
+                                <li>Jump: O(√n)</li>
+                            </ul>
+                        </div>
+                        <div class="insight-card">
+                            <h4><i class="fas fa-code"></i> Implementations</h4>
+                            <ul>
+                                <li>C: Array-based loops</li>
+                                <li>C++: STL ready templates</li>
+                                <li>Java: Iterative methods</li>
+                            </ul>
+                        </div>
+                        <div class="insight-card">
+                            <h4><i class="fas fa-briefcase"></i> Applications</h4>
+                            <ul>
+                                <li>Database lookups</li>
+                                <li>Phone contacts</li>
+                                <li>Sorted collections</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../js/search-visualizer.js"></script>
+</body>
+</html>

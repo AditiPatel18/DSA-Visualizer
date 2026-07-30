@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | DSA Learning Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1><i class="fas fa-code"></i> DSA Dashboard</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="algorithms/sorting.html"><i class="fas fa-sort-amount-down"></i> Algorithms</a></li>
+            <li><a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="#" id="logoutBtn" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="dashboard-header">
+        <div class="welcome-message">
+            <p class="eyebrow">Learning Dashboard</p>
+            <h2 id="welcomeText">Welcome back, Student!</h2>
+            <p id="loginTime">Last login: Today at 10:30 AM</p>
+        </div>
+        <div class="streak-counter">
+            <div class="streak-badge">
+                <i class="fas fa-fire"></i>
+                <span id="streakCount">14</span> day streak
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-stats">
+        <div class="stat-card primary">
+            <div class="stat-icon"><i class="fas fa-brain"></i></div>
+            <div class="stat-content">
+                <h3 id="algorithmsLearned">15</h3>
+                <p>Algorithms Learned</p>
+                <div class="progress-bar"><div class="progress-fill" style="width: 30%"></div></div>
+                <span class="progress-text">30% of 50 algorithms</span>
+            </div>
+        </div>
+        <div class="stat-card success">
+            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+            <div class="stat-content">
+                <h3 id="totalTime">48h 30m</h3>
+                <p>Total Learning Time</p>
+                <div class="trend positive"><i class="fas fa-arrow-up"></i> 12% this week</div>
+            </div>
+        </div>
+        <div class="stat-card warning">
+            <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+            <div class="stat-content">
+                <h3 id="activeDays">24</h3>
+                <p>Active Days</p>
+                <div class="trend">Current streak: <strong>14 days</strong></div>
+            </div>
+        </div>
+        <div class="stat-card info">
+            <div class="stat-icon"><i class="fas fa-trophy"></i></div>
+            <div class="stat-content">
+                <h3 id="achievements">8</h3>
+                <p>Achievements Unlocked</p>
+                <div class="trend">Next: <strong>Master 10 algorithms</strong></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-content">
+        <div class="dashboard-left">
+            <div class="chart-card card">
+                <div class="chart-header">
+                    <h3><i class="fas fa-chart-line"></i> Learning Progress</h3>
+                    <select id="timeRange">
+                        <option value="week">This Week</option>
+                        <option value="month" selected>This Month</option>
+                        <option value="year">This Year</option>
+                    </select>
+                </div>
+                <div class="chart-container"><canvas id="progressChart"></canvas></div>
+            </div>
+
+            <div class="activity-card card">
+                <div class="section-title">
+                    <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                    <span class="pill"><i class="fas fa-bolt"></i> Updated now</span>
+                </div>
+                <div class="activity-list">
+                    <div class="activity-item"><div class="activity-icon"><i class="fas fa-code"></i></div><div class="activity-content"><p>Learned <strong>Quick Sort</strong> in C++</p><span class="activity-time">2 hours ago</span></div></div>
+                    <div class="activity-item"><div class="activity-icon"><i class="fas fa-play-circle"></i></div><div class="activity-content"><p>Visualized <strong>Dijkstra's Algorithm</strong></p><span class="activity-time">Yesterday</span></div></div>
+                    <div class="activity-item"><div class="activity-icon"><i class="fas fa-check-circle"></i></div><div class="activity-content"><p>Completed <strong>Sorting Algorithms</strong> module</p><span class="activity-time">2 days ago</span></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-right">
+            <div class="language-card card">
+                <h3><i class="fas fa-globe"></i> Language Proficiency</h3>
+                <div class="language-progress">
+                    <div class="lang-progress-item"><div class="lang-info"><span class="lang-name c">C</span><span class="lang-percent">85%</span></div><div class="progress-bar"><div class="progress-fill c" style="width: 85%"></div></div></div>
+                    <div class="lang-progress-item"><div class="lang-info"><span class="lang-name cpp">C++</span><span class="lang-percent">70%</span></div><div class="progress-bar"><div class="progress-fill cpp" style="width: 70%"></div></div></div>
+                    <div class="lang-progress-item"><div class="lang-info"><span class="lang-name java">Java</span><span class="lang-percent">40%</span></div><div class="progress-bar"><div class="progress-fill java" style="width: 40%"></div></div></div>
+                </div>
+            </div>
+
+            <div class="goals-card card">
+                <h3><i class="fas fa-flag"></i> Learning Goals</h3>
+                <div class="goals-list">
+                    <div class="goal-item"><div class="goal-checkbox"><input type="checkbox" id="goal1" checked><label for="goal1"></label></div><div class="goal-content"><p>Complete Sorting Algorithms</p><span class="goal-progress">5/10 completed</span></div></div>
+                    <div class="goal-item"><div class="goal-checkbox"><input type="checkbox" id="goal2"><label for="goal2"></label></div><div class="goal-content"><p>Master Graph Algorithms</p><span class="goal-progress">3/12 completed</span></div></div>
+                    <div class="goal-item"><div class="goal-checkbox"><input type="checkbox" id="goal3"><label for="goal3"></label></div><div class="goal-content"><p>Learn Dynamic Programming</p><span class="goal-progress">1/8 completed</span></div></div>
+                </div>
+            </div>
+
+            <div class="category-card card">
+                <h3><i class="fas fa-chart-pie"></i> Category Progress</h3>
+                <div class="category-progress">
+                    <div class="category-item"><div class="category-info"><span class="category-name">Sorting</span><span class="category-percent">50%</span></div><div class="progress-bar"><div class="progress-fill" style="width: 50%"></div></div></div>
+                    <div class="category-item"><div class="category-info"><span class="category-name">Graph</span><span class="category-percent">25%</span></div><div class="progress-bar"><div class="progress-fill" style="width: 25%"></div></div></div>
+                    <div class="category-item"><div class="category-info"><span class="category-name">Searching</span><span class="category-percent">40%</span></div><div class="progress-bar"><div class="progress-fill" style="width: 40%"></div></div></div>
+                    <div class="category-item"><div class="category-info"><span class="category-name">DP</span><span class="category-percent">12%</span></div><div class="progress-bar"><div class="progress-fill" style="width: 12%"></div></div></div>
+                </div>
+            </div>
+
+            <div class="actions-card card soft-card">
+                <h3><i class="fas fa-bolt"></i> Continue Learning</h3>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="window.location.href='algorithms/sorting.html'"><i class="fas fa-play-circle"></i> Continue Learning</button>
+                    <button class="action-btn" onclick="window.location.href='profile.html'"><i class="fas fa-user-edit"></i> Update Profile</button>
+                    <button class="action-btn" onclick="window.location.href='algorithms/sorting.html?lang=java'"><i class="fab fa-java"></i> Practice Java</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            const user = await window.AuthApp?.readCurrentUser?.();
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const ctx = document.getElementById('progressChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Algorithms Learned',
+                        data: [2, 3, 1, 4, 2, 3, 2],
+                        borderColor: '#4CAF50',
+                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 5
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

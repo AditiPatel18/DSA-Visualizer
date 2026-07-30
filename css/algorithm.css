@@ -1,0 +1,370 @@
+/* algorithm.css */
+.page-header {
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    color: white;
+    padding: 3rem 5%;
+    border-bottom: 5px solid #4CAF50;
+}
+
+.header-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-content p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 800px;
+    margin-bottom: 2rem;
+}
+
+.header-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.header-stats .stat {
+    text-align: center;
+}
+
+.header-stats h3 {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    margin-bottom: 0.5rem;
+}
+
+.header-stats p {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin: 0;
+}
+
+/* Algorithm Page Layout */
+.algorithm-page {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2rem;
+    padding: 2rem 5%;
+    background: #f5f7fa;
+    min-height: 80vh;
+}
+
+@media (max-width: 992px) {
+    .algorithm-page {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Sidebar */
+.algo-sidebar {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+.sidebar-section {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    margin-bottom: 2rem;
+}
+
+.sidebar-section h3 {
+    color: #1a237e;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+}
+
+.filter-options {
+    margin-bottom: 1.5rem;
+}
+
+.filter-group {
+    margin-bottom: 1.5rem;
+}
+
+.filter-group h4 {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    color: #555;
+}
+
+.checkbox input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+.progress-circle {
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.progress-text {
+    text-align: center;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.btn-resume {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-resume:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+}
+
+/* Main Algorithm Cards */
+.algo-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.algo-detail-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.algo-detail-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    border-color: #4CAF50;
+}
+
+.algo-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.algo-title h3 {
+    color: #1a237e;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.algo-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tag-time, .tag-space, .tag-inplace, .tag-stable, .tag-easy {
+    padding: 0.2rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.tag-time {
+    background: #E3F2FD;
+    color: #1565C0;
+}
+
+.tag-space {
+    background: #E8F5E9;
+    color: #2E7D32;
+}
+
+.tag-inplace {
+    background: #FFF3E0;
+    color: #EF6C00;
+}
+
+.tag-stable {
+    background: #F3E5F5;
+    color: #7B1FA2;
+}
+
+.tag-easy {
+    background: #E0F2F1;
+    color: #00695C;
+}
+
+.algo-status {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.status-completed {
+    color: #4CAF50;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.status-in-progress {
+    color: #FF9800;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.status-not-started {
+    color: #9E9E9E;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.algo-description {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.algo-features {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.algo-features span {
+    color: #555;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.algo-languages {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.lang-progress {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.lang-progress:last-child {
+    margin-bottom: 0;
+}
+
+.lang-name {
+    min-width: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.lang-name.c { color: #A8B9CC; }
+.lang-name.cpp { color: #659AD2; }
+.lang-name.java { color: #007396; }
+
+.progress-bar.small {
+    flex: 1;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+/* Comparison Section */
+.comparison-section {
+    padding: 3rem 5%;
+    background: white;
+    border-top: 1px solid #e0e0e0;
+}
+
+.comparison-section h2 {
+    color: #1a237e;
+    text-align: center;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 2rem;
+}
+
+.comparison-table {
+    overflow-x: auto;
+}
+
+.comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.comparison-table thead {
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    color: white;
+}
+
+.comparison-table th {
+    padding: 1.2rem;
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.comparison-table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background 0.3s;
+}
+
+.comparison-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+.comparison-table tbody tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.comparison-table tbody tr:nth-child(even):hover {
+    background: #f0f2f5;
+}
+
+.comparison-table td {
+    padding: 1rem;
+    color: #555;
+}
+
+.comparison-table td:first-child {
+    font-weight: 600;
+    color: #1a237e;
+}

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Search Algorithm | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="../css/visualizer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1><i class="fas fa-search"></i> Binary Search Algorithm</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="../algorithms/searching.html"><i class="fas fa-arrow-left"></i> Back to Searching</a></li>
+        </ul>
+    </nav>
+
+    <div class="algorithm-detail-container">
+        <!-- Sidebar -->
+        <aside class="detail-sidebar">
+            <div class="algo-info-card">
+                <h3><i class="fas fa-info-circle"></i> Algorithm Info</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Category:</span>
+                        <span class="info-value searching">Searching</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Difficulty:</span>
+                        <span class="info-value easy">Easy</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Best Time:</span>
+                        <code class="info-value">O(1)</code>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Average Time:</span>
+                        <code class="info-value">O(log n)</code>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Worst Time:</span>
+                        <code class="info-value">O(log n)</code>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Space:</span>
+                        <code class="info-value">O(1)</code>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Prerequisite:</span>
+                        <span class="info-value">Sorted Array</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="language-selector-card">
+                <h3><i class="fas fa-globe"></i> Select Language</h3>
+                <div class="language-tabs">
+                    <button class="lang-tab active" data-lang="c">
+                        <i class="fab fa-c"></i> C
+                    </button>
+                    <button class="lang-tab" data-lang="cpp">
+                        <i class="fab fa-cuttlefish"></i>++ C++
+                    </button>
+                    <button class="lang-tab" data-lang="java">
+                        <i class="fab fa-java"></i> Java
+                    </button>
+                </div>
+            </div>
+
+            <div class="visualization-card">
+                <h3><i class="fas fa-play-circle"></i> Try Binary Search</h3>
+                <div class="search-box">
+                    <input type="number" id="searchKey" placeholder="Enter number to search" min="1" max="100" value="42">
+                    <button id="runBinarySearch" class="btn-run">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+                <div class="search-result" id="searchResult">
+                    <!-- Result will appear here -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="detail-main">
+            <!-- Explanation -->
+            <section class="explanation-section">
+                <h2><i class="fas fa-lightbulb"></i> Understanding Binary Search</h2>
+                <p class="intro-text">
+                    Binary Search is an efficient algorithm for finding an item from a <strong>sorted list</strong> of items. 
+                    It works by repeatedly dividing the search interval in half. If the value of the search key is less than 
+                    the item in the middle of the interval, narrow the interval to the lower half. Otherwise, narrow it to 
+                    the upper half.
+                </p>
+                
+                <div class="algorithm-steps">
+                    <h3><i class="fas fa-list-ol"></i> Algorithm Steps</h3>
+                    <ol class="steps-list">
+                        <li>
+                            <strong>Initialize:</strong> Set start = 0, end = n-1 where n is array size
+                        </li>
+                        <li>
+                            <strong>Find Middle:</strong> mid = start + (end - start) / 2
+                        </li>
+                        <li>
+                            <strong>Compare:</strong> If arr[mid] == target, return mid
+                        </li>
+                        <li>
+                            <strong>Adjust Left:</strong> If arr[mid] > target, set end = mid - 1
+                        </li>
+                        <li>
+                            <strong>Adjust Right:</strong> If arr[mid] < target, set start = mid + 1
+                        </li>
+                        <li>
+                            <strong>Repeat:</strong> Continue until start > end
+                        </li>
+                        <li>
+                            <strong>Return:</strong> If not found, return -1
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="visual-guide">
+                    <h3><i class="fas fa-chalkboard"></i> Visual Example</h3>
+                    <div class="example-array">
+                        <p>Searching for <strong>42</strong> in sorted array:</p>
+                        <div class="array-visual">
+                            <div class="array-element">10</div>
+                            <div class="array-element">20</div>
+                            <div class="array-element">30</div>
+                            <div class="array-element">40</div>
+                            <div class="array-element active">42</div>
+                            <div class="array-element">50</div>
+                            <div class="array-element">60</div>
+                            <div class="array-element">70</div>
+                        </div>
+                        <p class="example-steps">
+                            Step 1: Check middle (40) → 42 > 40 → search right half<br>
+                            Step 2: Check middle (60) → 42 < 60 → search left half<br>
+                            Step 3: Check 42 → found at position 4!
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Code Implementation -->
+            <section class="code-section">
+                <h2><i class="fas fa-code"></i> Implementation in Multiple Languages</h2>
+                
+                <!-- C Implementation -->
+                <div class="code-container active" id="code-c">
+                    <div class="code-header">
+                        <div class="code-title">
+                            <i class="fab fa-c"></i>
+                            <h3>C Implementation</h3>
+                            <span class="code-badge">20 lines</span>
+                        </div>
+                        <div class="code-actions">
+                            <button class="btn-copy" data-lang="c">
+                                <i class="far fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-c">
+#include &lt;stdio.h&gt;
+
+// Iterative Binary Search
+int binarySearch(int arr[], int left, int right, int target) {
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        
+        // Check if target is present at mid
+        if (arr[mid] == target)
+            return mid;
+        
+        // If target greater, ignore left half
+        if (arr[mid] < target)
+            left = mid + 1;
+        // If target smaller, ignore right half
+        else
+            right = mid - 1;
+    }
+    
+    // Target not present
+    return -1;
+}
+
+// Recursive Binary Search
+int binarySearchRecursive(int arr[], int left, int right, int target) {
+    if (right >= left) {
+        int mid = left + (right - left) / 2;
+        
+        if (arr[mid] == target)
+            return mid;
+        
+        if (arr[mid] > target)
+            return binarySearchRecursive(arr, left, mid - 1, target);
+        
+        return binarySearchRecursive(arr, mid + 1, right, target);
+    }
+    
+    return -1;
+}
+
+int main() {
+    int arr[] = {2, 3, 4, 10, 40};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int target = 10;
+    
+    int result = binarySearch(arr, 0, n - 1, target);
+    
+    if (result == -1)
+        printf("Element not found\n");
+    else
+        printf("Element found at index %d\n", result);
+    
+    return 0;
+}
+                        </code></pre>
+                    </div>
+                </div>
+
+                <!-- C++ Implementation -->
+                <div class="code-container" id="code-cpp">
+                    <div class="code-header">
+                        <div class="code-title">
+                            <i class="fab fa-cuttlefish"></i>++
+                            <h3>C++ Implementation</h3>
+                            <span class="code-badge">25 lines</span>
+                        </div>
+                        <div class="code-actions">
+                            <button class="btn-copy" data-lang="cpp">
+                                <i class="far fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-cpp">
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+class BinarySearch {
+public:
+    // Iterative implementation
+    int searchIterative(const vector&lt;int&gt;& arr, int target) {
+        int left = 0;
+        int right = arr.size() - 1;
+        
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            
+            if (arr[mid] == target)
+                return mid;
+            
+            if (arr[mid] < target)
+                left = mid + 1;
+            else
+                right = mid - 1;
+        }
+        
+        return -1;
+    }
+    
+    // Recursive implementation
+    int searchRecursive(const vector&lt;int&gt;& arr, int left, int right, int target) {
+        if (right >= left) {
+            int mid = left + (right - left) / 2;
+            
+            if (arr[mid] == target)
+                return mid;
+            
+            if (arr[mid] > target)
+                return searchRecursive(arr, left, mid - 1, target);
+            
+            return searchRecursive(arr, mid + 1, right, target);
+        }
+        
+        return -1;
+    }
+};
+
+int main() {
+    BinarySearch bs;
+    vector&lt;int&gt; arr = {2, 3, 4, 10, 40};
+    int target = 10;
+    
+    int result = bs.searchIterative(arr, target);
+    
+    if (result == -1)
+        cout << "Element not found" << endl;
+    else
+        cout << "Element found at index " << result << endl;
+    
+    return 0;
+}
+                        </code></pre>
+                    </div>
+                </div>
+
+                <!-- Java Implementation -->
+                <div class="code-container" id="code-java">
+                    <div class="code-header">
+                        <div class="code-title">
+                            <i class="fab fa-java"></i>
+                            <h3>Java Implementation</h3>
+                            <span class="code-badge">30 lines</span>
+                        </div>
+                        <div class="code-actions">
+                            <button class="btn-copy" data-lang="java">
+                                <i class="far fa-copy"></i> Copy Code
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code class="language-java">
+public class BinarySearch {
+    
+    // Iterative binary search
+    public static int searchIterative(int[] arr, int target) {
+        int left = 0;
+        int right = arr.length - 1;
+        
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            
+            if (arr[mid] == target)
+                return mid;
+            
+            if (arr[mid] < target)
+                left = mid + 1;
+            else
+                right = mid - 1;
+        }
+        
+        return -1;
+    }
+    
+    // Recursive binary search
+    public static int searchRecursive(int[] arr, int left, int right, int target) {
+        if (right >= left) {
+            int mid = left + (right - left) / 2;
+            
+            if (arr[mid] == target)
+                return mid;
+            
+            if (arr[mid] > target)
+                return searchRecursive(arr, left, mid - 1, target);
+            
+            return searchRecursive(arr, mid + 1, right, target);
+        }
+        
+        return -1;
+    }
+    
+    public static void main(String[] args) {
+        int[] arr = {2, 3, 4, 10, 40};
+        int target = 10;
+        
+        int result = searchIterative(arr, target);
+        
+        if (result == -1)
+            System.out.println("Element not found");
+        else
+            System.out.println("Element found at index " + result);
+    }
+}
+                        </code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Complexity Analysis -->
+            <section class="complexity-section">
+                <h2><i class="fas fa-chart-bar"></i> Complexity Analysis</h2>
+                <div class="complexity-grid">
+                    <div class="complexity-card">
+                        <h3><i class="fas fa-clock"></i> Time Complexity</h3>
+                        <div class="complexity-detail">
+                            <div class="case">
+                                <span class="case-name">Best Case:</span>
+                                <code class="case-value">O(1)</code>
+                            </div>
+                            <p class="case-desc">Target is at the middle of the array</p>
+                        </div>
+                        <div class="complexity-detail">
+                            <div class="case">
+                                <span class="case-name">Average Case:</span>
+                                <code class="case-value">O(log n)</code>
+                            </div>
+                            <p class="case-desc">Target is anywhere in the array</p>
+                        </div>
+                        <div class="complexity-detail">
+                            <div class="case">
+                                <span class="case-name">Worst Case:</span>
+                                <code class="case-value">O(log n)</code>
+                            </div>
+                            <p class="case-desc">Target is at the beginning or end, or not present</p>
+                        </div>
+                    </div>
+                    
+                    <div class="complexity-card">
+                        <h3><i class="fas fa-memory"></i> Space Complexity</h3>
+                        <div class="complexity-detail">
+                            <div class="case">
+                                <span class="case-name">Iterative:</span>
+                                <code class="case-value">O(1)</code>
+                            </div>
+                            <p class="case-desc">Only uses constant extra space</p>
+                        </div>
+                        <div class="complexity-detail">
+                            <div class="case">
+                                <span class="case-name">Recursive:</span>
+                                <code class="case-value">O(log n)</code>
+                            </div>
+                            <p class="case-desc">Due to recursion call stack</p>
+                        </div>
+                    </div>
+                    
+                    <div class="complexity-card">
+                        <h3><i class="fas fa-balance-scale"></i> Comparison with Linear Search</h3>
+                        <table class="comparison-table-small">
+                            <tr>
+                                <th>Aspect</th>
+                                <th>Binary Search</th>
+                                <th>Linear Search</th>
+                            </tr>
+                            <tr>
+                                <td>Time (Sorted)</td>
+                                <td class="better">O(log n)</td>
+                                <td>O(n)</td>
+                            </tr>
+                            <tr>
+                                <td>Time (Unsorted)</td>
+                                <td class="worse">Not applicable</td>
+                                <td>O(n)</td>
+                            </tr>
+                            <tr>
+                                <td>Space</td>
+                                <td>O(1)</td>
+                                <td>O(1)</td>
+                            </tr>
+                            <tr>
+                                <td>Implementation</td>
+                                <td>Medium</td>
+                                <td class="better">Easy</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Applications -->
+            <section class="applications-section">
+                <h2><i class="fas fa-rocket"></i> Real-World Applications</h2>
+                <div class="applications-grid">
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="app-content">
+                            <h4>Dictionary Lookup</h4>
+                            <p>Finding words in a dictionary or phone book</p>
+                        </div>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="app-content">
+                            <h4>Database Indexing</h4>
+                            <p>Searching in database indexes (B-trees use binary search)</p>
+                        </div>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="app-content">
+                            <h4>Game Development</h4>
+                            <p>Finding values in sorted game data (scores, rankings)</p>
+                        </div>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="app-content">
+                            <h4>Debugging</h4>
+                            <p>Finding bugs using binary search in code</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="../js/search-visualizer.js"></script>
+    <script>
+        hljs.highlightAll();
+        
+        // Language switching
+        document.querySelectorAll('.lang-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.code-container').forEach(c => c.classList.remove('active'));
+                
+                this.classList.add('active');
+                const lang = this.dataset.lang;
+                document.getElementById(`code-${lang}`).classList.add('active');
+            });
+        });
+        
+        // Copy code functionality
+        document.querySelectorAll('.btn-copy').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const lang = this.dataset.lang;
+                const codeElement = document.querySelector(`#code-${lang} code`);
+                const codeText = codeElement.textContent;
+                
+                navigator.clipboard.writeText(codeText).then(() => {
+                    const originalHTML = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    setTimeout(() => {
+                        this.innerHTML = originalHTML;
+                    }, 2000);
+                });
+            });
+        });
+        
+        // Binary search demo
+        document.getElementById('runBinarySearch').addEventListener('click', function() {
+            const key = parseInt(document.getElementById('searchKey').value);
+            const resultDiv = document.getElementById('searchResult');
+            
+            if (isNaN(key) || key < 1 || key > 100) {
+                resultDiv.innerHTML = '<span class="error">Please enter a number between 1-100</span>';
+                return;
+            }
+            
+            // Simulated binary search
+            const arr = [10, 20, 30, 40, 42, 50, 60, 70, 80, 90, 100];
+            let left = 0;
+            let right = arr.length - 1;
+            let steps = [];
+            let found = false;
+            let position = -1;
+            
+            while (left <= right) {
+                let mid = Math.floor((left + right) / 2);
+                steps.push(`Checking position ${mid} (value: ${arr[mid]})`);
+                
+                if (arr[mid] === key) {
+                    found = true;
+                    position = mid;
+                    break;
+                } else if (arr[mid] < key) {
+                    left = mid + 1;
+                    steps.push(`→ ${key} > ${arr[mid]}, searching right half [${left}, ${right}]`);
+                } else {
+                    right = mid - 1;
+                    steps.push(`→ ${key} < ${arr[mid]}, searching left half [${left}, ${right}]`);
+                }
+            }
+            
+            if (found) {
+                resultDiv.innerHTML = `
+                    <div class="success">
+                        <i class="fas fa-check-circle"></i>
+                        <strong>Found ${key} at position ${position}!</strong>
+                        <p>Steps taken: ${steps.length/2}</p>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <i class="fas fa-times-circle"></i>
+                        <strong>${key} not found in array</strong>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Algorithms | DSA Learning Platform</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/algorithm.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <h1><i class="fas fa-project-diagram"></i> Graph Algorithms</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="../dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="sorting.html"><i class="fas fa-sort-amount-down"></i> Sorting</a></li>
+            <li><a href="searching.html"><i class="fas fa-search"></i> Searching</a></li>
+            <li><a href="graph.html" class="active"><i class="fas fa-project-diagram"></i> Graph</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-header">
+        <div class="header-content">
+            <h2><i class="fas fa-project-diagram"></i> Graph Algorithms</h2>
+            <p>Explore graph traversal and shortest path algorithms with the same visual learning experience as the rest of the catalog.</p>
+            <div class="header-stats">
+                <div class="stat">
+                    <h3>6</h3>
+                    <p>Algorithms</p>
+                </div>
+                <div class="stat">
+                    <h3>18</h3>
+                    <p>Examples</p>
+                </div>
+                <div class="stat">
+                    <h3>75%</h3>
+                    <p>Completion</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="algorithm-page">
+        <aside class="algo-sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-filter"></i> Focus Areas</h3>
+                <div class="filter-options">
+                    <div class="filter-group">
+                        <h4>Topics</h4>
+                        <label class="checkbox"><input type="checkbox" checked> Traversal</label>
+                        <label class="checkbox"><input type="checkbox" checked> Shortest Path</label>
+                        <label class="checkbox"><input type="checkbox"> MST</label>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-section">
+                <h3><i class="fas fa-chart-pie"></i> Progress</h3>
+                <div class="progress-circle">
+                    <svg width="120" height="120" viewBox="0 0 120 120">
+                        <circle cx="60" cy="60" r="54" fill="none" stroke="#e0e0e0" stroke-width="12"/>
+                        <circle cx="60" cy="60" r="54" fill="none" stroke="#4CAF50" stroke-width="12" stroke-dasharray="339.292" stroke-dashoffset="169.646" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+                        <text x="60" y="65" text-anchor="middle" font-size="20" font-weight="bold" fill="#1a237e">50%</text>
+                    </svg>
+                </div>
+                <p class="progress-text">3 of 6 algorithms explored</p>
+                <button class="btn-resume" onclick="window.location.href='../algorithm-details/bfs.html'"><i class="fas fa-play"></i> Continue Learning</button>
+            </div>
+        </aside>
+
+        <main class="algo-main">
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/bfs.html'">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Breadth-First Search</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(V + E)</span>
+                            <span class="tag-space">O(V)</span>
+                            <span class="tag-easy">Easy</span>
+                        </div>
+                    </div>
+                    <div class="algo-status"><span class="status-completed"><i class="fas fa-check-circle"></i> Learned</span></div>
+                </div>
+                <p class="algo-description">Traverse graphs level by level using a queue, ideal for finding shortest paths in unweighted graphs.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-layer-group"></i> Level-order traversal</span>
+                    <span><i class="fas fa-bolt"></i> Queue-based</span>
+                    <span><i class="fas fa-ruler-combined"></i> Unweighted shortest path</span>
+                </div>
+            </div>
+
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/dijkstra.html'">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Dijkstra's Algorithm</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(E log V)</span>
+                            <span class="tag-space">O(V)</span>
+                            <span class="tag-medium">Medium</span>
+                        </div>
+                    </div>
+                    <div class="algo-status"><span class="status-in-progress"><i class="fas fa-sync-alt"></i> In Progress</span></div>
+                </div>
+                <p class="algo-description">Find the shortest path from a source node in graphs with non-negative weights.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-route"></i> Weighted shortest path</span>
+                    <span><i class="fas fa-sort-amount-up"></i> Greedy strategy</span>
+                    <span><i class="fas fa-project-diagram"></i> Priority queue</span>
+                </div>
+            </div>
+
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/dfs.html'">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Depth-First Search</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(V + E)</span>
+                            <span class="tag-space">O(V)</span>
+                            <span class="tag-medium">Medium</span>
+                        </div>
+                    </div>
+                    <div class="algo-status"><span class="status-not-started"><i class="fas fa-clock"></i> Not Started</span></div>
+                </div>
+                <p class="algo-description">Traverse a graph deeply using recursion or an explicit stack to explore connected components.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-code-branch"></i> Recursive or iterative</span>
+                    <span><i class="fas fa-sitemap"></i> Connected component search</span>
+                    <span><i class="fas fa-chart-line"></i> Useful for backtracking</span>
+                </div>
+            </div>
+
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/bellmanford.html'">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Bellman-Ford</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(VE)</span>
+                            <span class="tag-space">O(V)</span>
+                            <span class="tag-medium">Medium</span>
+                        </div>
+                    </div>
+                    <div class="algo-status"><span class="status-in-progress"><i class="fas fa-sync-alt"></i> In Progress</span></div>
+                </div>
+                <p class="algo-description">Relax every edge repeatedly to find shortest paths while handling negative-weight edges.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-arrow-down"></i> Negative edges supported</span>
+                    <span><i class="fas fa-repeat"></i> Relaxes all edges</span>
+                    <span><i class="fas fa-balance-scale"></i> Cycle detection</span>
+                </div>
+            </div>
+
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/prim.html'">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Prim's MST</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(E log V)</span>
+                            <span class="tag-space">O(V)</span>
+                            <span class="tag-medium">Medium</span>
+                        </div>
+                    </div>
+                    <div class="algo-status"><span class="status-not-started"><i class="fas fa-clock"></i> Not Started</span></div>
+                </div>
+                <p class="algo-description">Build a minimum spanning tree by repeatedly adding the cheapest edge that connects to the current tree.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-tree"></i> Minimum spanning tree</span>
+                    <span><i class="fas fa-signal"></i> Priority queue</span>
+                    <span><i class="fas fa-project-diagram"></i> Connected network design</span>
+                </div>
+            </div>
+
+            <div class="algo-detail-card" onclick="window.location.href='../algorithm-details/kruskal.html'">
+                <div class="algo-card-header">
+                    <div class="algo-title">
+                        <h3>Kruskal's MST</h3>
+                        <div class="algo-tags">
+                            <span class="tag-time">O(E log E)</span>
+                            <span class="tag-space">O(V + E)</span>
+                            <span class="tag-medium">Medium</span>
+                        </div>
+                    </div>
+                    <div class="algo-status"><span class="status-not-started"><i class="fas fa-clock"></i> Not Started</span></div>
+                </div>
+                <p class="algo-description">Construct a minimum spanning tree by selecting the cheapest edges while avoiding cycles.</p>
+                <div class="algo-features">
+                    <span><i class="fas fa-sort-amount-down"></i> Edge sorting</span>
+                    <span><i class="fas fa-network-wired"></i> Cycle avoidance</span>
+                    <span><i class="fas fa-balance-scale"></i> MST construction</span>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

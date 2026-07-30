@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Learning Platform | Master Algorithms in C, C++, Java</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1><i class="fas fa-code"></i> DSA Master</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="algorithms/sorting.html"><i class="fas fa-sort-amount-down"></i> Algorithms</a></li>
+            <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="login.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+            <li><a href="register.html" class="btn-register"><i class="fas fa-user-plus"></i> Register</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Master Data Structures & Algorithms</h2>
+            <p class="subtitle">Learn 50+ algorithms with implementations in C, C++, and Java</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <h3>50+</h3>
+                    <p>Algorithms</p>
+                </div>
+                <div class="stat">
+                    <h3>3</h3>
+                    <p>Languages</p>
+                </div>
+                <div class="stat">
+                    <h3>1000+</h3>
+                    <p>Code Examples</p>
+                </div>
+                <div class="stat">
+                    <h3>24/7</h3>
+                    <p>Practice</p>
+                </div>
+            </div>
+            <a href="register.html" class="cta-button">Start Learning Free</a>
+        </div>
+    </section>
+
+    <!-- Language Support -->
+    <section class="languages">
+        <h2>Learn in Your Favorite Language</h2>
+        <div class="language-cards">
+            <div class="lang-card" onclick="window.location.href='algorithms/sorting.html?lang=c'">
+                <div class="lang-icon c">
+                    <i class="fab fa-c"></i>
+                </div>
+                <h3>C Programming</h3>
+                <p>Low-level implementations, pointers, memory management</p>
+                <ul>
+                    <li><i class="fas fa-check"></i> 20+ Sorting Algorithms</li>
+                    <li><i class="fas fa-check"></i> 15+ Graph Algorithms</li>
+                    <li><i class="fas fa-check"></i> Memory-efficient code</li>
+                </ul>
+            </div>
+
+            <div class="lang-card" onclick="window.location.href='algorithms/sorting.html?lang=cpp'">
+                <div class="lang-icon cpp">
+                    <span>C++</span>
+                </div>
+                <h3>C++ Programming</h3>
+                <p>Object-oriented, STL, templates, competitive programming</p>
+                <ul>
+                    <li><i class="fas fa-check"></i> STL implementations</li>
+                    <li><i class="fas fa-check"></i> Template-based solutions</li>
+                    <li><i class="fas fa-check"></i> OOP patterns</li>
+                </ul>
+            </div>
+
+            <div class="lang-card" onclick="window.location.href='algorithms/sorting.html?lang=java'">
+                <div class="lang-icon java">
+                    <i class="fab fa-java"></i>
+                </div>
+                <h3>Java Programming</h3>
+                <p>Enterprise-level, collections framework, multithreading</p>
+                <ul>
+                    <li><i class="fas fa-check"></i> Collections Framework</li>
+                    <li><i class="fas fa-check"></i> Multithreading examples</li>
+                    <li><i class="fas fa-check"></i> Real-world applications</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Algorithms -->
+    <section class="featured-algorithms">
+        <h2>Featured Algorithms</h2>
+        <div class="algorithm-grid">
+            <!-- Quick Sort Card -->
+            <div class="algo-card" onclick="window.location.href='algorithm-details/quicksort.html'">
+                <div class="algo-header">
+                    <span class="algo-category sorting">Sorting</span>
+                    <span class="algo-difficulty medium">Medium</span>
+                </div>
+                <h3>Quick Sort</h3>
+                <p class="algo-desc">Divide and conquer algorithm using partition</p>
+                <div class="algo-stats">
+                    <span><i class="fas fa-clock"></i> O(n log n)</span>
+                    <span><i class="fas fa-memory"></i> O(log n)</span>
+                </div>
+                <div class="code-langs">
+                    <span class="lang-tag c">C</span>
+                    <span class="lang-tag cpp">C++</span>
+                    <span class="lang-tag java">Java</span>
+                </div>
+            </div>
+
+            <!-- Dijkstra Card -->
+            <div class="algo-card" onclick="window.location.href='algorithm-details/dijkstra.html'">
+                <div class="algo-header">
+                    <span class="algo-category graph">Graph</span>
+                    <span class="algo-difficulty medium">Medium</span>
+                </div>
+                <h3>Dijkstra's Algorithm</h3>
+                <p class="algo-desc">Find shortest path in weighted graphs</p>
+                <div class="algo-stats">
+                    <span><i class="fas fa-clock"></i> O(E log V)</span>
+                    <span><i class="fas fa-memory"></i> O(V)</span>
+                </div>
+                <div class="code-langs">
+                    <span class="lang-tag c">C</span>
+                    <span class="lang-tag cpp">C++</span>
+                    <span class="lang-tag java">Java</span>
+                </div>
+            </div>
+
+            <!-- BFS Card -->
+            <div class="algo-card" onclick="window.location.href='algorithm-details/bfs.html'">
+                <div class="algo-header">
+                    <span class="algo-category graph">Graph</span>
+                    <span class="algo-difficulty easy">Easy</span>
+                </div>
+                <h3>Breadth First Search</h3>
+                <p class="algo-desc">Level-order traversal using queue</p>
+                <div class="algo-stats">
+                    <span><i class="fas fa-clock"></i> O(V + E)</span>
+                    <span><i class="fas fa-memory"></i> O(V)</span>
+                </div>
+                <div class="code-langs">
+                    <span class="lang-tag c">C</span>
+                    <span class="lang-tag cpp">C++</span>
+                    <span class="lang-tag java">Java</span>
+                </div>
+            </div>
+
+            <!-- Knapsack Card -->
+            <div class="algo-card" onclick="window.location.href='algorithm-details/knapsack.html'">
+                <div class="algo-header">
+                    <span class="algo-category dp">DP</span>
+                    <span class="algo-difficulty hard">Hard</span>
+                </div>
+                <h3>0/1 Knapsack</h3>
+                <p class="algo-desc">Dynamic programming optimization</p>
+                <div class="algo-stats">
+                    <span><i class="fas fa-clock"></i> O(nW)</span>
+                    <span><i class="fas fa-memory"></i> O(nW)</span>
+                </div>
+                <div class="code-langs">
+                    <span class="lang-tag c">C</span>
+                    <span class="lang-tag cpp">C++</span>
+                    <span class="lang-tag java">Java</span>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="algorithms/sorting.html" class="btn-view-all">View All Algorithms <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>DSA Master</h3>
+                <p>Master Data Structures & Algorithms in multiple programming languages</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="algorithms/sorting.html">Sorting Algorithms</a></li>
+                    <li><a href="algorithms/searching.html">Searching Algorithms</a></li>
+                    <li><a href="algorithms/graph.html">Graph Algorithms</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Languages</h4>
+                <ul>
+                    <li><a href="algorithms/sorting.html?lang=c">C Programming</a></li>
+                    <li><a href="algorithms/sorting.html?lang=cpp">C++ Programming</a></li>
+                    <li><a href="algorithms/sorting.html?lang=java">Java Programming</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 DSA Learning Platform. Built for Google STEP 2026 by Student.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            const user = await window.AuthApp?.readCurrentUser?.();
+            const loginButton = document.querySelector('.btn-login');
+            const registerButton = document.querySelector('.btn-register');
+            if (user) {
+                if (loginButton) loginButton.style.display = 'none';
+                if (registerButton) registerButton.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
